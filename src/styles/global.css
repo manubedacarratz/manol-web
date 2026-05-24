@@ -1,0 +1,83 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --color-bg: #141414;
+    --color-text: #d4cfc9;
+    --color-muted: #5a5650;
+    --color-border: #232320;
+    --radius: 8px;
+  }
+
+  :root.light {
+    --color-bg: #f0ece6;
+    --color-text: #1a1916;
+    --color-muted: #9a948e;
+    --color-border: #ddd9d3;
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  /* Geist Mono en mayúsculas para todo el body */
+  html {
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    font-family: 'Geist Mono', 'Courier New', monospace;
+    font-size: 16px;
+    text-transform: uppercase;
+    letter-spacing: 0.075em;
+    line-height: 0.65;
+    -webkit-font-smoothing: antialiased;
+    cursor: none;
+  }
+
+  body {
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  ::selection {
+    background: var(--color-text);
+    color: var(--color-bg);
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  img, video {
+    display: block;
+    max-width: 100%;
+  }
+}
+
+/* Geist (sans) en mayúsculas con -2% de interletrado — para labels y nav */
+.font-geist {
+  font-family: 'Geist', 'Helvetica Neue', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+}
+
+/* Cursor custom */
+.cursor {
+  width: 8px;
+  height: 8px;
+  background: var(--color-text);
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  z-index: 10000;
+  transform: translate(-50%, -50%);
+  transition: width 0.15s ease, height 0.15s ease;
+  mix-blend-mode: difference;
+}
+
+.cursor.hover {
+  width: 28px;
+  height: 28px;
+}

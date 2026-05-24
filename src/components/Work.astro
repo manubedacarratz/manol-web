@@ -1,0 +1,63 @@
+---
+const projects = [
+  { slug: 'rampant',             title: 'RAMPANT',             year: '2025',      tags: ['Motion'],                                cover: '/work/rampant.jpg'           },
+  { slug: 'from-room',           title: 'FROM ROOM',           year: '2026',      tags: ['Motion', 'Design'],                      cover: '/work/from-room.jpg',          soon: true },
+  { slug: 'reb',                 title: 'REB',                 year: '2026',      tags: ['Branding'],                              cover: '/work/reb.jpg',                soon: true },
+  { slug: 'cass-guille-saporta', title: 'CASS & GUILLE',       year: '2025',      tags: ['Film', 'Design'],                        cover: '/work/cass-guille-saporta.jpg'},
+  { slug: 'bernardo-parisi',     title: 'BERNARDO PARISI',     year: '2025',      tags: ['Art Cover', 'Art Direction'],            cover: '/work/bernardo-parisi.jpg'   },
+  { slug: 'montanas',            title: 'MONTAÑAS',            year: '2023',      tags: ['Art Cover', 'Art Direction', 'Motion'],  cover: '/work/montanas.jpg'          },
+  { slug: 'legado',              title: 'LEGADO',              year: '2025–2026', tags: ['Branding'],                              cover: '/work/legado.jpg'            },
+  { slug: 'cafe-vilma',          title: 'CAFE VILMA',          year: '2026',      tags: ['Branding', 'Motion'],                    cover: '/work/cafe-vilma.jpg',        soon: true },
+  { slug: 'paisanos',            title: 'PAISANOS',            year: '2024',      tags: ['Motion'],                                cover: '/work/paisanos.jpg'          },
+  { slug: 'isla',                title: 'ISLA',                year: '2025',      tags: ['Motion', 'Design'],                      cover: '/work/isla.jpg'              },
+  { slug: 'aerolab',             title: 'AEROLAB',             year: '2024',      tags: ['Motion', 'Design'],                      cover: '/work/aerolab.jpg'           },
+];
+
+const shuffled = projects;
+---
+
+<section id="work" style="padding: 48px 20px;">
+
+  <div class="mb-10">
+    <h2 class="text-sm font-bold tracking-widest uppercase text-[var(--color-text)] mb-1">Projects</h2>
+    <p class="text-xs text-[var(--color-muted)]">A selection of last projects I've been working on</p>
+  </div>
+
+  <div class="grid grid-cols-3" style="gap: 8px;">
+    {shuffled.map((p) => {
+      const Tag = p.soon ? 'div' : 'a';
+      return (
+        <Tag
+          href={p.soon ? undefined : `/work/${p.slug}`}
+          class="group relative overflow-hidden bg-[var(--color-border)] aspect-[4/5] cursor-none block"
+          style="border-radius: 8px;"
+        >
+          {p.cover && (
+            <img
+              src={p.cover}
+              alt={p.title}
+              class="absolute inset-0 w-full h-full object-cover"
+            />
+          )}
+          {p.soon && (
+            <div class="absolute top-3 left-3">
+              <span class="text-[9px] font-medium tracking-widest uppercase px-2 py-1" style="background: rgba(0,0,0,0.55); color: rgba(255,255,255,0.8); border-radius: 4px; backdrop-filter: blur(4px);">Soon</span>
+            </div>
+          )}
+          <div class="absolute inset-0 flex items-end justify-between p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300" style="background: linear-gradient(to top, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.4) 50%, transparent 100%);">
+            <div>
+              <p class="text-xs font-medium tracking-wider uppercase text-white">{p.title}</p>
+              <p class="text-xs mt-0.5" style="color: rgba(255,255,255,0.65);">{p.year}</p>
+            </div>
+            <div class="flex flex-col items-end" style="gap: 0.8rem;">
+              {p.tags.map(tag => (
+                <span class="text-[10px] tracking-wider uppercase" style="color: rgba(255,255,255,0.65);">{tag}</span>
+              ))}
+            </div>
+          </div>
+        </Tag>
+      );
+    })}
+  </div>
+
+</section>

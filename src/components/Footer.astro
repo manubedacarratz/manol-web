@@ -1,0 +1,75 @@
+---
+import GifFooter from './GifFooter.astro';
+---
+
+<footer id="about">
+
+  <!-- Footer columns -->
+  <div class="grid grid-cols-4 gap-8" style="padding: 48px 20px; line-height: 0.65;">
+
+    <div>
+      <h2 class="font-geist text-sm font-bold text-[var(--color-text)] mb-6">About</h2>
+      <div class="space-y-3 max-w-sm">
+        <p class="text-xs text-[var(--color-muted)]">
+          Hi, my name is Manu Bedacarratz. You can also call me Manol.
+          I'm a motion and visual designer based in Buenos Aires 🇦🇷, working worldwide.
+        </p>
+        <p class="text-xs text-[var(--color-muted)]">
+          I would love to connect with other designers, studios, or enthusiasts
+          to collaborate in different projects.
+        </p>
+      </div>
+    </div>
+
+    <div>
+      <h2 class="font-geist text-sm font-bold text-[var(--color-text)] mb-6">Services</h2>
+      <ul class="space-y-2">
+        {['Branding', 'Motion ID', 'Art covers', 'Posters'].map(s => (
+          <li class="text-xs text-[var(--color-muted)]">{s}</li>
+        ))}
+      </ul>
+    </div>
+
+    <div>
+      <h2 class="font-geist text-sm font-bold text-[var(--color-text)] mb-6">Partners &amp; colleagues</h2>
+      <ul class="space-y-2">
+        {[
+          { name: 'Paisanos',  url: 'https://www.paisanos.io/es' },
+          { name: 'Rampant',   url: 'https://www.rampant.work/' },
+          { name: 'Paradigma', url: 'https://paradigma.cc/' },
+          { name: 'Aerolab',   url: 'https://aerolab.co/' },
+          { name: 'Almanach',  url: 'https://almanach.work/' },
+          { name: 'Joyco',     url: 'https://joyco.studio/' },
+        ].map(p => (
+          <li>
+            <a
+              href={p.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-xs text-[var(--color-muted)] hover:text-[var(--color-text)] transition-colors"
+            >
+              {p.name}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+
+    <div>
+      <h2 class="font-geist text-sm font-bold text-[var(--color-text)] mb-6">Contact</h2>
+      <p class="text-xs text-[var(--color-muted)] mb-3">
+        Want to collaborate?<br />Drop me a line.
+      </p>
+      <a
+        href="mailto:manubedacarratz@gmail.com"
+        class="text-xs text-[var(--color-muted)] hover:text-[var(--color-text)] transition-colors"
+      >
+        manubedacarratz@gmail.com
+      </a>
+    </div>
+
+  </div>
+
+  <GifFooter />
+
+</footer>

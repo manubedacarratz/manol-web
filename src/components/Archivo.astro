@@ -1,0 +1,201 @@
+---
+const pieces = [
+  { src: '/archive/1.gif',  ratio: '4:5', label: '—' },
+  { src: '/archive/2.jpg',  ratio: '4:5', label: '—' },
+  { src: '/archive/3.jpg',  ratio: '4:5', label: '—' },
+  { src: '/archive/4.jpg',  ratio: '1:1', label: '—' },
+  { src: '/archive/7.gif',  ratio: '4:5', label: '—' },
+  { src: '/archive/8.png',  ratio: '4:5', label: '—' },
+  { src: '/archive/9.png',  ratio: '4:5', label: '—' },
+  { src: '/archive/10.gif', ratio: '1:1', label: '—' },
+];
+
+for (let i = pieces.length - 1; i > 0; i--) {
+  const j = Math.floor(Math.random() * (i + 1));
+  [pieces[i], pieces[j]] = [pieces[j], pieces[i]];
+}
+
+const aspectMap: Record<string, string> = {
+  '1:1': 'aspect-square',
+  '4:5': 'aspect-[4/5]',
+};
+
+const BLANK_GIF = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
+---
+
+<section id="archive" style="padding: 48px 20px;">
+
+  <div class="mb-10">
+    <h2 class="font-geist text-sm font-bold text-[var(--color-text)] mb-1">Archive</h2>
+    <p class="text-xs text-[var(--color-muted)]">Stuff that didn't make it</p>
+  </div>
+
+  <div style="columns: 4; column-gap: 8px;">
+    {pieces.map((piece, i) => (
+      <div
+        class={`archive-item ${aspectMap[piece.ratio]} bg-[var(--color-border)] group relative overflow-hidden cursor-none`}
+        style="border-radius: 8px; break-inside: avoid; margin-bottom: 8px; display: block;"
+        data-index={String(i)}
+        data-src={piece.src}
+      >
+        <img
+          src={piece.src.endsWith('.gif') ? BLANK_GIF : piece.src}
+          data-src={piece.src.endsWith('.gif') ? piece.src : undefined}
+          class={`absolute inset-0 w-full h-full object-cover${piece.src.endsWith('.gif') ? ' archive-gif' : ''}`}
+          alt=""
+          loading={piece.src.endsWith('.gif') ? undefined : 'lazy'}
+        />
+        <div class="absolute inset-0 flex items-end p-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+          <span class="text-xs text-white">{piece.label}</span>
+        </div>
+      </div>
+    ))}
+  </div>
+
+</section>
+
+<!-- Lightbox carrusel -->
+<div id="archive-lightbox">
+  <button id="lb-close" class="lb-btn lb-close">✕</button>
+  <img id="lb-img" alt="" />
+  <button id="lb-prev" class="lb-btn lb-nav lb-prev">←</button>
+  <button id="lb-next" class="lb-btn lb-nav lb-next">→</button>
+  <div id="lb-counter"></div>
+</div>
+
+<style>
+  #archive-lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 500;
+    background: #141414;
+    display: none;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    align-items: center;
+    justify-content: center;
+    cursor: none;
+  }
+
+  #lb-img {
+    max-width: calc(100vw - 140px);
+    max-height: 88vh;
+    object-fit: contain;
+    border-radius: 8px;
+    opacity: 0;
+    transition: opacity 0.15s ease;
+    display: block;
+    pointer-events: none;
+    position: relative;
+    z-index: 1;
+  }
+
+  .lb-btn {
+    position: absolute;
+    background: none;
+    border: none;
+    color: #5a5650;
+    cursor: none;
+    font-family: inherit;
+    font-size: 0.65rem;
+    letter-spacing: 0.05em;
+    transition: color 0.15s;
+    padding: 12px;
+    z-index: 2;
+  }
+
+  .lb-btn:hover { color: #d4cfc9; }
+
+  .lb-close {
+    top: 16px;
+    right: 16px;
+    font-size: 0.8rem;
+  }
+
+  .lb-nav {
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.1rem;
+    padding: 20px 16px;
+  }
+
+  .lb-prev { left: 16px; }
+  .lb-next { right: 16px; }
+
+  #lb-counter {
+    position: absolute;
+    bottom: 16px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.6rem;
+    color: #5a5650;
+    letter-spacing: 0.05em;
+    pointer-events: none;
+  }
+</style>
+
+<script>
+  // Desync GIFs — carga escalonada para que nunca estén sincronizados
+  const gifImgs = document.querySelectorAll<HTMLImageElement>('.archive-gif');
+  gifImgs.forEach((img, i) => {
+    const src = img.dataset.src!;
+    if (i === 0) {
+      img.src = src;
+    } else {
+      setTimeout(() => { img.src = src; }, i * 700);
+    }
+  });
+
+  // Lightbox carrusel
+  const items = [...document.querySelectorAll<HTMLElement>('.archive-item')];
+  const srcs = items.map(el => el.dataset.src!);
+
+  const lightbox = document.getElementById('archive-lightbox')!;
+  const lbImg = document.getElementById('lb-img') as HTMLImageElement;
+  const lbCounter = document.getElementById('lb-counter')!;
+
+  let current = 0;
+
+  function showImg(index: number) {
+    current = index;
+    lbCounter.textContent = `${current + 1} / ${srcs.length}`;
+    lbImg.style.opacity = '0';
+    setTimeout(() => {
+      lbImg.onload = () => { lbImg.style.opacity = '1'; };
+      lbImg.src = srcs[current];
+      if (lbImg.complete && lbImg.naturalWidth > 0) lbImg.style.opacity = '1';
+    }, 100);
+  }
+
+  function openLightbox(index: number) {
+    showImg(index);
+    lightbox.style.display = 'flex';
+    requestAnimationFrame(() => { lightbox.style.opacity = '1'; });
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeLightbox() {
+    lightbox.style.opacity = '0';
+    setTimeout(() => {
+      lightbox.style.display = 'none';
+      document.body.style.overflow = '';
+    }, 200);
+  }
+
+  function prev() { showImg((current - 1 + srcs.length) % srcs.length); }
+  function next() { showImg((current + 1) % srcs.length); }
+
+  items.forEach((item, i) => item.addEventListener('click', () => openLightbox(i)));
+
+  document.getElementById('lb-close')?.addEventListener('click', closeLightbox);
+  document.getElementById('lb-prev')?.addEventListener('click', e => { e.stopPropagation(); prev(); });
+  document.getElementById('lb-next')?.addEventListener('click', e => { e.stopPropagation(); next(); });
+  lightbox.addEventListener('click', e => { if (e.target === lightbox) closeLightbox(); });
+
+  document.addEventListener('keydown', e => {
+    if (lightbox.style.display === 'none' || !lightbox.style.display) return;
+    if (e.key === 'Escape') closeLightbox();
+    if (e.key === 'ArrowLeft') prev();
+    if (e.key === 'ArrowRight') next();
+  });
+</script>

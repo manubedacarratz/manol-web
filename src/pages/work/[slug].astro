@@ -1,0 +1,102 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Nav from '../../components/Nav.astro';
+import GifFooter from '../../components/GifFooter.astro';
+
+export function getStaticPaths() {
+  const projects = [
+    { slug: 'aerolab',             title: 'AEROLAB',         year: '2024',      tags: ['Motion', 'Design']                     },
+    { slug: 'isla',                title: 'ISLA',             year: '2025',      tags: ['Motion', 'Design']                     },
+    { slug: 'rampant',             title: 'RAMPANT',          year: '2025',      tags: ['Motion']                               },
+    { slug: 'paisanos',            title: 'PAISANOS',         year: '2024',      tags: ['Motion']                               },
+    { slug: 'from-room',           title: 'FROM ROOM',        year: '2026',      tags: ['Motion', 'Design']                     },
+    { slug: 'reb',                 title: 'REB',              year: '2026',      tags: ['Branding']                             },
+    { slug: 'cass-guille-saporta', title: 'CASS & GUILLE',    year: '2025',      tags: ['Film', 'Design']                       },
+    { slug: 'bernardo-parisi',     title: 'BERNARDO PARISI',  year: '2025',      tags: ['Art Cover', 'Art Direction']           },
+    { slug: 'montanas',            title: 'MONTAÑAS',         year: '2023',      tags: ['Art Cover', 'Art Direction', 'Motion'] },
+    { slug: 'legado',              title: 'LEGADO',           year: '2025–2026', tags: ['Branding']                             },
+    { slug: 'cafe-vilma',          title: 'CAFE VILMA',       year: '2026',      tags: ['Branding', 'Motion']                   },
+  ];
+  return projects.map(p => ({ params: { slug: p.slug }, props: p }));
+}
+
+const { slug, title, year, tags } = Astro.props;
+---
+
+<Layout title={`${title} — manol`}>
+  <Nav />
+  <main style="padding: 20px; padding-top: 100px;">
+
+    {slug === 'paisanos' ? (
+      <>
+        <!-- Hero 16:9 -->
+        <div style="aspect-ratio: 16/9; border-radius: 8px; overflow: hidden; background: var(--color-border);">
+          <video autoplay muted loop playsinline style="width: 100%; height: 100%; object-fit: cover; display: block;">
+            <source src="/work/paisanos/1-hero.mp4" type="video/mp4" />
+          </video>
+        </div>
+
+        <!-- Info -->
+        <div class="grid grid-cols-2 gap-8" style="padding: 32px 0 40px;">
+          <div class="space-y-4">
+            <div>
+              <h1 class="font-geist text-sm font-bold text-[var(--color-text)] mb-2">{title}</h1>
+              <p class="text-xs text-[var(--color-muted)]">{tags.join(', ')}</p>
+            </div>
+          </div>
+          <div class="flex justify-end">
+            <p class="text-xs text-[var(--color-muted)]">{year}</p>
+          </div>
+        </div>
+
+        <!-- Dos cuadrados 1:1 -->
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+          <div style="aspect-ratio: 1/1; border-radius: 8px; overflow: hidden; background: #010E00;">
+            <video autoplay muted loop playsinline style="width: 100%; height: 100%; object-fit: cover; display: block; transform: scale(0.8);">
+              <source src="/work/paisanos/2.mp4" type="video/mp4" />
+            </video>
+          </div>
+          <div style="aspect-ratio: 1/1; border-radius: 8px; overflow: hidden; background: var(--color-border);">
+            <video autoplay muted loop playsinline style="width: 100%; height: 100%; object-fit: cover; display: block;">
+              <source src="/work/paisanos/3.mp4" type="video/mp4" />
+            </video>
+          </div>
+        </div>
+
+        <!-- Video 4: 16:9 full width -->
+        <div style="aspect-ratio: 16/9; border-radius: 8px; overflow: hidden; background: var(--color-border); margin-top: 8px;">
+          <video autoplay muted loop playsinline style="width: 100%; height: 100%; object-fit: cover; display: block;">
+            <source src="/work/paisanos/4.mp4" type="video/mp4" />
+          </video>
+        </div>
+      </>
+    ) : (
+      <>
+        <!-- Hero placeholder -->
+        <div class="bg-[var(--color-border)]" style="aspect-ratio: 16/9; border-radius: 8px; width: 100%;"></div>
+
+        <!-- Info -->
+        <div class="grid grid-cols-2 gap-8" style="padding: 32px 0 40px;">
+          <div class="space-y-4">
+            <div>
+              <h1 class="font-geist text-sm font-bold text-[var(--color-text)] mb-2">{title}</h1>
+              <p class="text-xs text-[var(--color-muted)]">{tags.join(', ')}</p>
+            </div>
+          </div>
+          <div class="flex justify-end">
+            <p class="text-xs text-[var(--color-muted)]">{year}</p>
+          </div>
+        </div>
+
+        <!-- Placeholders -->
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+          <div class="bg-[var(--color-border)]" style="aspect-ratio: 1/1; border-radius: 8px;"></div>
+          <div class="bg-[var(--color-border)]" style="aspect-ratio: 1/1; border-radius: 8px;"></div>
+        </div>
+      </>
+    )}
+
+    <GifFooter href="/" />
+
+  </main>
+</Layout>

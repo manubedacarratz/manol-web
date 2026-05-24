@@ -1,0 +1,97 @@
+---
+---
+
+<nav class="fixed top-0 left-0 right-0 z-50 flex items-center justify-between" style="padding-top: 32px; padding-bottom: 20px; padding-left: 32px; padding-right: 32px;">
+  <a href="/" id="nav-logo-link" class="flex items-center">
+    <span id="nav-logo-text" class="text-xs tracking-widest uppercase font-medium text-[var(--color-text)]">manol</span>
+    <canvas id="nav-logo-canvas" style="height: 12px; width: auto; display: none;"></canvas>
+  </a>
+  <div class="flex items-center gap-8">
+    <a href="#work"    class="text-xs tracking-widest uppercase text-[var(--color-muted)] hover:text-[var(--color-text)] transition-colors">Work</a>
+    <a href="#archive" class="text-xs tracking-widest uppercase text-[var(--color-muted)] hover:text-[var(--color-text)] transition-colors">Archive</a>
+    <a href="#about"   class="text-xs tracking-widest uppercase text-[var(--color-muted)] hover:text-[var(--color-text)] transition-colors">About</a>
+  </div>
+</nav>
+
+<script>
+  function applyTheme(theme: string) {
+    document.documentElement.classList.toggle('light', theme === 'light');
+    document.querySelectorAll<HTMLButtonElement>('.theme-btn').forEach(btn => {
+      const active = btn.dataset.theme === theme;
+      btn.style.background = active ? 'var(--color-text)' : 'transparent';
+      btn.style.color      = active ? 'var(--color-bg)'   : 'var(--color-muted)';
+    });
+  }
+
+  document.querySelectorAll<HTMLButtonElement>('.theme-btn').forEach(btn => {
+    btn.addEventListener('click', () => applyTheme(btn.dataset.theme!));
+  });
+
+  applyTheme('dark');
+</script>
+
+<script>
+  import { parseGIF, decompressFrames } from 'gifuct-js';
+
+  const link    = document.getElementById('nav-logo-link') as HTMLAnchorElement;
+  const text    = document.getElementById('nav-logo-text') as HTMLSpanElement;
+  const canvas  = document.getElementById('nav-logo-canvas') as HTMLCanvasElement;
+  const ctx     = canvas.getContext('2d')!;
+
+  const SPEED = 1.5;
+  let frames: ReturnType<typeof decompressFrames> = [];
+  let frameIndex = 0;
+  let timer: ReturnType<typeof setTimeout> | null = null;
+  let loaded = false;
+
+  async function loadGif() {
+    const res    = await fetch('/footer/manol.gif');
+    const buffer = await res.arrayBuffer();
+    const gif    = parseGIF(buffer);
+    frames       = decompressFrames(gif, true);
+
+    // set canvas to natural GIF dimensions, CSS scales it to 12px height
+    canvas.width  = frames[0].dims.width;
+    canvas.height = frames[0].dims.height;
+    loaded = true;
+  }
+
+  function drawFrame(index: number) {
+    const f = frames[index];
+    const imageData = new ImageData(f.patch, f.dims.width, f.dims.height);
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.putImageData(imageData, f.dims.left, f.dims.top);
+
+    const delay = (f.delay || 10) / SPEED;
+    timer = setTimeout(() => {
+      frameIndex = (index + 1) % frames.length;
+      drawFrame(frameIndex);
+    }, delay);
+  }
+
+  function startGif() {
+    if (!loaded) return;
+    frameIndex = 0;
+    drawFrame(frameIndex);
+  }
+
+  function stopGif() {
+    if (timer) { clearTimeout(timer); timer = null; }
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+  }
+
+  link.addEventListener('mouseenter', () => {
+    text.style.display   = 'none';
+    canvas.style.display = 'block';
+    startGif();
+  });
+
+  link.addEventListener('mouseleave', () => {
+    stopGif();
+    canvas.style.display = 'none';
+    text.style.display   = '';
+  });
+
+  // preload en background para que el primer hover no tenga delay
+  loadGif();
+</script>
