@@ -7,21 +7,24 @@ export function getStaticPaths() {
   const lorem = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.';
 
   const projects = [
-    { slug: 'aerolab',             title: 'AEROLAB',         year: '2024',      tags: ['Motion', 'Design'],                     description: lorem },
-    { slug: 'isla',                title: 'ISLA',             year: '2025',      tags: ['Motion', 'Design'],                     description: lorem },
-    { slug: 'paisanos',            title: 'PAISANOS',         year: '2024',      tags: ['Motion'],                               description: lorem },
-    { slug: 'from-room',           title: 'FROM ROOM',        year: '2026',      tags: ['Motion', 'Design'],                     description: lorem },
-    { slug: 'reb',                 title: 'REB',              year: '2026',      tags: ['Branding'],                             description: lorem },
-    { slug: 'cass-guille-saporta', title: 'CASS & GUILLE',    year: '2025',      tags: ['Film', 'Design'],                       description: lorem },
-    { slug: 'bernardo-parisi',     title: 'BERNARDO PARISI',  year: '2025',      tags: ['Art Cover', 'Art Direction'],           description: lorem },
-    { slug: 'montanas',            title: 'MONTAÑAS',         year: '2023',      tags: ['Art Cover', 'Art Direction', 'Motion'], description: lorem },
-    { slug: 'legado',              title: 'LEGADO',           year: '2025–2026', tags: ['Branding'],                             description: lorem },
-    { slug: 'cafe-vilma',          title: 'CAFE VILMA',       year: '2026',      tags: ['Branding', 'Motion'],                   description: lorem },
+    { slug: 'aerolab',             title: 'AEROLAB',         year: '2024',      tags: ['Motion', 'Design'],                     descriptionEn: lorem, descriptionEs: lorem },
+    { slug: 'isla',                title: 'ISLA',             year: '2025',      tags: ['Motion', 'Design'],                     descriptionEn: lorem, descriptionEs: lorem },
+    { slug: 'paisanos',            title: 'PAISANOS',         year: '2024',      tags: ['Motion'],                               descriptionEn: lorem, descriptionEs: lorem },
+    { slug: 'from-room',           title: 'FROM ROOM',        year: '2026',      tags: ['Motion', 'Design'],                     descriptionEn: lorem, descriptionEs: lorem },
+    { slug: 'reb',                 title: 'REB',              year: '2026',      tags: ['Branding'],                             descriptionEn: lorem, descriptionEs: lorem },
+    { slug: 'cass-guille-saporta', title: 'CASS & GUILLE',    year: '2025',      tags: ['Film', 'Design'],                       descriptionEn: lorem, descriptionEs: lorem },
+    { slug: 'bernardo-parisi',     title: 'BERNARDO PARISI',  year: '2025',      tags: ['Art Cover', 'Art Direction'],           descriptionEn: lorem, descriptionEs: lorem },
+    { slug: 'montanas',            title: 'MONTAÑAS',         year: '2023',      tags: ['Art Cover', 'Art Direction', 'Motion'], descriptionEn: lorem, descriptionEs: lorem },
+    { slug: 'legado',              title: 'LEGADO',           year: '2025–2026', tags: ['Branding'],                             descriptionEn: lorem, descriptionEs: lorem },
+    { slug: 'cafe-vilma',          title: 'CAFE VILMA',       year: '2026',      tags: ['Branding', 'Motion'],
+      descriptionEs: 'Vilma es un café ubicado en un antiguo puesto de diarios de Buenos Aires, pensado como una reinterpretación de los cafés tradicionales. Junto con Justina Antonacci trabajamos la identidad completa del local: desde el logo y el sistema tipográfico hasta el packaging y la cartelería del puesto. El concepto pone el foco en la barra como espacio de encuentro, en la calidez de lo cotidiano y en la dimensión social del café de paso.',
+      descriptionEn: 'Vilma is a café set in a former newsstand in Buenos Aires, conceived as a reinterpretation of traditional cafés. Together with Justina Antonacci, we developed the brand\'s full identity: from the logo and typographic system to packaging and signage for the stand. The concept centers on the counter as a meeting point, the warmth of everyday routine, and the social dimension of a quick coffee stop.',
+    },
   ];
   return projects.map(p => ({ params: { slug: p.slug }, props: p }));
 }
 
-const { slug, title, year, tags, description } = Astro.props;
+const { slug, title, year, tags, descriptionEn, descriptionEs } = Astro.props;
 
 const allProjects = [
   { slug: 'aerolab',             title: 'AEROLAB',         year: '2024',      cover: '/work/aerolab.jpg'             },
@@ -61,7 +64,8 @@ const suggestions = allProjects
         <div class="grid grid-cols-2 gap-8" style="padding: 32px 0 40px;">
           <div>
             <h1 class="font-geist text-sm font-bold text-[var(--color-text)] mb-2">{title}</h1>
-            <p class="text-xs text-[var(--color-muted)] leading-relaxed" style="margin-top: 16px; max-width: 420px;">{description}</p>
+            <p class="lang-en text-xs text-[var(--color-muted)] leading-relaxed" style="margin-top: 16px; max-width: 420px;">{descriptionEn}</p>
+            <p class="lang-es text-xs text-[var(--color-muted)] leading-relaxed" style="margin-top: 16px; max-width: 420px;">{descriptionEs}</p>
           </div>
           <div class="flex flex-col items-end gap-4">
             <p class="text-xs text-[var(--color-muted)]">{year}</p>
@@ -115,7 +119,8 @@ const suggestions = allProjects
         <div class="grid grid-cols-2 gap-8" style="padding: 32px 0 40px;">
           <div>
             <h1 class="font-geist text-sm font-bold text-[var(--color-text)] mb-2">{title}</h1>
-            <p class="text-xs text-[var(--color-muted)] leading-relaxed" style="margin-top: 16px; max-width: 420px;">{description}</p>
+            <p class="lang-en text-xs text-[var(--color-muted)] leading-relaxed" style="margin-top: 16px; max-width: 420px;">{descriptionEn}</p>
+            <p class="lang-es text-xs text-[var(--color-muted)] leading-relaxed" style="margin-top: 16px; max-width: 420px;">{descriptionEs}</p>
           </div>
           <div class="flex flex-col items-end gap-4">
             <p class="text-xs text-[var(--color-muted)]">{year}</p>
@@ -181,7 +186,8 @@ const suggestions = allProjects
         <div class="grid grid-cols-2 gap-8" style="padding: 32px 0 40px;">
           <div>
             <h1 class="font-geist text-sm font-bold text-[var(--color-text)] mb-2">{title}</h1>
-            <p class="text-xs text-[var(--color-muted)] leading-relaxed" style="margin-top: 16px; max-width: 420px;">{description}</p>
+            <p class="lang-en text-xs text-[var(--color-muted)] leading-relaxed" style="margin-top: 16px; max-width: 420px;">{descriptionEn}</p>
+            <p class="lang-es text-xs text-[var(--color-muted)] leading-relaxed" style="margin-top: 16px; max-width: 420px;">{descriptionEs}</p>
           </div>
           <div class="flex flex-col items-end gap-4">
             <p class="text-xs text-[var(--color-muted)]">{year}</p>
@@ -240,7 +246,8 @@ const suggestions = allProjects
         <div class="grid grid-cols-2 gap-8" style="padding: 32px 0 40px;">
           <div>
             <h1 class="font-geist text-sm font-bold text-[var(--color-text)] mb-2">{title}</h1>
-            <p class="text-xs text-[var(--color-muted)] leading-relaxed" style="margin-top: 16px; max-width: 420px;">{description}</p>
+            <p class="lang-en text-xs text-[var(--color-muted)] leading-relaxed" style="margin-top: 16px; max-width: 420px;">{descriptionEn}</p>
+            <p class="lang-es text-xs text-[var(--color-muted)] leading-relaxed" style="margin-top: 16px; max-width: 420px;">{descriptionEs}</p>
           </div>
           <div class="flex flex-col items-end gap-4">
             <p class="text-xs text-[var(--color-muted)]">{year}</p>
@@ -304,7 +311,8 @@ const suggestions = allProjects
         <div class="grid grid-cols-2 gap-8" style="padding: 32px 0 40px;">
           <div>
             <h1 class="font-geist text-sm font-bold text-[var(--color-text)] mb-2">{title}</h1>
-            <p class="text-xs text-[var(--color-muted)] leading-relaxed" style="margin-top: 16px; max-width: 420px;">{description}</p>
+            <p class="lang-en text-xs text-[var(--color-muted)] leading-relaxed" style="margin-top: 16px; max-width: 420px;">{descriptionEn}</p>
+            <p class="lang-es text-xs text-[var(--color-muted)] leading-relaxed" style="margin-top: 16px; max-width: 420px;">{descriptionEs}</p>
           </div>
           <div class="flex flex-col items-end gap-4">
             <p class="text-xs text-[var(--color-muted)]">{year}</p>
@@ -370,7 +378,8 @@ const suggestions = allProjects
         <div class="grid grid-cols-2 gap-8" style="padding: 32px 0 40px;">
           <div>
             <h1 class="font-geist text-sm font-bold text-[var(--color-text)] mb-2">{title}</h1>
-            <p class="text-xs text-[var(--color-muted)] leading-relaxed" style="margin-top: 16px; max-width: 420px;">{description}</p>
+            <p class="lang-en text-xs text-[var(--color-muted)] leading-relaxed" style="margin-top: 16px; max-width: 420px;">{descriptionEn}</p>
+            <p class="lang-es text-xs text-[var(--color-muted)] leading-relaxed" style="margin-top: 16px; max-width: 420px;">{descriptionEs}</p>
           </div>
           <div class="flex flex-col items-end gap-4">
             <p class="text-xs text-[var(--color-muted)]">{year}</p>
@@ -429,7 +438,8 @@ const suggestions = allProjects
         <div class="grid grid-cols-2 gap-8" style="padding: 32px 0 40px;">
           <div>
             <h1 class="font-geist text-sm font-bold text-[var(--color-text)] mb-2">{title}</h1>
-            <p class="text-xs text-[var(--color-muted)] leading-relaxed" style="margin-top: 16px; max-width: 420px;">{description}</p>
+            <p class="lang-en text-xs text-[var(--color-muted)] leading-relaxed" style="margin-top: 16px; max-width: 420px;">{descriptionEn}</p>
+            <p class="lang-es text-xs text-[var(--color-muted)] leading-relaxed" style="margin-top: 16px; max-width: 420px;">{descriptionEs}</p>
           </div>
           <div class="flex flex-col items-end gap-4">
             <p class="text-xs text-[var(--color-muted)]">{year}</p>
