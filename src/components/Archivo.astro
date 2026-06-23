@@ -1,13 +1,13 @@
 ---
 const pieces = [
   { src: '/archive/1.gif',  ratio: '4:5', label: '—' },
-  { src: '/archive/2.jpg',  ratio: '4:5', label: '—' },
   { src: '/archive/3.jpg',  ratio: '4:5', label: '—' },
   { src: '/archive/4.jpg',  ratio: '1:1', label: '—' },
   { src: '/archive/7.gif',  ratio: '4:5', label: '—' },
   { src: '/archive/8.png',  ratio: '4:5', label: '—' },
   { src: '/archive/9.png',  ratio: '4:5', label: '—' },
   { src: '/archive/10.gif', ratio: '1:1', label: '—' },
+  { src: '/archive/11.jpg', ratio: '4:5', label: '—' },
 ];
 
 for (let i = pieces.length - 1; i > 0; i--) {
@@ -30,7 +30,7 @@ const BLANK_GIF = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAA
     <p class="text-xs text-[var(--color-muted)]">Stuff that didn't make it</p>
   </div>
 
-  <div style="columns: 4; column-gap: 8px;">
+  <div id="archivo-grid" style="columns: 4; column-gap: 8px;">
     {pieces.map((piece, i) => (
       <div
         class={`archive-item ${aspectMap[piece.ratio]} bg-[var(--color-border)] group relative overflow-hidden cursor-none`}
@@ -64,6 +64,12 @@ const BLANK_GIF = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAA
 </div>
 
 <style>
+  @media (max-width: 767px) {
+    #archivo-grid {
+      columns: 2 !important;
+    }
+  }
+
   #archive-lightbox {
     position: fixed;
     inset: 0;

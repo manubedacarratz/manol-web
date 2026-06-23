@@ -7,9 +7,9 @@
     <canvas id="nav-logo-canvas" style="height: 12px; width: auto; display: none;"></canvas>
   </a>
   <div class="flex items-center gap-8">
-    <a href="#work"    class="text-xs tracking-widest uppercase text-[var(--color-muted)] hover:text-[var(--color-text)] transition-colors">Work</a>
-    <a href="#archive" class="text-xs tracking-widest uppercase text-[var(--color-muted)] hover:text-[var(--color-text)] transition-colors">Archive</a>
-    <a href="#about"   class="text-xs tracking-widest uppercase text-[var(--color-muted)] hover:text-[var(--color-text)] transition-colors">About</a>
+    <a href="/#work"    class="text-xs tracking-widest uppercase text-[var(--color-muted)] hover:text-[var(--color-text)] transition-colors">Work</a>
+    <a href="/#archive" class="text-xs tracking-widest uppercase text-[var(--color-muted)] hover:text-[var(--color-text)] transition-colors">Archive</a>
+    <a href="/#about"   class="text-xs tracking-widest uppercase text-[var(--color-muted)] hover:text-[var(--color-text)] transition-colors">About</a>
   </div>
 </nav>
 
@@ -28,6 +28,39 @@
   });
 
   applyTheme('dark');
+</script>
+
+<script>
+  function easeInOutCubic(t: number) {
+    return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+  }
+
+  function smoothScrollTo(target: HTMLElement, duration = 800) {
+    const startY = window.scrollY;
+    const endY   = startY + target.getBoundingClientRect().top;
+    const startTime = performance.now();
+
+    function step(now: number) {
+      const elapsed = now - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      window.scrollTo(0, startY + (endY - startY) * easeInOutCubic(progress));
+      if (progress < 1) requestAnimationFrame(step);
+    }
+
+    requestAnimationFrame(step);
+  }
+
+  document.querySelectorAll<HTMLAnchorElement>('nav a[href*="#"]').forEach(link => {
+    link.addEventListener('click', (e) => {
+      const [path, id] = link.getAttribute('href')!.split('#');
+      if (path && path !== window.location.pathname) return;
+      const target = document.getElementById(id);
+      if (!target) return;
+      e.preventDefault();
+      smoothScrollTo(target);
+      history.pushState(null, '', `#${id}`);
+    });
+  });
 </script>
 
 <script>

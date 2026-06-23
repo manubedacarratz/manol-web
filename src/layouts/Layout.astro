@@ -7,7 +7,7 @@ interface Props {
 }
 
 const {
-  title = 'manol — motion design',
+  title = 'manol',
   description = 'Motion and visual designer based in Buenos Aires, working worldwide.',
 } = Astro.props;
 ---
@@ -28,8 +28,32 @@ const {
   <body>
     <div class="cursor" id="cursor"></div>
     <slot />
+
+    <!-- Language toggle -->
+    <div id="lang-toggle" style="position: fixed; bottom: 20px; left: 20px; z-index: 9999; display: flex; gap: 2px; background: var(--color-border); border-radius: 6px; padding: 3px; opacity: 0.35; transition: opacity 0.2s ease;" onmouseenter="this.style.opacity='1'" onmouseleave="this.style.opacity='0.35'">
+      <button data-lang="en" class="lang-btn" style="font-family: 'Geist Mono', monospace; font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; padding: 4px 8px; border-radius: 4px; border: none; cursor: pointer; transition: background 0.15s, color 0.15s;">EN</button>
+      <button data-lang="es" class="lang-btn" style="font-family: 'Geist Mono', monospace; font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; padding: 4px 8px; border-radius: 4px; border: none; cursor: pointer; transition: background 0.15s, color 0.15s;">ES</button>
+    </div>
   </body>
   <script>
+    // ── Language toggle ──────────────────────────────────────
+    function applyLang(lang: string) {
+      document.documentElement.classList.toggle('es', lang === 'es');
+      document.querySelectorAll<HTMLButtonElement>('.lang-btn').forEach(btn => {
+        const active = btn.dataset.lang === lang;
+        btn.style.background = active ? 'var(--color-text)' : 'transparent';
+        btn.style.color      = active ? 'var(--color-bg)'   : 'var(--color-muted)';
+      });
+      localStorage.setItem('lang', lang);
+    }
+
+    document.querySelectorAll<HTMLButtonElement>('.lang-btn').forEach(btn => {
+      btn.addEventListener('click', () => applyLang(btn.dataset.lang!));
+    });
+
+    applyLang(localStorage.getItem('lang') || 'en');
+
+    // ── Cursor ───────────────────────────────────────────────
     const cursor = document.getElementById('cursor');
     if (cursor) {
       document.addEventListener('mousemove', (e) => {

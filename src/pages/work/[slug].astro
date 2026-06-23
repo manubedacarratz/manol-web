@@ -1,36 +1,57 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import Nav from '../../components/Nav.astro';
-import GifFooter from '../../components/GifFooter.astro';
+import Footer from '../../components/Footer.astro';
 
 export function getStaticPaths() {
+  const lorem = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.';
+
   const projects = [
-    { slug: 'aerolab',             title: 'AEROLAB',         year: '2024',      tags: ['Motion', 'Design']                     },
-    { slug: 'isla',                title: 'ISLA',             year: '2025',      tags: ['Motion', 'Design']                     },
-    { slug: 'rampant',             title: 'RAMPANT',          year: '2025',      tags: ['Motion']                               },
-    { slug: 'paisanos',            title: 'PAISANOS',         year: '2024',      tags: ['Motion']                               },
-    { slug: 'from-room',           title: 'FROM ROOM',        year: '2026',      tags: ['Motion', 'Design']                     },
-    { slug: 'reb',                 title: 'REB',              year: '2026',      tags: ['Branding']                             },
-    { slug: 'cass-guille-saporta', title: 'CASS & GUILLE',    year: '2025',      tags: ['Film', 'Design']                       },
-    { slug: 'bernardo-parisi',     title: 'BERNARDO PARISI',  year: '2025',      tags: ['Art Cover', 'Art Direction']           },
-    { slug: 'montanas',            title: 'MONTAÑAS',         year: '2023',      tags: ['Art Cover', 'Art Direction', 'Motion'] },
-    { slug: 'legado',              title: 'LEGADO',           year: '2025–2026', tags: ['Branding']                             },
-    { slug: 'cafe-vilma',          title: 'CAFE VILMA',       year: '2026',      tags: ['Branding', 'Motion']                   },
+    { slug: 'aerolab',             title: 'AEROLAB',         year: '2024',      tags: ['Motion', 'Design'],                     description: lorem },
+    { slug: 'isla',                title: 'ISLA',             year: '2025',      tags: ['Motion', 'Design'],                     description: lorem },
+    { slug: 'paisanos',            title: 'PAISANOS',         year: '2024',      tags: ['Motion'],                               description: lorem },
+    { slug: 'from-room',           title: 'FROM ROOM',        year: '2026',      tags: ['Motion', 'Design'],                     description: lorem },
+    { slug: 'reb',                 title: 'REB',              year: '2026',      tags: ['Branding'],                             description: lorem },
+    { slug: 'cass-guille-saporta', title: 'CASS & GUILLE',    year: '2025',      tags: ['Film', 'Design'],                       description: lorem },
+    { slug: 'bernardo-parisi',     title: 'BERNARDO PARISI',  year: '2025',      tags: ['Art Cover', 'Art Direction'],           description: lorem },
+    { slug: 'montanas',            title: 'MONTAÑAS',         year: '2023',      tags: ['Art Cover', 'Art Direction', 'Motion'], description: lorem },
+    { slug: 'legado',              title: 'LEGADO',           year: '2025–2026', tags: ['Branding'],                             description: lorem },
+    { slug: 'cafe-vilma',          title: 'CAFE VILMA',       year: '2026',      tags: ['Branding', 'Motion'],                   description: lorem },
   ];
   return projects.map(p => ({ params: { slug: p.slug }, props: p }));
 }
 
-const { slug, title, year, tags } = Astro.props;
+const { slug, title, year, tags, description } = Astro.props;
+
+const allProjects = [
+  { slug: 'aerolab',             title: 'AEROLAB',         year: '2024',      cover: '/work/aerolab.jpg'             },
+  { slug: 'isla',                title: 'ISLA',             year: '2025',      cover: '/work/isla.jpg'                },
+  { slug: 'paisanos',            title: 'PAISANOS',         year: '2024',      cover: '/work/paisanos.jpg'            },
+  { slug: 'from-room',           title: 'FROM ROOM',        year: '2026',      cover: '/work/from-room.jpg'           },
+  { slug: 'reb',                 title: 'REB',              year: '2026',      cover: '/work/reb.jpg'                 },
+  { slug: 'cass-guille-saporta', title: 'CASS & GUILLE',    year: '2025',      cover: '/work/cass-guille-saporta.jpg' },
+  { slug: 'bernardo-parisi',     title: 'BERNARDO PARISI',  year: '2025',      cover: '/work/bernardo-parisi.jpg'    },
+  { slug: 'montanas',            title: 'MONTAÑAS',         year: '2023',      cover: '/work/montanas.jpg'            },
+  { slug: 'legado',              title: 'LEGADO',           year: '2025–2026', cover: '/work/legado.jpg'              },
+  { slug: 'cafe-vilma',          title: 'CAFE VILMA',       year: '2026',      cover: '/work/cafe-vilma.jpg'          },
+];
+
+const soonSlugs = new Set(['from-room', 'cass-guille-saporta', 'isla', 'montanas']);
+
+const suggestions = allProjects
+  .filter(p => p.slug !== slug && !soonSlugs.has(p.slug))
+  .sort(() => Math.random() - 0.5)
+  .slice(0, 4);
 ---
 
 <Layout title={`${title} — manol`}>
   <Nav />
-  <main style="padding: 20px; padding-top: 100px;">
+  <main style="padding: 20px;">
 
     {slug === 'paisanos' ? (
       <>
         <!-- Hero 16:9 -->
-        <div style="aspect-ratio: 16/9; border-radius: 8px; overflow: hidden; background: var(--color-border);">
+        <div style="aspect-ratio: 16/9; overflow: hidden; background: var(--color-border);">
           <video autoplay muted loop playsinline style="width: 100%; height: 100%; object-fit: cover; display: block;">
             <source src="/work/paisanos/1-hero.mp4" type="video/mp4" />
           </video>
@@ -38,25 +59,24 @@ const { slug, title, year, tags } = Astro.props;
 
         <!-- Info -->
         <div class="grid grid-cols-2 gap-8" style="padding: 32px 0 40px;">
-          <div class="space-y-4">
-            <div>
-              <h1 class="font-geist text-sm font-bold text-[var(--color-text)] mb-2">{title}</h1>
-              <p class="text-xs text-[var(--color-muted)]">{tags.join(', ')}</p>
-            </div>
+          <div>
+            <h1 class="font-geist text-sm font-bold text-[var(--color-text)] mb-2">{title}</h1>
+            <p class="text-xs text-[var(--color-muted)] leading-relaxed" style="margin-top: 16px; max-width: 420px;">{description}</p>
           </div>
-          <div class="flex justify-end">
+          <div class="flex flex-col items-end gap-4">
             <p class="text-xs text-[var(--color-muted)]">{year}</p>
+            <p class="text-xs text-[var(--color-muted)]">{tags.join(', ')}</p>
           </div>
         </div>
 
         <!-- Dos cuadrados 1:1 -->
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
-          <div style="aspect-ratio: 1/1; border-radius: 8px; overflow: hidden; background: #010E00;">
+          <div style="aspect-ratio: 1/1; overflow: hidden; background: #010E00;">
             <video autoplay muted loop playsinline style="width: 100%; height: 100%; object-fit: cover; display: block; transform: scale(0.8);">
               <source src="/work/paisanos/2.mp4" type="video/mp4" />
             </video>
           </div>
-          <div style="aspect-ratio: 1/1; border-radius: 8px; overflow: hidden; background: var(--color-border);">
+          <div style="aspect-ratio: 1/1; overflow: hidden; background: var(--color-border);">
             <video autoplay muted loop playsinline style="width: 100%; height: 100%; object-fit: cover; display: block;">
               <source src="/work/paisanos/3.mp4" type="video/mp4" />
             </video>
@@ -64,39 +84,391 @@ const { slug, title, year, tags } = Astro.props;
         </div>
 
         <!-- Video 4: 16:9 full width -->
-        <div style="aspect-ratio: 16/9; border-radius: 8px; overflow: hidden; background: var(--color-border); margin-top: 8px;">
+        <div style="aspect-ratio: 16/9; overflow: hidden; background: var(--color-border); margin-top: 8px;">
           <video autoplay muted loop playsinline style="width: 100%; height: 100%; object-fit: cover; display: block;">
             <source src="/work/paisanos/4.mp4" type="video/mp4" />
+          </video>
+        </div>
+
+        <!-- Videos 5 y 6: dos cuadrados 1:1 -->
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 8px;">
+          <div style="aspect-ratio: 1/1; overflow: hidden; background: var(--color-border);">
+            <video autoplay muted loop playsinline style="width: 100%; height: 100%; object-fit: cover; display: block;">
+              <source src="/work/paisanos/5.mp4" type="video/mp4" />
+            </video>
+          </div>
+          <div style="aspect-ratio: 1/1; overflow: hidden; background: var(--color-border);">
+            <video autoplay muted loop playsinline style="width: 100%; height: 100%; object-fit: cover; display: block;">
+              <source src="/work/paisanos/6.mp4" type="video/mp4" />
+            </video>
+          </div>
+        </div>
+      </>
+    ) : slug === 'reb' ? (
+      <>
+        <!-- Hero landscape -->
+        <div style="aspect-ratio: 1862/1005; overflow: hidden; background: var(--color-border);">
+          <img src="/work/reb/1.jpg" alt="REB 1" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
+        </div>
+
+        <!-- Info -->
+        <div class="grid grid-cols-2 gap-8" style="padding: 32px 0 40px;">
+          <div>
+            <h1 class="font-geist text-sm font-bold text-[var(--color-text)] mb-2">{title}</h1>
+            <p class="text-xs text-[var(--color-muted)] leading-relaxed" style="margin-top: 16px; max-width: 420px;">{description}</p>
+          </div>
+          <div class="flex flex-col items-end gap-4">
+            <p class="text-xs text-[var(--color-muted)]">{year}</p>
+            <p class="text-xs text-[var(--color-muted)]">{tags.join(', ')}</p>
+          </div>
+        </div>
+
+        <!-- 2 + 3: dos columnas portrait -->
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+          <div style="aspect-ratio: 924/1174; overflow: hidden; background: var(--color-border);">
+            <img src="/work/reb/8.jpg" alt="REB 8" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
+          </div>
+          <div style="aspect-ratio: 924/1174; overflow: hidden; background: var(--color-border);">
+            <img src="/work/reb/9.jpg" alt="REB 9" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
+          </div>
+        </div>
+
+        <!-- 4: landscape full width -->
+        <div style="aspect-ratio: 1862/1006; overflow: hidden; background: var(--color-border); margin-top: 8px;">
+          <img src="/work/reb/4.jpg" alt="REB 4" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
+        </div>
+
+        <!-- 5 + 6: dos columnas portrait -->
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 8px;">
+          <div style="aspect-ratio: 924/1174; overflow: hidden; background: var(--color-border);">
+            <img src="/work/reb/5.jpg" alt="REB 5" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
+          </div>
+          <div style="aspect-ratio: 924/1174; overflow: hidden; background: var(--color-border);">
+            <img src="/work/reb/6.jpg" alt="REB 6" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
+          </div>
+        </div>
+
+        <!-- 7: landscape full width -->
+        <div style="aspect-ratio: 1862/1006; overflow: hidden; background: var(--color-border); margin-top: 8px;">
+          <img src="/work/reb/7.jpg" alt="REB 7" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
+        </div>
+
+        <!-- 8 + 9: dos columnas portrait -->
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 8px;">
+          <div style="aspect-ratio: 924/1174; overflow: hidden; background: var(--color-border);">
+            <img src="/work/reb/2.jpg" alt="REB 2" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
+          </div>
+          <div style="aspect-ratio: 924/1174; overflow: hidden; background: var(--color-border);">
+            <img src="/work/reb/3.jpg" alt="REB 3" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
+          </div>
+        </div>
+
+        <!-- 10: landscape full width -->
+        <div style="aspect-ratio: 1862/1006; overflow: hidden; background: var(--color-border); margin-top: 8px;">
+          <img src="/work/reb/10.jpg" alt="REB 10" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
+        </div>
+      </>
+    ) : slug === 'bernardo-parisi' ? (
+      <>
+        <!-- Hero video landscape -->
+        <div style="aspect-ratio: 1862/1004; overflow: hidden; background: var(--color-border);">
+          <video autoplay muted loop playsinline style="width: 100%; height: 100%; object-fit: cover; display: block;">
+            <source src="/work/bernardo-parisi/1.mp4" type="video/mp4" />
+          </video>
+        </div>
+
+        <!-- Info -->
+        <div class="grid grid-cols-2 gap-8" style="padding: 32px 0 40px;">
+          <div>
+            <h1 class="font-geist text-sm font-bold text-[var(--color-text)] mb-2">{title}</h1>
+            <p class="text-xs text-[var(--color-muted)] leading-relaxed" style="margin-top: 16px; max-width: 420px;">{description}</p>
+          </div>
+          <div class="flex flex-col items-end gap-4">
+            <p class="text-xs text-[var(--color-muted)]">{year}</p>
+            <p class="text-xs text-[var(--color-muted)]">{tags.join(', ')}</p>
+          </div>
+        </div>
+
+        <!-- 2 + 3: dos cuadrados -->
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+          <div style="aspect-ratio: 924/923; overflow: hidden; background: var(--color-border);">
+            <img src="/work/bernardo-parisi/2.jpg" alt="Bernardo Parisi 2" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
+          </div>
+          <div style="aspect-ratio: 924/923; overflow: hidden; background: var(--color-border);">
+            <img src="/work/bernardo-parisi/3.jpg" alt="Bernardo Parisi 3" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
+          </div>
+        </div>
+
+        <!-- 4: landscape full width -->
+        <div style="aspect-ratio: 1862/1006; overflow: hidden; background: var(--color-border); margin-top: 8px;">
+          <img src="/work/bernardo-parisi/4.jpg" alt="Bernardo Parisi 4" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
+        </div>
+
+        <!-- 5 + 6: dos near-square -->
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 8px;">
+          <div style="aspect-ratio: 924/1005; overflow: hidden; background: var(--color-border);">
+            <img src="/work/bernardo-parisi/5.jpg" alt="Bernardo Parisi 5" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
+          </div>
+          <div style="aspect-ratio: 924/1005; overflow: hidden; background: var(--color-border);">
+            <img src="/work/bernardo-parisi/6.jpg" alt="Bernardo Parisi 6" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
+          </div>
+        </div>
+
+        <!-- 7 + 8: dos near-square -->
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 8px;">
+          <div style="aspect-ratio: 924/1005; overflow: hidden; background: var(--color-border);">
+            <img src="/work/bernardo-parisi/7.jpg" alt="Bernardo Parisi 7" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
+          </div>
+          <div style="aspect-ratio: 924/1005; overflow: hidden; background: var(--color-border);">
+            <img src="/work/bernardo-parisi/8.jpg" alt="Bernardo Parisi 8" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
+          </div>
+        </div>
+
+        <!-- 9: landscape full width -->
+        <div style="aspect-ratio: 1862/1006; overflow: hidden; background: var(--color-border); margin-top: 8px;">
+          <img src="/work/bernardo-parisi/9.jpg" alt="Bernardo Parisi 9" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
+        </div>
+      </>
+    ) : slug === 'cafe-vilma' ? (
+      <>
+        <!-- Hero landscape -->
+        <div style="aspect-ratio: 1862/1005; overflow: hidden; background: var(--color-border);">
+          <img src="/work/cafe-vilma/1.jpg" alt="Cafe Vilma 1" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
+        </div>
+
+        <!-- Info -->
+        <div class="grid grid-cols-2 gap-8" style="padding: 32px 0 40px;">
+          <div>
+            <h1 class="font-geist text-sm font-bold text-[var(--color-text)] mb-2">{title}</h1>
+            <p class="text-xs text-[var(--color-muted)] leading-relaxed" style="margin-top: 16px; max-width: 420px;">{description}</p>
+          </div>
+          <div class="flex flex-col items-end gap-4">
+            <p class="text-xs text-[var(--color-muted)]">{year}</p>
+            <p class="text-xs text-[var(--color-muted)]">{tags.join(', ')}</p>
+          </div>
+        </div>
+
+        <!-- 2 + 3: dos columnas portrait -->
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+          <div style="aspect-ratio: 924/1174; overflow: hidden; background: var(--color-border);">
+            <img src="/work/cafe-vilma/2.jpg" alt="Cafe Vilma 2" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
+          </div>
+          <div style="aspect-ratio: 924/1174; overflow: hidden; background: var(--color-border);">
+            <img src="/work/cafe-vilma/3.jpg" alt="Cafe Vilma 3" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
+          </div>
+        </div>
+
+        <!-- 4: landscape full width -->
+        <div style="aspect-ratio: 1862/1006; overflow: hidden; background: var(--color-border); margin-top: 8px;">
+          <img src="/work/cafe-vilma/4.jpg" alt="Cafe Vilma 4" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
+        </div>
+
+        <!-- 5 + 6: dos columnas ~1:1 -->
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 8px;">
+          <div style="aspect-ratio: 924/1005; overflow: hidden; background: var(--color-border);">
+            <img src="/work/cafe-vilma/5.jpg" alt="Cafe Vilma 5" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
+          </div>
+          <div style="aspect-ratio: 924/1005; overflow: hidden; background: var(--color-border);">
+            <img src="/work/cafe-vilma/6.jpg" alt="Cafe Vilma 6" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
+          </div>
+        </div>
+
+        <!-- 7: landscape full width -->
+        <div style="aspect-ratio: 1862/1006; overflow: hidden; background: var(--color-border); margin-top: 8px;">
+          <img src="/work/cafe-vilma/7.jpg" alt="Cafe Vilma 7" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
+        </div>
+
+        <!-- 8 + 9: dos columnas ~1:1 -->
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 8px;">
+          <div style="aspect-ratio: 924/1005; overflow: hidden; background: var(--color-border);">
+            <img src="/work/cafe-vilma/8.jpg" alt="Cafe Vilma 8" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
+          </div>
+          <div style="aspect-ratio: 924/1005; overflow: hidden; background: var(--color-border);">
+            <img src="/work/cafe-vilma/9.jpg" alt="Cafe Vilma 9" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
+          </div>
+        </div>
+
+        <!-- 10: landscape full width -->
+        <div style="aspect-ratio: 1862/1006; overflow: hidden; background: var(--color-border); margin-top: 8px;">
+          <img src="/work/cafe-vilma/10.jpg" alt="Cafe Vilma 10" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
+        </div>
+      </>
+    ) : slug === 'legado' ? (
+      <>
+        <!-- Hero 1: landscape -->
+        <div style="aspect-ratio: 1862/1005; overflow: hidden; background: var(--color-border);">
+          <img src="/work/legado/1.jpg" alt="Legado 1" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
+        </div>
+
+        <!-- Info -->
+        <div class="grid grid-cols-2 gap-8" style="padding: 32px 0 40px;">
+          <div>
+            <h1 class="font-geist text-sm font-bold text-[var(--color-text)] mb-2">{title}</h1>
+            <p class="text-xs text-[var(--color-muted)] leading-relaxed" style="margin-top: 16px; max-width: 420px;">{description}</p>
+          </div>
+          <div class="flex flex-col items-end gap-4">
+            <p class="text-xs text-[var(--color-muted)]">{year}</p>
+            <p class="text-xs text-[var(--color-muted)]">{tags.join(', ')}</p>
+          </div>
+        </div>
+
+        <!-- 2 + 3: dos columnas portrait -->
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+          <div style="aspect-ratio: 924/1174; overflow: hidden; background: var(--color-border);">
+            <img src="/work/legado/2.jpg" alt="Legado 2" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
+          </div>
+          <div style="aspect-ratio: 924/1174; overflow: hidden; background: var(--color-border);">
+            <img src="/work/legado/3.jpg" alt="Legado 3" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
+          </div>
+        </div>
+
+        <!-- 4: landscape full width -->
+        <div style="aspect-ratio: 1862/1006; overflow: hidden; background: var(--color-border); margin-top: 8px;">
+          <img src="/work/legado/4.jpg" alt="Legado 4" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
+        </div>
+
+        <!-- 5 + 6: dos columnas ~1:1 -->
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 8px;">
+          <div style="aspect-ratio: 924/1005; overflow: hidden; background: var(--color-border);">
+            <img src="/work/legado/5.jpg" alt="Legado 5" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
+          </div>
+          <div style="aspect-ratio: 924/1005; overflow: hidden; background: var(--color-border);">
+            <img src="/work/legado/6.jpg" alt="Legado 6" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
+          </div>
+        </div>
+
+        <!-- 7: landscape full width -->
+        <div style="aspect-ratio: 1862/1006; overflow: hidden; background: var(--color-border); margin-top: 8px;">
+          <img src="/work/legado/7.jpg" alt="Legado 7" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
+        </div>
+
+        <!-- 8 + 9: dos columnas ~1:1 -->
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 8px;">
+          <div style="aspect-ratio: 924/1005; overflow: hidden; background: var(--color-border);">
+            <img src="/work/legado/8.jpg" alt="Legado 8" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
+          </div>
+          <div style="aspect-ratio: 924/1005; overflow: hidden; background: var(--color-border);">
+            <img src="/work/legado/9.jpg" alt="Legado 9" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
+          </div>
+        </div>
+
+        <!-- 10: landscape full width -->
+        <div style="aspect-ratio: 1862/1006; overflow: hidden; background: var(--color-border); margin-top: 8px;">
+          <img src="/work/legado/10.jpg" alt="Legado 10" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
+        </div>
+      </>
+    ) : slug === 'aerolab' ? (
+      <>
+        <!-- Hero video landscape -->
+        <div style="aspect-ratio: 2500/1406; overflow: hidden; background: var(--color-border);">
+          <video autoplay muted loop playsinline style="width: 100%; height: 100%; object-fit: cover; display: block;">
+            <source src="/work/aerolab/1.mp4" type="video/mp4" />
+          </video>
+        </div>
+
+        <!-- Info -->
+        <div class="grid grid-cols-2 gap-8" style="padding: 32px 0 40px;">
+          <div>
+            <h1 class="font-geist text-sm font-bold text-[var(--color-text)] mb-2">{title}</h1>
+            <p class="text-xs text-[var(--color-muted)] leading-relaxed" style="margin-top: 16px; max-width: 420px;">{description}</p>
+          </div>
+          <div class="flex flex-col items-end gap-4">
+            <p class="text-xs text-[var(--color-muted)]">{year}</p>
+            <p class="text-xs text-[var(--color-muted)]">{tags.join(', ')}</p>
+          </div>
+        </div>
+
+        <!-- 2 + 3: dos cuadrados -->
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+          <div style="aspect-ratio: 1/1; overflow: hidden; background: var(--color-border);">
+            <video autoplay muted loop playsinline style="width: 100%; height: 100%; object-fit: cover; display: block;">
+              <source src="/work/aerolab/2.mp4" type="video/mp4" />
+            </video>
+          </div>
+          <div style="aspect-ratio: 1/1; overflow: hidden; background: var(--color-border);">
+            <video autoplay muted loop playsinline style="width: 100%; height: 100%; object-fit: cover; display: block;">
+              <source src="/work/aerolab/3.mp4" type="video/mp4" />
+            </video>
+          </div>
+        </div>
+
+        <!-- 4: landscape full width -->
+        <div style="aspect-ratio: 2500/1406; overflow: hidden; background: var(--color-border); margin-top: 8px;">
+          <video autoplay muted loop playsinline style="width: 100%; height: 100%; object-fit: cover; display: block;">
+            <source src="/work/aerolab/4.mp4" type="video/mp4" />
+          </video>
+        </div>
+
+        <!-- 5 + 6: dos cuadrados -->
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 8px;">
+          <div style="aspect-ratio: 1/1; overflow: hidden; background: var(--color-border);">
+            <video autoplay muted loop playsinline style="width: 100%; height: 100%; object-fit: cover; display: block;">
+              <source src="/work/aerolab/5.mp4" type="video/mp4" />
+            </video>
+          </div>
+          <div style="aspect-ratio: 1/1; overflow: hidden; background: var(--color-border);">
+            <video autoplay muted loop playsinline style="width: 100%; height: 100%; object-fit: cover; display: block;">
+              <source src="/work/aerolab/6.mp4" type="video/mp4" />
+            </video>
+          </div>
+        </div>
+
+        <!-- 7: landscape full width -->
+        <div style="aspect-ratio: 2500/1406; overflow: hidden; background: var(--color-border); margin-top: 8px;">
+          <video autoplay muted loop playsinline style="width: 100%; height: 100%; object-fit: cover; display: block;">
+            <source src="/work/aerolab/7.mp4" type="video/mp4" />
           </video>
         </div>
       </>
     ) : (
       <>
         <!-- Hero placeholder -->
-        <div class="bg-[var(--color-border)]" style="aspect-ratio: 16/9; border-radius: 8px; width: 100%;"></div>
+        <div class="bg-[var(--color-border)]" style="aspect-ratio: 16/9; width: 100%;"></div>
 
         <!-- Info -->
         <div class="grid grid-cols-2 gap-8" style="padding: 32px 0 40px;">
-          <div class="space-y-4">
-            <div>
-              <h1 class="font-geist text-sm font-bold text-[var(--color-text)] mb-2">{title}</h1>
-              <p class="text-xs text-[var(--color-muted)]">{tags.join(', ')}</p>
-            </div>
+          <div>
+            <h1 class="font-geist text-sm font-bold text-[var(--color-text)] mb-2">{title}</h1>
+            <p class="text-xs text-[var(--color-muted)] leading-relaxed" style="margin-top: 16px; max-width: 420px;">{description}</p>
           </div>
-          <div class="flex justify-end">
+          <div class="flex flex-col items-end gap-4">
             <p class="text-xs text-[var(--color-muted)]">{year}</p>
+            <p class="text-xs text-[var(--color-muted)]">{tags.join(', ')}</p>
           </div>
         </div>
 
         <!-- Placeholders -->
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
-          <div class="bg-[var(--color-border)]" style="aspect-ratio: 1/1; border-radius: 8px;"></div>
-          <div class="bg-[var(--color-border)]" style="aspect-ratio: 1/1; border-radius: 8px;"></div>
+          <div class="bg-[var(--color-border)]" style="aspect-ratio: 1/1;"></div>
+          <div class="bg-[var(--color-border)]" style="aspect-ratio: 1/1;"></div>
         </div>
       </>
     )}
 
-    <GifFooter href="/" />
+    <!-- Similar projects -->
+    <section style="padding-top: 48px;">
+      <div style="margin-bottom: 24px;">
+        <h2 class="text-sm font-bold tracking-widest uppercase text-[var(--color-text)]">Similar projects</h2>
+      </div>
+      <div class="grid grid-cols-2 md:grid-cols-4" style="gap: 8px;">
+        {suggestions.map(p => (
+          <a
+            href={`/work/${p.slug}`}
+            class="group relative overflow-hidden bg-[var(--color-border)] aspect-[4/5] cursor-none block"
+            style="border-radius: 8px;"
+          >
+            <img src={p.cover} alt={p.title} class="absolute inset-0 w-full h-full object-cover" />
+            <div class="absolute inset-0 flex items-end p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300" style="background: linear-gradient(to top, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.4) 50%, transparent 100%);">
+              <div>
+                <p class="text-xs font-medium tracking-wider uppercase text-white">{p.title}</p>
+                <p class="text-xs mt-0.5" style="color: rgba(255,255,255,0.65);">{p.year}</p>
+              </div>
+            </div>
+          </a>
+        ))}
+      </div>
+    </section>
 
   </main>
+  <Footer />
 </Layout>

@@ -1,16 +1,15 @@
 ---
 const projects = [
-  { slug: 'rampant',             title: 'RAMPANT',             year: '2025',      tags: ['Motion'],                                cover: '/work/rampant.jpg'           },
+  { slug: 'cafe-vilma',          title: 'CAFE VILMA',          year: '2026',      tags: ['Branding', 'Motion'],                    cover: '/work/cafe-vilma.jpg'         },
+  { slug: 'bernardo-parisi',     title: 'BERNARDO PARISI',     year: '2025',      tags: ['Art Cover', 'Art Direction'],            cover: '/work/bernardo-parisi.jpg'    },
+  { slug: 'reb',                 title: 'REB',                 year: '2026',      tags: ['Branding'],                              cover: '/work/reb.jpg'                },
+  { slug: 'legado',              title: 'LEGADO',              year: '2025–2026', tags: ['Branding'],                              cover: '/work/legado.jpg'             },
+  { slug: 'paisanos',            title: 'PAISANOS',            year: '2024',      tags: ['Motion'],                                cover: '/work/paisanos.jpg'           },
+  { slug: 'aerolab',             title: 'AEROLAB',             year: '2024',      tags: ['Motion', 'Design'],                      cover: '/work/aerolab.jpg'            },
   { slug: 'from-room',           title: 'FROM ROOM',           year: '2026',      tags: ['Motion', 'Design'],                      cover: '/work/from-room.jpg',          soon: true },
-  { slug: 'reb',                 title: 'REB',                 year: '2026',      tags: ['Branding'],                              cover: '/work/reb.jpg',                soon: true },
-  { slug: 'cass-guille-saporta', title: 'CASS & GUILLE',       year: '2025',      tags: ['Film', 'Design'],                        cover: '/work/cass-guille-saporta.jpg'},
-  { slug: 'bernardo-parisi',     title: 'BERNARDO PARISI',     year: '2025',      tags: ['Art Cover', 'Art Direction'],            cover: '/work/bernardo-parisi.jpg'   },
-  { slug: 'montanas',            title: 'MONTAÑAS',            year: '2023',      tags: ['Art Cover', 'Art Direction', 'Motion'],  cover: '/work/montanas.jpg'          },
-  { slug: 'legado',              title: 'LEGADO',              year: '2025–2026', tags: ['Branding'],                              cover: '/work/legado.jpg'            },
-  { slug: 'cafe-vilma',          title: 'CAFE VILMA',          year: '2026',      tags: ['Branding', 'Motion'],                    cover: '/work/cafe-vilma.jpg',        soon: true },
-  { slug: 'paisanos',            title: 'PAISANOS',            year: '2024',      tags: ['Motion'],                                cover: '/work/paisanos.jpg'          },
-  { slug: 'isla',                title: 'ISLA',                year: '2025',      tags: ['Motion', 'Design'],                      cover: '/work/isla.jpg'              },
-  { slug: 'aerolab',             title: 'AEROLAB',             year: '2024',      tags: ['Motion', 'Design'],                      cover: '/work/aerolab.jpg'           },
+  { slug: 'cass-guille-saporta', title: 'CASS & GUILLE',       year: '2025',      tags: ['Film', 'Design'],                        cover: '/work/cass-guille-saporta.jpg',soon: true },
+  { slug: 'montanas',            title: 'MONTAÑAS',            year: '2023',      tags: ['Art Cover', 'Art Direction', 'Motion'],  cover: '/work/montanas.jpg',           soon: true },
+  { slug: 'isla',                title: 'ISLA',                year: '2025',      tags: ['Motion', 'Design'],                      cover: '/work/isla.jpg',               soon: true },
 ];
 
 const shuffled = projects;
@@ -23,7 +22,7 @@ const shuffled = projects;
     <p class="text-xs text-[var(--color-muted)]">A selection of last projects I've been working on</p>
   </div>
 
-  <div class="grid grid-cols-3" style="gap: 8px;">
+  <div class="grid grid-cols-1 md:grid-cols-3" style="gap: 8px;">
     {shuffled.map((p) => {
       const Tag = p.soon ? 'div' : 'a';
       return (

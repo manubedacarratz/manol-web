@@ -1,11 +1,12 @@
 ---
 interface Props {
   href?: string;
+  marginBottom?: string;
 }
-const { href } = Astro.props;
+const { href, marginBottom = '-40px' } = Astro.props;
 ---
 
-<div style="margin: 0 -50px -40px;">
+<div style={`margin: 0 -50px ${marginBottom};`}>
   {href ? (
     <a href={href} style="display: block; cursor: none;">
       <img
