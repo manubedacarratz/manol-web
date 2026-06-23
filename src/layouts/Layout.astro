@@ -3,12 +3,14 @@ import '../styles/global.css';
 
 interface Props {
   title?: string;
-  description?: string;
+  descriptionEn?: string;
+  descriptionEs?: string;
 }
 
 const {
   title = 'manol',
-  description = 'Motion and visual designer based in Buenos Aires, working worldwide.',
+  descriptionEn = 'Manu Bedacarratz (Manol). Graphic and motion designer in Buenos Aires. Brand identities, animation and music videos for cultural projects.',
+  descriptionEs = 'Manu Bedacarratz (Manol). Diseñador gráfico y de motion en Buenos Aires. Identidades, animación y videoclips para proyectos culturales.',
 } = Astro.props;
 ---
 
@@ -17,7 +19,9 @@ const {
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content={description} />
+    <meta name="description" content={descriptionEn} />
+    <meta name="description-en" content={descriptionEn} />
+    <meta name="description-es" content={descriptionEs} />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -37,8 +41,13 @@ const {
   </body>
   <script>
     // ── Language toggle ──────────────────────────────────────
+    const metaDesc   = document.querySelector('meta[name="description"]') as HTMLMetaElement;
+    const metaDescEn = (document.querySelector('meta[name="description-en"]') as HTMLMetaElement)?.content;
+    const metaDescEs = (document.querySelector('meta[name="description-es"]') as HTMLMetaElement)?.content;
+
     function applyLang(lang: string) {
       document.documentElement.classList.toggle('es', lang === 'es');
+      if (metaDesc) metaDesc.setAttribute('content', lang === 'es' ? metaDescEs : metaDescEn);
       document.querySelectorAll<HTMLButtonElement>('.lang-btn').forEach(btn => {
         const active = btn.dataset.lang === lang;
         btn.style.background = active ? 'var(--color-text)' : 'transparent';

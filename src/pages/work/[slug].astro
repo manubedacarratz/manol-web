@@ -20,11 +20,15 @@ export function getStaticPaths() {
     { slug: 'reb',                 title: 'REB',              year: '2026',      tags: ['Branding'],
       descriptionEs: 'REB es una label de indumentaria urbana pensada como una reinterpretación contemporánea de la cultura del fútbol, con una referencia indirecta al CAI. Trabajamos la identidad completa: logo, sistema tipográfico, paleta y aplicaciones, junto con el desarrollo gráfico de las primeras prendas de la marca. Armamos un sistema que funcione de base para que la marca pueda expresarse a lo largo de los drops.',
       descriptionEn: 'REB is an urban clothing label conceived as a contemporary reinterpretation of football culture, with an indirect reference to CAI. We worked on the complete identity: logo, typographic system, color palette, and applications, along with the graphic development of the brand\'s first garments. We built a system flexible enough to serve as a foundation for the brand to express itself across future drops.',
+      metaEs: 'Identidad de marca para REB, una label de indumentaria urbana con referencia a la cultura del fútbol. Logo, tipografía, paleta y aplicaciones.',
+      metaEn: 'Brand identity for REB, an urban clothing label rooted in football culture. Logo, typographic system, color palette and applications.',
     },
     { slug: 'cass-guille-saporta', title: 'CASS & GUILLE',    year: '2025',      tags: ['Film', 'Design'],                       descriptionEn: lorem, descriptionEs: lorem },
     { slug: 'bernardo-parisi',     title: 'BERNARDO PARISI',  year: '2025',      tags: ['Art Cover', 'Art Direction'],
       descriptionEs: 'Trabajamos en el lanzamiento de "La motito", el nuevo disco de Bernardo Parisi. El proyecto incluyó el arte de tapa y contratapa, además de las piezas de comunicación para el lanzamiento y la fecha de presentación. El disco está disponible en todas las plataformas.',
       descriptionEn: 'We worked on the launch of "La motito", Bernardo Parisi\'s new album. The project included the cover and back cover art, along with the communication pieces for the release and presentation date. The album is now available on all platforms.',
+      metaEs: 'Arte de tapa y comunicación de lanzamiento para "La motito", el nuevo disco de Bernardo Parisi.',
+      metaEn: 'Cover art and release communication for "La motito", Bernardo Parisi\'s new album.',
     },
     { slug: 'montanas',            title: 'MONTAÑAS',         year: '2023',      tags: ['Art Cover', 'Art Direction', 'Motion'], descriptionEn: lorem, descriptionEs: lorem },
     { slug: 'legado',              title: 'LEGADO',           year: '2025–2026', tags: ['Branding'],
@@ -34,12 +38,14 @@ export function getStaticPaths() {
     { slug: 'cafe-vilma',          title: 'CAFE VILMA',       year: '2026',      tags: ['Branding', 'Motion'],
       descriptionEs: 'Vilma es un café ubicado en un antiguo puesto de diarios de Buenos Aires, pensado como una reinterpretación de los cafés tradicionales. Junto con Justina Antonacci trabajamos la identidad completa del local: desde el logo y el sistema tipográfico hasta el packaging y la cartelería del puesto. El concepto pone el foco en la barra como espacio de encuentro, en la calidez de lo cotidiano y en la dimensión social del café de paso.',
       descriptionEn: 'Vilma is a café set in a former newsstand in Buenos Aires, conceived as a reinterpretation of traditional cafés. Together with Justina Antonacci, we developed the brand\'s full identity: from the logo and typographic system to packaging and signage for the stand. The concept centers on the counter as a meeting point, the warmth of everyday routine, and the social dimension of a quick coffee stop.',
+      metaEs: 'Identidad de marca para Vilma, un café en un antiguo puesto de diarios de Buenos Aires. Logo, tipografía, packaging y cartelería.',
+      metaEn: 'Brand identity for Vilma, a café in a former newsstand in Buenos Aires. Logo, typography, packaging and signage.',
     },
   ];
   return projects.map(p => ({ params: { slug: p.slug }, props: p }));
 }
 
-const { slug, title, year, tags, descriptionEn, descriptionEs } = Astro.props;
+const { slug, title, year, tags, descriptionEn, descriptionEs, metaEn, metaEs } = Astro.props;
 
 const allProjects = [
   { slug: 'aerolab',             title: 'AEROLAB',         year: '2024',      cover: '/work/aerolab.jpg'             },
@@ -62,7 +68,7 @@ const suggestions = allProjects
   .slice(0, 4);
 ---
 
-<Layout title={`${title} — manol`}>
+<Layout title={`${title} — manol`} descriptionEn={metaEn} descriptionEs={metaEs}>
   <Nav />
   <main style="padding: 20px;">
 
