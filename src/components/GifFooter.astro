@@ -6,12 +6,12 @@ interface Props {
 const { href, marginBottom = '-40px' } = Astro.props;
 ---
 
-<div style={`margin: 0 -50px ${marginBottom};`}>
+<div id="gif-footer-wrapper" style={`margin: 0 -50px ${marginBottom};`}>
   {href ? (
     <a href={href} style="display: block; cursor: none;">
       <img
         id="gif-footer"
-        src="/footer/manol.gif"
+        src="/footer/manol.png"
         alt="MANOL"
         style="width: 100%; height: auto; display: block;"
       />
@@ -19,9 +19,27 @@ const { href, marginBottom = '-40px' } = Astro.props;
   ) : (
     <img
       id="gif-footer"
-      src="/footer/manol.gif"
+      src="/footer/manol.png"
       alt="MANOL"
       style="width: 100%; height: auto; display: block; cursor: none;"
     />
   )}
 </div>
+
+<script>
+  const wrapper = document.getElementById('gif-footer-wrapper');
+  const img = document.getElementById('gif-footer') as HTMLImageElement | null;
+  if (wrapper && img) {
+    const isHoverDevice = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+    if (isHoverDevice) {
+      wrapper.addEventListener('mouseenter', () => {
+        img.src = '/footer/manol.gif';
+      });
+      wrapper.addEventListener('mouseleave', () => {
+        img.src = '/footer/manol.png';
+      });
+    } else {
+      img.src = '/footer/manol.gif';
+    }
+  }
+</script>
