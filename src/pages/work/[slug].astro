@@ -41,7 +41,7 @@ export function getStaticPaths() {
       metaEs: 'Identidad y comunicación para "Legado", obra de danza contemporánea sobre herencia, cuerpo y memoria.',
       metaEn: 'Identity and communication for "Legado", a contemporary dance piece about inheritance, body and memory.',
     },
-    { slug: 'cafe-vilma',          title: 'CAFE VILMA',       year: '2026',      tags: ['Branding', 'Motion'],
+    { slug: 'vilma-cafe',          title: 'VILMA CAFE',       year: '2026',      tags: ['Branding', 'Motion'],
       descriptionEs: 'Vilma es un café ubicado en un antiguo puesto de diarios de Buenos Aires, pensado como una reinterpretación de los cafés tradicionales. Junto con Justina Antonacci trabajamos la identidad completa del local: desde el logo y el sistema tipográfico hasta el packaging y la cartelería del puesto. El concepto pone el foco en la barra como espacio de encuentro, en la calidez de lo cotidiano y en la dimensión social del café de paso.',
       descriptionEn: 'Vilma is a café set in a former newsstand in Buenos Aires, conceived as a reinterpretation of traditional cafés. Together with Justina Antonacci, we developed the brand\'s full identity: from the logo and typographic system to packaging and signage for the stand. The concept centers on the counter as a meeting point, the warmth of everyday routine, and the social dimension of a quick coffee stop.',
       metaEs: 'Identidad de marca para Vilma, un café en un antiguo puesto de diarios de Buenos Aires. Logo, tipografía, packaging y cartelería.',
@@ -63,7 +63,7 @@ const allProjects = [
   { slug: 'bernardo-parisi',     title: 'BERNARDO PARISI',  year: '2025',      cover: '/work/bernardo-parisi.jpg'    },
   { slug: 'montanas',            title: 'MONTAÑAS',         year: '2023',      cover: '/work/montanas.jpg'            },
   { slug: 'legado',              title: 'LEGADO',           year: '2025–2026', cover: '/work/legado.jpg'              },
-  { slug: 'cafe-vilma',          title: 'CAFE VILMA',       year: '2026',      cover: '/work/cafe-vilma.jpg'          },
+  { slug: 'vilma-cafe',          title: 'VILMA CAFE',       year: '2026',      cover: '/work/cafe-vilma.jpg'          },
 ];
 
 const soonSlugs = new Set(['from-room', 'cass-guille-saporta', 'isla', 'montanas']);
@@ -88,13 +88,17 @@ const suggestions = allProjects
         </div>
 
         <!-- Info -->
-        <div class="grid grid-cols-2 gap-8" style="padding: 32px 0 40px;">
-          <div>
-            <h1 class="font-geist text-sm font-bold text-[var(--color-text)] mb-2">{title}</h1>
-            <p class="lang-en text-xs text-[var(--color-muted)] leading-relaxed" style="margin-top: 16px; max-width: 420px;">{descriptionEn}</p>
-            <p class="lang-es text-xs text-[var(--color-muted)] leading-relaxed" style="margin-top: 16px; max-width: 420px;">{descriptionEs}</p>
+        <div class="project-info">
+          <div class="project-info-left">
+            <div class="project-info-header">
+              <h1 class="font-geist text-sm font-bold text-[var(--color-text)]">{title}</h1>
+            </div>
+            <div class="project-info-desc">
+              <p class="lang-en text-xs text-[var(--color-muted)] leading-relaxed">{descriptionEn}</p>
+              <p class="lang-es text-xs text-[var(--color-muted)] leading-relaxed">{descriptionEs}</p>
+            </div>
           </div>
-          <div class="flex flex-col items-end gap-4">
+          <div class="project-info-meta flex flex-col items-end gap-2">
             <p class="text-xs text-[var(--color-muted)]">{year}</p>
             <p class="text-xs text-[var(--color-muted)]">{tags.join(', ')}</p>
           </div>
@@ -143,13 +147,17 @@ const suggestions = allProjects
         </div>
 
         <!-- Info -->
-        <div class="grid grid-cols-2 gap-8" style="padding: 32px 0 40px;">
-          <div>
-            <h1 class="font-geist text-sm font-bold text-[var(--color-text)] mb-2">{title}</h1>
-            <p class="lang-en text-xs text-[var(--color-muted)] leading-relaxed" style="margin-top: 16px; max-width: 420px;">{descriptionEn}</p>
-            <p class="lang-es text-xs text-[var(--color-muted)] leading-relaxed" style="margin-top: 16px; max-width: 420px;">{descriptionEs}</p>
+        <div class="project-info">
+          <div class="project-info-left">
+            <div class="project-info-header">
+              <h1 class="font-geist text-sm font-bold text-[var(--color-text)]">{title}</h1>
+            </div>
+            <div class="project-info-desc">
+              <p class="lang-en text-xs text-[var(--color-muted)] leading-relaxed">{descriptionEn}</p>
+              <p class="lang-es text-xs text-[var(--color-muted)] leading-relaxed">{descriptionEs}</p>
+            </div>
           </div>
-          <div class="flex flex-col items-end gap-4">
+          <div class="project-info-meta flex flex-col items-end gap-2">
             <p class="text-xs text-[var(--color-muted)]">{year}</p>
             <p class="text-xs text-[var(--color-muted)]">{tags.join(', ')}</p>
           </div>
@@ -210,13 +218,17 @@ const suggestions = allProjects
         </div>
 
         <!-- Info -->
-        <div class="grid grid-cols-2 gap-8" style="padding: 32px 0 40px;">
-          <div>
-            <h1 class="font-geist text-sm font-bold text-[var(--color-text)] mb-2">{title}</h1>
-            <p class="lang-en text-xs text-[var(--color-muted)] leading-relaxed" style="margin-top: 16px; max-width: 420px;">{descriptionEn}</p>
-            <p class="lang-es text-xs text-[var(--color-muted)] leading-relaxed" style="margin-top: 16px; max-width: 420px;">{descriptionEs}</p>
+        <div class="project-info">
+          <div class="project-info-left">
+            <div class="project-info-header">
+              <h1 class="font-geist text-sm font-bold text-[var(--color-text)]">{title}</h1>
+            </div>
+            <div class="project-info-desc">
+              <p class="lang-en text-xs text-[var(--color-muted)] leading-relaxed">{descriptionEn}</p>
+              <p class="lang-es text-xs text-[var(--color-muted)] leading-relaxed">{descriptionEs}</p>
+            </div>
           </div>
-          <div class="flex flex-col items-end gap-4">
+          <div class="project-info-meta flex flex-col items-end gap-2">
             <p class="text-xs text-[var(--color-muted)]">{year}</p>
             <p class="text-xs text-[var(--color-muted)]">{tags.join(', ')}</p>
           </div>
@@ -262,21 +274,25 @@ const suggestions = allProjects
           <img src="/work/bernardo-parisi/9.jpg" alt="Bernardo Parisi 9" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
         </div>
       </>
-    ) : slug === 'cafe-vilma' ? (
+    ) : slug === 'vilma-cafe' ? (
       <>
         <!-- Hero landscape -->
         <div style="aspect-ratio: 1862/1005; overflow: hidden; background: var(--color-border);">
-          <img src="/work/cafe-vilma/1.jpg" alt="Cafe Vilma 1" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
+          <img src="/work/cafe-vilma/1.jpg" alt="Vilma Cafe 1" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
         </div>
 
         <!-- Info -->
-        <div class="grid grid-cols-2 gap-8" style="padding: 32px 0 40px;">
-          <div>
-            <h1 class="font-geist text-sm font-bold text-[var(--color-text)] mb-2">{title}</h1>
-            <p class="lang-en text-xs text-[var(--color-muted)] leading-relaxed" style="margin-top: 16px; max-width: 420px;">{descriptionEn}</p>
-            <p class="lang-es text-xs text-[var(--color-muted)] leading-relaxed" style="margin-top: 16px; max-width: 420px;">{descriptionEs}</p>
+        <div class="project-info">
+          <div class="project-info-left">
+            <div class="project-info-header">
+              <h1 class="font-geist text-sm font-bold text-[var(--color-text)]">{title}</h1>
+            </div>
+            <div class="project-info-desc">
+              <p class="lang-en text-xs text-[var(--color-muted)] leading-relaxed">{descriptionEn}</p>
+              <p class="lang-es text-xs text-[var(--color-muted)] leading-relaxed">{descriptionEs}</p>
+            </div>
           </div>
-          <div class="flex flex-col items-end gap-4">
+          <div class="project-info-meta flex flex-col items-end gap-2">
             <p class="text-xs text-[var(--color-muted)]">{year}</p>
             <p class="text-xs text-[var(--color-muted)]">{tags.join(', ')}</p>
           </div>
@@ -285,46 +301,46 @@ const suggestions = allProjects
         <!-- 2 + 3: dos columnas portrait -->
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
           <div style="aspect-ratio: 924/1174; overflow: hidden; background: var(--color-border);">
-            <img src="/work/cafe-vilma/2.jpg" alt="Cafe Vilma 2" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
+            <img src="/work/cafe-vilma/2.jpg" alt="Vilma Cafe 2" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
           </div>
           <div style="aspect-ratio: 924/1174; overflow: hidden; background: var(--color-border);">
-            <img src="/work/cafe-vilma/3.jpg" alt="Cafe Vilma 3" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
+            <img src="/work/cafe-vilma/3.jpg" alt="Vilma Cafe 3" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
           </div>
         </div>
 
         <!-- 4: landscape full width -->
         <div style="aspect-ratio: 1862/1006; overflow: hidden; background: var(--color-border); margin-top: 8px;">
-          <img src="/work/cafe-vilma/4.jpg" alt="Cafe Vilma 4" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
+          <img src="/work/cafe-vilma/4.jpg" alt="Vilma Cafe 4" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
         </div>
 
         <!-- 5 + 6: dos columnas ~1:1 -->
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 8px;">
           <div style="aspect-ratio: 924/1005; overflow: hidden; background: var(--color-border);">
-            <img src="/work/cafe-vilma/5.jpg" alt="Cafe Vilma 5" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
+            <img src="/work/cafe-vilma/5.jpg" alt="Vilma Cafe 5" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
           </div>
           <div style="aspect-ratio: 924/1005; overflow: hidden; background: var(--color-border);">
-            <img src="/work/cafe-vilma/6.jpg" alt="Cafe Vilma 6" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
+            <img src="/work/cafe-vilma/6.jpg" alt="Vilma Cafe 6" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
           </div>
         </div>
 
         <!-- 7: landscape full width -->
         <div style="aspect-ratio: 1862/1006; overflow: hidden; background: var(--color-border); margin-top: 8px;">
-          <img src="/work/cafe-vilma/7.jpg" alt="Cafe Vilma 7" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
+          <img src="/work/cafe-vilma/7.jpg" alt="Vilma Cafe 7" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
         </div>
 
         <!-- 8 + 9: dos columnas ~1:1 -->
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 8px;">
           <div style="aspect-ratio: 924/1005; overflow: hidden; background: var(--color-border);">
-            <img src="/work/cafe-vilma/8.jpg" alt="Cafe Vilma 8" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
+            <img src="/work/cafe-vilma/8.jpg" alt="Vilma Cafe 8" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
           </div>
           <div style="aspect-ratio: 924/1005; overflow: hidden; background: var(--color-border);">
-            <img src="/work/cafe-vilma/9.jpg" alt="Cafe Vilma 9" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
+            <img src="/work/cafe-vilma/9.jpg" alt="Vilma Cafe 9" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
           </div>
         </div>
 
         <!-- 10: landscape full width -->
         <div style="aspect-ratio: 1862/1006; overflow: hidden; background: var(--color-border); margin-top: 8px;">
-          <img src="/work/cafe-vilma/10.jpg" alt="Cafe Vilma 10" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
+          <img src="/work/cafe-vilma/10.jpg" alt="Vilma Cafe 10" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
         </div>
       </>
     ) : slug === 'legado' ? (
@@ -335,13 +351,17 @@ const suggestions = allProjects
         </div>
 
         <!-- Info -->
-        <div class="grid grid-cols-2 gap-8" style="padding: 32px 0 40px;">
-          <div>
-            <h1 class="font-geist text-sm font-bold text-[var(--color-text)] mb-2">{title}</h1>
-            <p class="lang-en text-xs text-[var(--color-muted)] leading-relaxed" style="margin-top: 16px; max-width: 420px;">{descriptionEn}</p>
-            <p class="lang-es text-xs text-[var(--color-muted)] leading-relaxed" style="margin-top: 16px; max-width: 420px;">{descriptionEs}</p>
+        <div class="project-info">
+          <div class="project-info-left">
+            <div class="project-info-header">
+              <h1 class="font-geist text-sm font-bold text-[var(--color-text)]">{title}</h1>
+            </div>
+            <div class="project-info-desc">
+              <p class="lang-en text-xs text-[var(--color-muted)] leading-relaxed">{descriptionEn}</p>
+              <p class="lang-es text-xs text-[var(--color-muted)] leading-relaxed">{descriptionEs}</p>
+            </div>
           </div>
-          <div class="flex flex-col items-end gap-4">
+          <div class="project-info-meta flex flex-col items-end gap-2">
             <p class="text-xs text-[var(--color-muted)]">{year}</p>
             <p class="text-xs text-[var(--color-muted)]">{tags.join(', ')}</p>
           </div>
@@ -402,13 +422,17 @@ const suggestions = allProjects
         </div>
 
         <!-- Info -->
-        <div class="grid grid-cols-2 gap-8" style="padding: 32px 0 40px;">
-          <div>
-            <h1 class="font-geist text-sm font-bold text-[var(--color-text)] mb-2">{title}</h1>
-            <p class="lang-en text-xs text-[var(--color-muted)] leading-relaxed" style="margin-top: 16px; max-width: 420px;">{descriptionEn}</p>
-            <p class="lang-es text-xs text-[var(--color-muted)] leading-relaxed" style="margin-top: 16px; max-width: 420px;">{descriptionEs}</p>
+        <div class="project-info">
+          <div class="project-info-left">
+            <div class="project-info-header">
+              <h1 class="font-geist text-sm font-bold text-[var(--color-text)]">{title}</h1>
+            </div>
+            <div class="project-info-desc">
+              <p class="lang-en text-xs text-[var(--color-muted)] leading-relaxed">{descriptionEn}</p>
+              <p class="lang-es text-xs text-[var(--color-muted)] leading-relaxed">{descriptionEs}</p>
+            </div>
           </div>
-          <div class="flex flex-col items-end gap-4">
+          <div class="project-info-meta flex flex-col items-end gap-2">
             <p class="text-xs text-[var(--color-muted)]">{year}</p>
             <p class="text-xs text-[var(--color-muted)]">{tags.join(', ')}</p>
           </div>
@@ -462,13 +486,17 @@ const suggestions = allProjects
         <div class="bg-[var(--color-border)]" style="aspect-ratio: 16/9; width: 100%;"></div>
 
         <!-- Info -->
-        <div class="grid grid-cols-2 gap-8" style="padding: 32px 0 40px;">
-          <div>
-            <h1 class="font-geist text-sm font-bold text-[var(--color-text)] mb-2">{title}</h1>
-            <p class="lang-en text-xs text-[var(--color-muted)] leading-relaxed" style="margin-top: 16px; max-width: 420px;">{descriptionEn}</p>
-            <p class="lang-es text-xs text-[var(--color-muted)] leading-relaxed" style="margin-top: 16px; max-width: 420px;">{descriptionEs}</p>
+        <div class="project-info">
+          <div class="project-info-left">
+            <div class="project-info-header">
+              <h1 class="font-geist text-sm font-bold text-[var(--color-text)]">{title}</h1>
+            </div>
+            <div class="project-info-desc">
+              <p class="lang-en text-xs text-[var(--color-muted)] leading-relaxed">{descriptionEn}</p>
+              <p class="lang-es text-xs text-[var(--color-muted)] leading-relaxed">{descriptionEs}</p>
+            </div>
           </div>
-          <div class="flex flex-col items-end gap-4">
+          <div class="project-info-meta flex flex-col items-end gap-2">
             <p class="text-xs text-[var(--color-muted)]">{year}</p>
             <p class="text-xs text-[var(--color-muted)]">{tags.join(', ')}</p>
           </div>
@@ -485,13 +513,14 @@ const suggestions = allProjects
     <!-- Similar projects -->
     <section style="padding-top: 48px;">
       <div style="margin-bottom: 24px;">
-        <h2 class="text-sm font-bold tracking-widest uppercase text-[var(--color-text)]">Similar projects</h2>
+        <h2 class="lang-en text-sm font-bold tracking-widest uppercase text-[var(--color-text)]">Similar projects</h2>
+        <h2 class="lang-es text-sm font-bold tracking-widest uppercase text-[var(--color-text)]">Proyectos similares</h2>
       </div>
       <div class="grid grid-cols-2 md:grid-cols-4" style="gap: 8px;">
         {suggestions.map(p => (
           <a
             href={`/work/${p.slug}`}
-            class="group relative overflow-hidden bg-[var(--color-border)] aspect-[4/5] cursor-none block"
+            class="suggestion-card group relative overflow-hidden bg-[var(--color-border)] aspect-[4/5] cursor-none block"
             style="border-radius: 8px;"
           >
             <img src={p.cover} alt={p.title} class="absolute inset-0 w-full h-full object-cover" />
@@ -509,3 +538,74 @@ const suggestions = allProjects
   </main>
   <Footer />
 </Layout>
+
+<style is:global>
+  /* ── Info block — desktop ─────────────────────────────── */
+  .project-info {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    padding: 32px 0 40px;
+  }
+
+  .project-info-desc p {
+    margin-top: 16px;
+  }
+
+  /* ── Info block — mobile ──────────────────────────────── */
+  @media (max-width: 767px) {
+    /* Quitar padding horizontal del main para que imágenes sean full frame */
+    main {
+      padding-left: 0 !important;
+      padding-right: 0 !important;
+    }
+
+    /* Devolver padding a las zonas de texto */
+    .project-info {
+      display: flex !important;
+      flex-direction: column !important;
+      gap: 0 !important;
+      padding: 20px 20px 28px !important;
+    }
+
+    /* display: contents hace que los hijos de project-info-left
+       participen directamente en el flex del padre */
+    .project-info-left {
+      display: contents;
+    }
+
+    .project-info-header { order: 1; }
+
+    .project-info-meta {
+      order: 2;
+      align-items: flex-start !important;
+      flex-direction: row !important;
+      gap: 12px !important;
+      margin-top: 6px;
+    }
+
+    .project-info-desc {
+      order: 3;
+    }
+
+    .project-info-desc p {
+      margin-top: 14px;
+    }
+
+    /* 2-col grids → 1 col */
+    [style*="grid-template-columns: 1fr 1fr"] {
+      grid-template-columns: 1fr !important;
+    }
+
+    /* Similar projects section: devolver padding */
+    main > section {
+      padding-left: 20px !important;
+      padding-right: 20px !important;
+    }
+
+    /* Solo 2 proyectos sugeridos en mobile */
+    .suggestion-card:nth-child(n+3) {
+      display: none;
+    }
+  }
+</style>

@@ -1,6 +1,6 @@
 ---
 const projects = [
-  { slug: 'cafe-vilma',          title: 'CAFE VILMA',          year: '2026',      tags: ['Branding', 'Motion'],                    cover: '/work/cafe-vilma.jpg'         },
+  { slug: 'vilma-cafe',          title: 'VILMA CAFE',          year: '2026',      tags: ['Branding', 'Motion'],                    cover: '/work/cafe-vilma.jpg'         },
   { slug: 'bernardo-parisi',     title: 'BERNARDO PARISI',     year: '2025',      tags: ['Art Cover', 'Art Direction'],            cover: '/work/bernardo-parisi.jpg'    },
   { slug: 'reb',                 title: 'REB',                 year: '2026',      tags: ['Branding'],                              cover: '/work/reb.jpg'                },
   { slug: 'legado',              title: 'LEGADO',              year: '2025–2026', tags: ['Branding'],                              cover: '/work/legado.jpg'             },
@@ -12,23 +12,44 @@ const projects = [
   { slug: 'isla',                title: 'ISLA',                year: '2025',      tags: ['Motion', 'Design'],                      cover: '/work/isla.jpg',               soon: true },
 ];
 
+const allTags = [...new Set(projects.flatMap(p => p.tags))].sort();
 const shuffled = projects;
 ---
 
 <section id="work" style="padding: 48px 20px;">
 
-  <div class="mb-10">
-    <h2 class="text-sm font-bold tracking-widest uppercase text-[var(--color-text)] mb-1">Projects</h2>
-    <p class="text-xs text-[var(--color-muted)]">A selection of last projects I've been working on</p>
+  <div id="work-header" class="mb-10" style="display: flex; align-items: flex-end; justify-content: space-between; gap: 16px;">
+    <div>
+      <h2 class="lang-en text-sm font-bold tracking-widest uppercase text-[var(--color-text)] mb-1">Projects</h2>
+      <h2 class="lang-es text-sm font-bold tracking-widest uppercase text-[var(--color-text)] mb-1">Proyectos</h2>
+      <p class="lang-en text-xs text-[var(--color-muted)]">A selection of last projects I've been working on</p>
+      <p class="lang-es text-xs text-[var(--color-muted)]">Una selección de mis últimos proyectos</p>
+    </div>
+
+    <div id="filter-bar" style="display: flex; flex-wrap: wrap; gap: 16px; justify-content: flex-end;">
+      <button
+        class="filter-btn active"
+        data-filter="all"
+        style="font-family: inherit; font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; padding: 0; background: none; border: none; cursor: none; color: var(--color-text);"
+      ><span class="lang-en">All</span><span class="lang-es">Todo</span></button>
+      {allTags.map(tag => (
+        <button
+          class="filter-btn"
+          data-filter={tag}
+          style="font-family: inherit; font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; padding: 0; background: none; border: none; cursor: none; color: var(--color-muted);"
+        >{tag}</button>
+      ))}
+    </div>
   </div>
 
-  <div class="grid grid-cols-1 md:grid-cols-3" style="gap: 8px;">
+  <div id="work-grid" class="grid grid-cols-1 md:grid-cols-3" style="gap: 8px;">
     {shuffled.map((p) => {
       const Tag = p.soon ? 'div' : 'a';
       return (
         <Tag
           href={p.soon ? undefined : `/work/${p.slug}`}
-          class="group relative overflow-hidden bg-[var(--color-border)] aspect-[4/5] cursor-none block"
+          class="work-card group relative overflow-hidden bg-[var(--color-border)] aspect-[4/5] cursor-none block"
+          data-tags={p.tags.join(',')}
           style="border-radius: 8px;"
         >
           {p.cover && (
@@ -43,7 +64,7 @@ const shuffled = projects;
               <span class="text-[9px] font-medium tracking-widest uppercase px-2 py-1" style="background: rgba(0,0,0,0.55); color: rgba(255,255,255,0.8); border-radius: 4px; backdrop-filter: blur(4px);">Soon</span>
             </div>
           )}
-          <div class="absolute inset-0 flex items-end justify-between p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300" style="background: linear-gradient(to top, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.4) 50%, transparent 100%);">
+          <div class="work-card-overlay absolute inset-0 flex items-end justify-between p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300" style="background: linear-gradient(to top, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.4) 50%, transparent 100%);">
             <div>
               <p class="text-xs font-medium tracking-wider uppercase text-white">{p.title}</p>
               <p class="text-xs mt-0.5" style="color: rgba(255,255,255,0.65);">{p.year}</p>
@@ -60,3 +81,46 @@ const shuffled = projects;
   </div>
 
 </section>
+
+<style>
+  @media (max-width: 767px) {
+    #work-header {
+      flex-direction: column !important;
+      align-items: flex-start !important;
+    }
+    #filter-bar {
+      justify-content: flex-start !important;
+    }
+  }
+
+  /* En touch: overlay siempre visible */
+  @media (hover: none) {
+    :global(.work-card-overlay) {
+      opacity: 1 !important;
+    }
+  }
+</style>
+
+<script>
+  const buttons = document.querySelectorAll<HTMLButtonElement>('.filter-btn');
+  const cards = document.querySelectorAll<HTMLElement>('.work-card');
+
+  buttons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const filter = btn.dataset.filter!;
+
+      buttons.forEach(b => {
+        b.style.color = b === btn ? 'var(--color-text)' : 'var(--color-muted)';
+      });
+
+      cards.forEach(card => {
+        if (filter === 'all') {
+          card.style.display = '';
+        } else {
+          const tags = card.dataset.tags?.split(',') ?? [];
+          card.style.display = tags.includes(filter) ? '' : 'none';
+        }
+      });
+    });
+  });
+</script>

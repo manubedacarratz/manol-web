@@ -11,31 +11,17 @@ const { href, marginBottom = '-40px' } = Astro.props;
     <a href={href} style="display: block; cursor: none;">
       <img
         id="gif-footer"
-        src="/footer/manol.png"
+        src="/footer/manol.gif"
         alt="MANOL"
-        data-gif="/footer/manol.gif"
-        data-png="/footer/manol.png"
         style="width: 100%; height: auto; display: block;"
       />
     </a>
   ) : (
     <img
       id="gif-footer"
-      src="/footer/manol.png"
+      src="/footer/manol.gif"
       alt="MANOL"
-      data-gif="/footer/manol.gif"
-      data-png="/footer/manol.png"
       style="width: 100%; height: auto; display: block; cursor: none;"
     />
   )}
 </div>
-
-<script>
-  const wm = document.querySelector<HTMLImageElement>('#gif-footer');
-  if (wm) {
-    const preload = new Image();
-    preload.src = wm.dataset.gif!;
-    wm.addEventListener('mouseenter', () => { wm.src = wm.dataset.gif!; });
-    wm.addEventListener('mouseleave', () => { wm.src = wm.dataset.png!; });
-  }
-</script>

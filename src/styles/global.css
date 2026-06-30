@@ -33,7 +33,12 @@
     letter-spacing: 0.075em;
     line-height: 0.65;
     -webkit-font-smoothing: antialiased;
-    cursor: none;
+  }
+
+  @media (pointer: fine) {
+    html {
+      cursor: none;
+    }
   }
 
   body {
@@ -82,23 +87,31 @@
 html.es .lang-en { display: none; }
 html.es .lang-es { display: block; }
 
-/* Cursor custom */
-.cursor {
-  width: 8px;
-  height: 8px;
-  background: var(--color-text);
-  border-radius: 50%;
-  position: fixed;
-  pointer-events: none;
-  z-index: 10000;
-  transform: translate(-50%, -50%);
-  transition: width 0.15s ease, height 0.15s ease;
-  mix-blend-mode: difference;
+/* Cursor custom — solo en dispositivos con puntero fino (mouse) */
+@media (pointer: fine) {
+  .cursor {
+    width: 8px;
+    height: 8px;
+    background: var(--color-text);
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    z-index: 10000;
+    transform: translate(-50%, -50%);
+    transition: width 0.15s ease, height 0.15s ease;
+    mix-blend-mode: difference;
+  }
+
+  .cursor.hover {
+    width: 28px;
+    height: 28px;
+  }
 }
 
-.cursor.hover {
-  width: 28px;
-  height: 28px;
+@media (pointer: coarse) {
+  .cursor {
+    display: none;
+  }
 }
 
 /* TEST: quitar puntas redondeadas de todos los contenedores */

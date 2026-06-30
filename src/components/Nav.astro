@@ -6,12 +6,67 @@
     <span id="nav-logo-text" class="text-xs tracking-widest uppercase font-medium text-[var(--color-text)]">manol</span>
     <canvas id="nav-logo-canvas" style="height: 12px; width: auto; display: none;"></canvas>
   </a>
-  <div class="flex items-center gap-8">
-    <a href="/#work"    class="text-xs tracking-widest uppercase text-[var(--color-muted)] hover:text-[var(--color-text)] transition-colors">Work</a>
-    <a href="/#archive" class="text-xs tracking-widest uppercase text-[var(--color-muted)] hover:text-[var(--color-text)] transition-colors">Archive</a>
-    <a href="/#about"   class="text-xs tracking-widest uppercase text-[var(--color-muted)] hover:text-[var(--color-text)] transition-colors">About</a>
+  <div class="flex items-center" id="nav-right">
+    <div class="flex items-center" id="nav-links">
+      <a href="/#work"    class="lang-en text-xs tracking-widest uppercase text-[var(--color-muted)] hover:text-[var(--color-text)] transition-colors">Work</a>
+      <a href="/#work"    class="lang-es text-xs tracking-widest uppercase text-[var(--color-muted)] hover:text-[var(--color-text)] transition-colors">Trabajo</a>
+      <a href="/#archive" class="lang-en text-xs tracking-widest uppercase text-[var(--color-muted)] hover:text-[var(--color-text)] transition-colors">Archive</a>
+      <a href="/#archive" class="lang-es text-xs tracking-widest uppercase text-[var(--color-muted)] hover:text-[var(--color-text)] transition-colors">Archivo</a>
+      <a href="/#about"   class="lang-en text-xs tracking-widest uppercase text-[var(--color-muted)] hover:text-[var(--color-text)] transition-colors">About</a>
+      <a href="/#about"   class="lang-es text-xs tracking-widest uppercase text-[var(--color-muted)] hover:text-[var(--color-text)] transition-colors">Sobre mí</a>
+    </div>
+    <button id="nav-menu-toggle" aria-label="Toggle menu">Menu</button>
   </div>
 </nav>
+
+<style>
+  #nav-links {
+    gap: 32px;
+  }
+
+  #nav-menu-toggle {
+    display: none;
+  }
+
+  @media (max-width: 767px) {
+    #nav-links {
+      gap: 20px;
+      overflow: hidden;
+      max-width: 0;
+      opacity: 0;
+      pointer-events: none;
+      transition: max-width 0.35s ease, opacity 0.25s ease;
+      white-space: nowrap;
+    }
+
+    #nav-links.open {
+      max-width: 400px;
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    #nav-menu-toggle {
+      display: block;
+      background: none;
+      border: none;
+      font-family: 'Geist Mono', 'Courier New', monospace;
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--color-muted);
+      padding: 0;
+      margin-left: 20px;
+      cursor: pointer;
+      transition: color 0.15s ease;
+      flex-shrink: 0;
+    }
+
+    #nav-menu-toggle:hover,
+    #nav-menu-toggle.open {
+      color: var(--color-text);
+    }
+  }
+</style>
 
 <script>
   function applyTheme(theme: string) {
@@ -127,4 +182,24 @@
 
   // preload en background para que el primer hover no tenga delay
   loadGif();
+</script>
+
+<script>
+  const toggle   = document.getElementById('nav-menu-toggle')!;
+  const navLinks = document.getElementById('nav-links')!;
+
+  toggle.addEventListener('click', () => {
+    const isOpen = navLinks.classList.toggle('open');
+    toggle.classList.toggle('open', isOpen);
+    toggle.textContent = isOpen ? 'Close' : 'Menu';
+  });
+
+  // Cerrar al tocar un link
+  navLinks.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      navLinks.classList.remove('open');
+      toggle.classList.remove('open');
+      toggle.textContent = 'Menu';
+    });
+  });
 </script>

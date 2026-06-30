@@ -26,8 +26,10 @@ const BLANK_GIF = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAA
 <section id="archive" style="padding: 48px 20px;">
 
   <div class="mb-10">
-    <h2 class="font-geist text-sm font-bold text-[var(--color-text)] mb-1">Archive</h2>
-    <p class="text-xs text-[var(--color-muted)]">Stuff that didn't make it</p>
+    <h2 class="lang-en font-geist text-sm font-bold text-[var(--color-text)] mb-1">Archive</h2>
+    <h2 class="lang-es font-geist text-sm font-bold text-[var(--color-text)] mb-1">Archivo</h2>
+    <p class="lang-en text-xs text-[var(--color-muted)]">Stuff that didn't make it</p>
+    <p class="lang-es text-xs text-[var(--color-muted)]">Lo que no llegó a ningún lado</p>
   </div>
 
   <div id="archivo-grid" style="columns: 4; column-gap: 8px;">
@@ -203,5 +205,15 @@ const BLANK_GIF = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAA
     if (e.key === 'Escape') closeLightbox();
     if (e.key === 'ArrowLeft') prev();
     if (e.key === 'ArrowRight') next();
+  });
+
+  // Swipe en mobile
+  let touchStartX = 0;
+  lightbox.addEventListener('touchstart', e => {
+    touchStartX = e.touches[0].clientX;
+  }, { passive: true });
+  lightbox.addEventListener('touchend', e => {
+    const delta = e.changedTouches[0].clientX - touchStartX;
+    if (Math.abs(delta) > 50) delta < 0 ? next() : prev();
   });
 </script>

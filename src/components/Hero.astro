@@ -1,5 +1,4 @@
 ---
-import { musicData } from '../data/music.js';
 ---
 
 <!-- Video full frame -->
@@ -35,7 +34,34 @@ import { musicData } from '../data/music.js';
 </section>
 
 <style>
+  /* Currently listening: fijo en esquina inferior derecha en todos los viewports */
+  #music-link {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 100;
+  }
+  #music-link .text-right {
+    text-align: right;
+    white-space: nowrap;
+  }
+  #music-link #track-name {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 150px;
+    display: block;
+  }
+
   @media (max-width: 767px) {
+    #hero-info-right {
+      align-items: flex-start !important;
+      justify-content: flex-start !important;
+      gap: 16px;
+    }
+    #hero-info-right > .text-right {
+      text-align: left !important;
+    }
     #hero-section {
       padding: 0 !important;
     }
@@ -50,8 +76,8 @@ import { musicData } from '../data/music.js';
       height: 100% !important;
     }
     #manol-img {
-      margin-top: 0 !important;
-      margin-bottom: 0 !important;
+      margin-top: -15px !important;
+      margin-bottom: -15px !important;
     }
   }
 
@@ -94,10 +120,14 @@ import { musicData } from '../data/music.js';
     </div>
   </div>
 
-  <div class="flex flex-col items-end justify-between">
-    <div class="text-right space-y-1">
+  <div id="hero-info-right" class="flex flex-col items-end justify-between">
+    <div class="lang-en text-right space-y-1">
       <p class="text-xs text-[var(--color-muted)]">Based in Buenos Aires,</p>
       <p class="text-xs text-[var(--color-muted)]">Working worldwide</p>
+    </div>
+    <div class="lang-es text-right space-y-1">
+      <p class="text-xs text-[var(--color-muted)]">Buenos Aires,</p>
+      <p class="text-xs text-[var(--color-muted)]">Para el mundo</p>
     </div>
     <a
       id="music-link"
@@ -106,17 +136,20 @@ import { musicData } from '../data/music.js';
       rel="noopener noreferrer"
       class="flex items-center gap-3 group cursor-none"
     >
-      <p class="text-xs text-[var(--color-muted)] group-hover:text-[var(--color-text)] transition-colors">
-        Currently listening
-      </p>
+      <div class="text-right">
+        <p class="lang-en text-xs text-[var(--color-muted)] group-hover:text-[var(--color-text)] transition-colors">Currently listening</p>
+        <p class="lang-es text-xs text-[var(--color-muted)] group-hover:text-[var(--color-text)] transition-colors">Escuchando</p>
+        <p id="track-name" class="text-xs" style="color: var(--color-text); opacity: 0; transition: opacity 0.4s ease;">—</p>
+      </div>
       <div class="flex-none" style="width:40px;height:40px;">
         <svg viewBox="0 0 40 40" width="40" height="40" class="vinyl-record">
           <circle cx="20" cy="20" r="19" fill="#1c1c1a"/>
-          <circle cx="20" cy="20" r="17"   fill="none" stroke="#232320" stroke-width="0.8"/>
-          <circle cx="20" cy="20" r="14.5" fill="none" stroke="#232320" stroke-width="0.8"/>
-          <circle cx="20" cy="20" r="12"   fill="none" stroke="#232320" stroke-width="0.8"/>
-          <circle cx="20" cy="20" r="9.5"  fill="none" stroke="#232320" stroke-width="0.8"/>
+          <circle cx="20" cy="20" r="17"   fill="none" stroke="#2c2c28" stroke-width="0.8"/>
+          <circle cx="20" cy="20" r="14.5" fill="none" stroke="#2c2c28" stroke-width="0.8"/>
+          <circle cx="20" cy="20" r="12"   fill="none" stroke="#2c2c28" stroke-width="0.8"/>
+          <circle cx="20" cy="20" r="9.5"  fill="none" stroke="#2c2c28" stroke-width="0.8"/>
           <circle cx="20" cy="20" r="7" fill="#2e2820"/>
+          <circle cx="32" cy="8" r="1.5" fill="rgba(212,207,201,0.55)"/>
           <circle cx="20" cy="20" r="1.5" fill="#141414"/>
         </svg>
       </div>
@@ -129,10 +162,20 @@ import { musicData } from '../data/music.js';
 <script>
   import { tracks } from '../data/music.js';
 
-  const musicLink = document.getElementById('music-link') as HTMLAnchorElement;
+  const musicLink  = document.getElementById('music-link') as HTMLAnchorElement;
+  const trackName  = document.getElementById('track-name') as HTMLElement;
+
   function pickTrack() {
-    musicLink.href = tracks[Math.floor(Math.random() * tracks.length)];
+    const track = tracks[Math.floor(Math.random() * tracks.length)];
+    musicLink.href = track.url;
+
+    trackName.style.opacity = '0';
+    setTimeout(() => {
+      trackName.textContent = `${track.artist} — ${track.title}`;
+      trackName.style.opacity = '1';
+    }, 400);
   }
+
   pickTrack();
   setInterval(pickTrack, 30_000);
 
