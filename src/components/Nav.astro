@@ -1,7 +1,7 @@
 ---
 ---
 
-<nav class="fixed top-0 left-0 right-0 z-50 flex items-center justify-between" style="padding-top: 32px; padding-bottom: 20px; padding-left: 32px; padding-right: 32px;">
+<nav id="site-nav" class="fixed top-0 left-0 right-0 z-50 flex items-center justify-between" style="padding-top: 32px; padding-bottom: 20px; padding-left: 32px; padding-right: 32px;">
   <a href="/" id="nav-logo-link" class="flex items-center">
     <span id="nav-logo-text" class="text-xs tracking-widest uppercase font-medium text-[var(--color-text)]">manol</span>
     <canvas id="nav-logo-canvas" style="height: 12px; width: auto; display: none;"></canvas>
@@ -20,6 +20,14 @@
 </nav>
 
 <style>
+  #site-nav {
+    transition: transform 0.35s ease;
+  }
+
+  #site-nav.nav-hidden {
+    transform: translateY(-100%);
+  }
+
   #nav-links {
     gap: 32px;
   }
@@ -202,4 +210,41 @@
       toggle.textContent = 'Menu';
     });
   });
+</script>
+
+<script>
+  const nav = document.getElementById('site-nav')!;
+  const navLinksMenu = document.getElementById('nav-links')!;
+
+  const TOP_OFFSET  = 80;  // siempre visible cerca del top
+  const THRESHOLD   = 8;   // ignora micro-scrolls/jitter
+
+  let lastY = window.scrollY;
+  let ticking = false;
+
+  function updateNav() {
+    const y = window.scrollY;
+    const delta = y - lastY;
+
+    // no ocultar si el menu mobile está abierto
+    if (!navLinksMenu.classList.contains('open')) {
+      if (y <= TOP_OFFSET) {
+        nav.classList.remove('nav-hidden');
+      } else if (delta > THRESHOLD) {
+        nav.classList.add('nav-hidden');
+      } else if (delta < -THRESHOLD) {
+        nav.classList.remove('nav-hidden');
+      }
+    }
+
+    lastY = y;
+    ticking = false;
+  }
+
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      requestAnimationFrame(updateNav);
+      ticking = true;
+    }
+  }, { passive: true });
 </script>

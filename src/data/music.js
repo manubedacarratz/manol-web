@@ -5,4 +5,6 @@ export const tracks = [
   { url: 'https://www.youtube.com/watch?v=Ph04YJSo8CI', artist: 'Ana Frango Elétrico',     title: 'Insista em mim'  },
   { url: 'https://www.youtube.com/watch?v=bD6Hgy2XKTA', artist: 'Pedro Ricardo',           title: 'HÖR Jan 30 / 2023' },
   { url: 'https://www.youtube.com/watch?v=9KS5QnFWsWI', artist: 'Juana Aguirre',           title: 'lo_divino'        },
+  { url: 'https://www.youtube.com/watch?v=KnpMjW-rXbQ', artist: 'Maria Wolff',             title: 'La Cita'          },
+  { url: 'https://www.youtube.com/watch?v=bndmCWBZ5jw', artist: 'Alex Anwandter',          title: 'Precipicio'       },
 ];

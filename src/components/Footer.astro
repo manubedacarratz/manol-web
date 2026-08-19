@@ -7,7 +7,7 @@ import GifFooter from './GifFooter.astro';
   <!-- Footer columns -->
   <div class="grid grid-cols-1 md:grid-cols-4 gap-8" style="padding: 88px 20px 8px; line-height: 0.65;">
 
-    <div>
+    <div class="reveal" style="--i: 0;">
       <h2 class="font-geist text-sm font-bold text-[var(--color-text)] mb-6">About</h2>
       <div class="space-y-3 max-w-sm">
         <div class="lang-en space-y-3">
@@ -23,7 +23,7 @@ import GifFooter from './GifFooter.astro';
       </div>
     </div>
 
-    <div>
+    <div class="reveal" style="--i: 1;">
       <div class="lang-en">
         <h2 class="font-geist text-sm font-bold text-[var(--color-text)] mb-6">Services</h2>
         <ul class="space-y-2">
@@ -42,12 +42,12 @@ import GifFooter from './GifFooter.astro';
       </div>
     </div>
 
-    <div>
-      <h2 class="font-geist text-sm font-bold text-[var(--color-text)] mb-6">Partners &amp; colleagues</h2>
+    <div class="reveal" style="--i: 2;">
+      <h2 class="font-geist text-sm font-bold text-[var(--color-text)] mb-6">Clients &amp; partners</h2>
       <ul class="space-y-2">
         {[
           { name: 'Paisanos',  url: 'https://www.paisanos.io/es' },
-
+          { name: 'Rampant',   url: 'https://www.rampant.work/' },
           { name: 'Paradigma', url: 'https://paradigma.cc/' },
           { name: 'Aerolab',   url: 'https://aerolab.co/' },
           { name: 'Almanach',  url: 'https://almanach.work/' },
@@ -67,7 +67,7 @@ import GifFooter from './GifFooter.astro';
       </ul>
     </div>
 
-    <div>
+    <div class="reveal" style="--i: 3;">
       <div class="lang-en">
         <h2 class="font-geist text-sm font-bold text-[var(--color-text)] mb-6">Contact</h2>
         <p class="text-xs text-[var(--color-muted)] mb-3">If you're working on something and think we could make something good together, reach out.</p>
@@ -108,7 +108,7 @@ import GifFooter from './GifFooter.astro';
 
   </div>
 
-  <div style="margin-top: 80px;">
+  <div style="margin-top: 20px;">
     <GifFooter marginBottom="-90px" />
   </div>
 

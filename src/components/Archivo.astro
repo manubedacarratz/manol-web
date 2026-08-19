@@ -8,16 +8,67 @@ const pieces = [
   { src: '/archive/9.png',  ratio: '4:5', label: '—' },
   { src: '/archive/10.gif', ratio: '1:1', label: '—' },
   { src: '/archive/11.jpg', ratio: '4:5', label: '—' },
+  { src: '/archive/12.mp4', ratio: '4:5', label: '—' },
+  { src: '/archive/13.mp4', ratio: '4:5', label: '—' },
+  { src: '/archive/14.mp4', ratio: '4:5', label: '—' },
+  { src: '/archive/15.mp4', ratio: '4:5', label: '—' },
+  { src: '/archive/16.mp4', ratio: '1:1', label: '—' },
+  { src: '/archive/17.mp4', ratio: '4:5', label: '—' },
+  { src: '/archive/18.mp4', ratio: '4:5', label: '—' },
+  { src: '/archive/19.jpg', ratio: '4:5', label: '—' },
+  { src: '/archive/20.mp4', ratio: '4:5', label: '—' },
+  { src: '/archive/21.mp4', ratio: '4:5', label: '—' },
+  { src: '/archive/22.mp4', ratio: '4:5', label: '—' },
+  { src: '/archive/23.mp4', ratio: '4:5', label: '—' },
+  { src: '/archive/24.mp4', ratio: '4:5', label: '—' },
+  { src: '/archive/25.mp4', ratio: '4:5', label: '—' },
+  { src: '/archive/26.mp4', ratio: '4:5', label: '—' },
+  { src: '/archive/27.mp4', ratio: '4:5', label: '—' },
+  { src: '/archive/28.mp4', ratio: '9:16', label: '—' },
 ];
 
-for (let i = pieces.length - 1; i > 0; i--) {
-  const j = Math.floor(Math.random() * (i + 1));
-  [pieces[i], pieces[j]] = [pieces[j], pieces[i]];
+function shuffle<T>(arr: T[]): T[] {
+  const result = [...arr];
+  for (let i = result.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [result[i], result[j]] = [result[j], result[i]];
+  }
+  return result;
 }
+
+// Grupos de piezas que deben quedar separadas entre sí en el grid
+const FAR_GROUPS = [
+  ['/archive/11.jpg', '/archive/12.mp4', '/archive/13.mp4'],
+  ['/archive/14.mp4', '/archive/15.mp4'],
+  ['/archive/21.mp4', '/archive/22.mp4'],
+  ['/archive/23.mp4', '/archive/24.mp4', '/archive/25.mp4'],
+];
+const MIN_DISTANCE = 6;
+
+function satisfiesSpacing(arr: typeof pieces): boolean {
+  for (const group of FAR_GROUPS) {
+    const indexes = group.map(src => arr.findIndex(p => p.src === src));
+    for (let i = 0; i < indexes.length; i++) {
+      for (let j = i + 1; j < indexes.length; j++) {
+        if (Math.abs(indexes[i] - indexes[j]) < MIN_DISTANCE) return false;
+      }
+    }
+  }
+  return true;
+}
+
+let shuffled = shuffle(pieces);
+let attempts = 0;
+while (!satisfiesSpacing(shuffled) && attempts < 1000) {
+  shuffled = shuffle(pieces);
+  attempts++;
+}
+pieces.splice(0, pieces.length, ...shuffled);
 
 const aspectMap: Record<string, string> = {
   '1:1': 'aspect-square',
   '4:5': 'aspect-[4/5]',
+  '9:16': 'aspect-[9/16]',
 };
 
 const BLANK_GIF = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
@@ -25,28 +76,41 @@ const BLANK_GIF = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAA
 
 <section id="archive" style="padding: 48px 20px;">
 
-  <div class="mb-10">
+  <div class="mb-10 reveal" style="--i: 0;">
     <h2 class="lang-en font-geist text-sm font-bold text-[var(--color-text)] mb-1">Archive</h2>
     <h2 class="lang-es font-geist text-sm font-bold text-[var(--color-text)] mb-1">Archivo</h2>
-    <p class="lang-en text-xs text-[var(--color-muted)]">Stuff that didn't make it</p>
-    <p class="lang-es text-xs text-[var(--color-muted)]">Lo que no llegó a ningún lado</p>
+    <p class="lang-en text-xs text-[var(--color-muted)]">Tests, explorations and discards</p>
+    <p class="lang-es text-xs text-[var(--color-muted)]">Pruebas, exploraciones y descartes</p>
   </div>
 
   <div id="archivo-grid" style="columns: 4; column-gap: 8px;">
     {pieces.map((piece, i) => (
       <div
-        class={`archive-item ${aspectMap[piece.ratio]} bg-[var(--color-border)] group relative overflow-hidden cursor-none`}
-        style="border-radius: 8px; break-inside: avoid; margin-bottom: 8px; display: block;"
+        class={`archive-item reveal ${aspectMap[piece.ratio]} bg-[var(--color-border)] group relative overflow-hidden cursor-none`}
+        style={`border-radius: 8px; break-inside: avoid; margin-bottom: 8px; display: block; --i: ${i % 8};`}
         data-index={String(i)}
         data-src={piece.src}
+        data-ratio={piece.ratio}
       >
-        <img
-          src={piece.src.endsWith('.gif') ? BLANK_GIF : piece.src}
-          data-src={piece.src.endsWith('.gif') ? piece.src : undefined}
-          class={`absolute inset-0 w-full h-full object-cover${piece.src.endsWith('.gif') ? ' archive-gif' : ''}`}
-          alt=""
-          loading={piece.src.endsWith('.gif') ? undefined : 'lazy'}
-        />
+        {piece.src.endsWith('.mp4') ? (
+          <video
+            src={piece.src}
+            class="absolute inset-0 w-full h-full object-cover"
+            autoplay
+            loop
+            muted
+            playsinline
+            preload="metadata"
+          />
+        ) : (
+          <img
+            src={piece.src.endsWith('.gif') ? BLANK_GIF : piece.src}
+            data-src={piece.src.endsWith('.gif') ? piece.src : undefined}
+            class={`absolute inset-0 w-full h-full object-cover${piece.src.endsWith('.gif') ? ' archive-gif' : ''}`}
+            alt=""
+            loading={piece.src.endsWith('.gif') ? undefined : 'lazy'}
+          />
+        )}
         <div class="absolute inset-0 flex items-end p-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
           <span class="text-xs text-white">{piece.label}</span>
         </div>
@@ -60,6 +124,7 @@ const BLANK_GIF = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAA
 <div id="archive-lightbox">
   <button id="lb-close" class="lb-btn lb-close">✕</button>
   <img id="lb-img" alt="" />
+  <video id="lb-video" muted loop playsinline controls></video>
   <button id="lb-prev" class="lb-btn lb-nav lb-prev">←</button>
   <button id="lb-next" class="lb-btn lb-nav lb-next">→</button>
   <div id="lb-counter"></div>
@@ -85,7 +150,8 @@ const BLANK_GIF = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAA
     cursor: none;
   }
 
-  #lb-img {
+  #lb-img,
+  #lb-video {
     max-width: calc(100vw - 140px);
     max-height: 88vh;
     object-fit: contain;
@@ -93,9 +159,12 @@ const BLANK_GIF = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAA
     opacity: 0;
     transition: opacity 0.15s ease;
     display: block;
-    pointer-events: none;
     position: relative;
     z-index: 1;
+  }
+
+  #lb-img {
+    pointer-events: none;
   }
 
   .lb-btn {
@@ -143,6 +212,66 @@ const BLANK_GIF = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAA
 </style>
 
 <script>
+  // Masonry balanceado: cada pieza va a la columna más corta (no izquierda a derecha),
+  // así el borde final del grid queda parejo en vez de asimétrico/más vertical.
+  const archivoGrid = document.getElementById('archivo-grid')!;
+
+  function layoutMasonry() {
+    const allItems = [...archivoGrid.querySelectorAll<HTMLElement>('.archive-item')]
+      .sort((a, b) => Number(a.dataset.index) - Number(b.dataset.index));
+
+    const numCols = window.innerWidth < 768 ? 2 : 4;
+    const heights = new Array(numCols).fill(0);
+    const cols: HTMLElement[][] = Array.from({ length: numCols }, () => []);
+
+    allItems.forEach(item => {
+      const [w, h] = item.dataset.ratio!.split(':').map(Number);
+      const relHeight = h / w;
+
+      let shortest = 0;
+      for (let i = 1; i < numCols; i++) {
+        if (heights[i] < heights[shortest]) shortest = i;
+      }
+
+      cols[shortest].push(item);
+      heights[shortest] += relHeight + 0.08;
+    });
+
+    archivoGrid.style.display = 'flex';
+    archivoGrid.style.gap = '8px';
+    archivoGrid.innerHTML = '';
+
+    cols.forEach(colItems => {
+      const colEl = document.createElement('div');
+      colEl.style.cssText = 'display:flex;flex-direction:column;gap:8px;flex:1;min-width:0;';
+      colItems.forEach(item => {
+        item.style.marginBottom = '0';
+        colEl.appendChild(item);
+      });
+      archivoGrid.appendChild(colEl);
+    });
+
+    // Los <video> se pausan al desconectarse del documento: los reanudamos
+    archivoGrid.querySelectorAll<HTMLVideoElement>('video').forEach(v => {
+      v.play().catch(() => {});
+    });
+  }
+
+  layoutMasonry();
+
+  let lastCols = window.innerWidth < 768 ? 2 : 4;
+  let resizeTimer: ReturnType<typeof setTimeout>;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => {
+      const cols = window.innerWidth < 768 ? 2 : 4;
+      if (cols !== lastCols) {
+        lastCols = cols;
+        layoutMasonry();
+      }
+    }, 200);
+  });
+
   // Desync GIFs — carga escalonada para que nunca estén sincronizados
   const gifImgs = document.querySelectorAll<HTMLImageElement>('.archive-gif');
   gifImgs.forEach((img, i) => {
@@ -154,12 +283,14 @@ const BLANK_GIF = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAA
     }
   });
 
-  // Lightbox carrusel
-  const items = [...document.querySelectorAll<HTMLElement>('.archive-item')];
+  // Lightbox carrusel — orden lógico (data-index), no el de la columna visual
+  const items = [...document.querySelectorAll<HTMLElement>('.archive-item')]
+    .sort((a, b) => Number(a.dataset.index) - Number(b.dataset.index));
   const srcs = items.map(el => el.dataset.src!);
 
   const lightbox = document.getElementById('archive-lightbox')!;
   const lbImg = document.getElementById('lb-img') as HTMLImageElement;
+  const lbVideo = document.getElementById('lb-video') as HTMLVideoElement;
   const lbCounter = document.getElementById('lb-counter')!;
 
   let current = 0;
@@ -167,11 +298,27 @@ const BLANK_GIF = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAA
   function showImg(index: number) {
     current = index;
     lbCounter.textContent = `${current + 1} / ${srcs.length}`;
+    const src = srcs[current];
+    const isVideo = src.endsWith('.mp4');
+
     lbImg.style.opacity = '0';
+    lbVideo.style.opacity = '0';
+    lbVideo.pause();
+
     setTimeout(() => {
-      lbImg.onload = () => { lbImg.style.opacity = '1'; };
-      lbImg.src = srcs[current];
-      if (lbImg.complete && lbImg.naturalWidth > 0) lbImg.style.opacity = '1';
+      if (isVideo) {
+        lbImg.style.display = 'none';
+        lbVideo.style.display = 'block';
+        lbVideo.onloadeddata = () => { lbVideo.style.opacity = '1'; };
+        lbVideo.src = src;
+        lbVideo.play();
+      } else {
+        lbVideo.style.display = 'none';
+        lbImg.style.display = 'block';
+        lbImg.onload = () => { lbImg.style.opacity = '1'; };
+        lbImg.src = src;
+        if (lbImg.complete && lbImg.naturalWidth > 0) lbImg.style.opacity = '1';
+      }
     }, 100);
   }
 
@@ -186,6 +333,7 @@ const BLANK_GIF = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAA
     lightbox.style.opacity = '0';
     setTimeout(() => {
       lightbox.style.display = 'none';
+      lbVideo.pause();
       document.body.style.overflow = '';
     }, 200);
   }

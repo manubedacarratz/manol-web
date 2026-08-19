@@ -2,9 +2,9 @@
 
 @layer base {
   :root {
-    --color-bg: #141414;
+    --color-bg: #0d0d0d;
     --color-text: #d4cfc9;
-    --color-muted: #5a5650;
+    --color-muted: #7a7671;
     --color-border: #232320;
     --radius: 8px;
   }
@@ -24,7 +24,7 @@
 
   /* Geist Mono en mayúsculas para todo el body */
   html {
-    background: linear-gradient(180deg, #1a1a1a 0%, #141414 50%, #0e0e0e 100%);
+    background: linear-gradient(180deg, #121212 0%, #0d0d0d 50%, #080808 100%);
     background-attachment: fixed;
     color: var(--color-text);
     font-family: 'Geist Mono', 'Courier New', monospace;
@@ -117,4 +117,14 @@ html.es .lang-es { display: block; }
 /* TEST: quitar puntas redondeadas de todos los contenedores */
 *:not(.cursor) {
   border-radius: 0 !important;
+}
+
+/* TEST: stagger reveal — opacidad rápida escalonada por --i, por elemento a medida que entra en viewport */
+.reveal {
+  opacity: 0;
+  transition: opacity 0.3s ease-out;
+  transition-delay: calc(var(--i, 0) * 25ms);
+}
+.reveal.in-view {
+  opacity: var(--reveal-opacity, 1);
 }

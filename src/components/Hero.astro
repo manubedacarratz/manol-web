@@ -99,7 +99,8 @@
       id="manol-img"
       src="/footer/manol.png"
       alt="MANOL"
-      style="width: 100%; height: auto; display: block; opacity: 0.2; margin-top: -50px; margin-bottom: -50px;"
+      class="reveal"
+      style="width: 100%; height: auto; display: block; margin-top: -50px; margin-bottom: -50px; --reveal-opacity: 0.2; --i: 0;"
     />
   </div>
 </div>
@@ -107,10 +108,10 @@
 <!-- Info row -->
 <div class="grid grid-cols-1 md:grid-cols-2 gap-8" style="padding: 12px 20px;">
 
-  <div class="max-w-sm">
+  <div class="max-w-sm reveal" style="--i: 0;">
     <div class="lang-en">
       <p class="text-xs text-[var(--color-muted)] leading-relaxed">
-        My name is Manu Bedacarratz, but most people call me Manol. Graphic and motion designer based in Buenos Aires. I work alongside friends and colleagues across all kinds of projects — from brand identities and motion systems to posters and music videos.
+        My name is Manu Bedacarratz, but you can call me Manol. Graphic and motion designer based in Buenos Aires. I work alongside studios and colleagues across all kinds of projects — from brand identities and motion systems to posters and music videos.
       </p>
     </div>
     <div class="lang-es">
@@ -121,27 +122,27 @@
   </div>
 
   <div id="hero-info-right" class="flex flex-col items-end justify-between">
-    <div class="lang-en text-right space-y-1">
+    <div class="lang-en text-right space-y-1 reveal" style="--i: 1;">
       <p class="text-xs text-[var(--color-muted)]">Based in Buenos Aires,</p>
       <p class="text-xs text-[var(--color-muted)]">Working worldwide</p>
     </div>
-    <div class="lang-es text-right space-y-1">
+    <div class="lang-es text-right space-y-1 reveal" style="--i: 1;">
       <p class="text-xs text-[var(--color-muted)]">Buenos Aires,</p>
       <p class="text-xs text-[var(--color-muted)]">Para el mundo</p>
     </div>
-    <a
+    <button
       id="music-link"
-      href="#"
-      target="_blank"
-      rel="noopener noreferrer"
-      class="flex items-center gap-3 group cursor-none"
+      type="button"
+      aria-label="Play"
+      class="flex items-center gap-3 group cursor-none reveal"
+      style="background:none;border:none;padding:0;font:inherit;color:inherit;--i: 2;"
     >
       <div class="text-right">
         <p class="lang-en text-xs text-[var(--color-muted)] group-hover:text-[var(--color-text)] transition-colors">Currently listening</p>
         <p class="lang-es text-xs text-[var(--color-muted)] group-hover:text-[var(--color-text)] transition-colors">Escuchando</p>
         <p id="track-name" class="text-xs" style="color: var(--color-text); opacity: 0; transition: opacity 0.4s ease;">—</p>
       </div>
-      <div class="flex-none" style="width:40px;height:40px;">
+      <div class="flex-none" style="width:40px;height:40px;position:relative;">
         <svg viewBox="0 0 40 40" width="40" height="40" class="vinyl-record">
           <circle cx="20" cy="20" r="19" fill="#1c1c1a"/>
           <circle cx="20" cy="20" r="17"   fill="none" stroke="#2c2c28" stroke-width="0.8"/>
@@ -152,8 +153,16 @@
           <circle cx="32" cy="8" r="1.5" fill="rgba(212,207,201,0.55)"/>
           <circle cx="20" cy="20" r="1.5" fill="#141414"/>
         </svg>
+        <svg id="icon-play" width="11" height="11" viewBox="0 0 24 24" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);fill:rgba(212,207,201,0.85);pointer-events:none;">
+          <path d="M8 5v14l11-7z"/>
+        </svg>
+        <svg id="icon-pause" width="11" height="11" viewBox="0 0 24 24" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);fill:rgba(212,207,201,0.85);pointer-events:none;display:none;">
+          <rect x="5" y="4" width="5" height="16"/>
+          <rect x="14" y="4" width="5" height="16"/>
+        </svg>
       </div>
-    </a>
+    </button>
+    <div id="yt-audio-player" style="position:fixed;width:0;height:0;overflow:hidden;opacity:0;pointer-events:none;"></div>
   </div>
 
 </div>
@@ -162,22 +171,98 @@
 <script>
   import { tracks } from '../data/music.js';
 
-  const musicLink  = document.getElementById('music-link') as HTMLAnchorElement;
+  const musicLink  = document.getElementById('music-link') as HTMLButtonElement;
   const trackName  = document.getElementById('track-name') as HTMLElement;
+  const iconPlay   = document.getElementById('icon-play') as HTMLElement;
+  const iconPause  = document.getElementById('icon-pause') as HTMLElement;
+
+  let currentTrack = tracks[0];
+  let rotationTimer: ReturnType<typeof setInterval> | null = null;
+  let player: any = null;
+  let loadedVideoId: string | null = null;
+  let isPlaying = false;
+
+  function getVideoId(url: string): string {
+    try { return new URL(url).searchParams.get('v') ?? ''; } catch { return ''; }
+  }
 
   function pickTrack() {
-    const track = tracks[Math.floor(Math.random() * tracks.length)];
-    musicLink.href = track.url;
+    currentTrack = tracks[Math.floor(Math.random() * tracks.length)];
 
     trackName.style.opacity = '0';
     setTimeout(() => {
-      trackName.textContent = `${track.artist} — ${track.title}`;
+      trackName.textContent = `${currentTrack.artist} — ${currentTrack.title}`;
       trackName.style.opacity = '1';
     }, 400);
   }
 
+  function startRotation() {
+    if (rotationTimer) return;
+    rotationTimer = setInterval(pickTrack, 30_000);
+  }
+
+  function stopRotation() {
+    if (rotationTimer) { clearInterval(rotationTimer); rotationTimer = null; }
+  }
+
   pickTrack();
-  setInterval(pickTrack, 30_000);
+  startRotation();
+
+  function setPlayingUI(playing: boolean) {
+    isPlaying = playing;
+    iconPlay.style.display  = playing ? 'none' : '';
+    iconPause.style.display = playing ? '' : 'none';
+    musicLink.setAttribute('aria-label', playing ? 'Pause' : 'Play');
+  }
+
+  function loadYouTubeAPI(): Promise<void> {
+    return new Promise((resolve) => {
+      const w = window as any;
+      if (w.YT && w.YT.Player) { resolve(); return; }
+      const existing = w.onYouTubeIframeAPIReady;
+      w.onYouTubeIframeAPIReady = () => { existing?.(); resolve(); };
+      const tag = document.createElement('script');
+      tag.src = 'https://www.youtube.com/iframe_api';
+      document.head.appendChild(tag);
+    });
+  }
+
+  async function ensurePlayer(): Promise<void> {
+    if (player) return;
+    await loadYouTubeAPI();
+    await new Promise<void>((resolve) => {
+      player = new (window as any).YT.Player('yt-audio-player', {
+        height: '0',
+        width: '0',
+        playerVars: { controls: 0 },
+        events: {
+          onReady: () => resolve(),
+          onStateChange: (e: any) => {
+            const YTState = (window as any).YT.PlayerState;
+            if (e.data === YTState.PLAYING) { setPlayingUI(true); stopRotation(); }
+            else if (e.data === YTState.PAUSED || e.data === YTState.ENDED) { setPlayingUI(false); startRotation(); }
+          },
+        },
+      });
+    });
+  }
+
+  musicLink.addEventListener('click', async () => {
+    if (isPlaying) {
+      player?.pauseVideo();
+      return;
+    }
+    const videoId = getVideoId(currentTrack.url);
+    if (!videoId) return;
+
+    await ensurePlayer();
+    if (loadedVideoId !== videoId) {
+      loadedVideoId = videoId;
+      player.loadVideoById(videoId);
+    } else {
+      player.playVideo();
+    }
+  });
 
 
   // Sound toggle

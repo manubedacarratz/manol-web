@@ -11,35 +11,19 @@ const { href, marginBottom = '-40px' } = Astro.props;
     <a href={href} style="display: block; cursor: none;">
       <img
         id="gif-footer"
-        src="/footer/manol.png"
+        src="/footer/manol.gif"
         alt="MANOL"
-        style="width: 100%; height: auto; display: block;"
+        class="reveal"
+        style="width: 100%; height: auto; display: block; --reveal-opacity: 0.4; --i: 0;"
       />
     </a>
   ) : (
     <img
       id="gif-footer"
-      src="/footer/manol.png"
+      src="/footer/manol.gif"
       alt="MANOL"
-      style="width: 100%; height: auto; display: block; cursor: none;"
+      class="reveal"
+      style="width: 100%; height: auto; display: block; cursor: none; --reveal-opacity: 0.4; --i: 0;"
     />
   )}
 </div>
-
-<script>
-  const wrapper = document.getElementById('gif-footer-wrapper');
-  const img = document.getElementById('gif-footer') as HTMLImageElement | null;
-  if (wrapper && img) {
-    const isHoverDevice = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
-    if (isHoverDevice) {
-      wrapper.addEventListener('mouseenter', () => {
-        img.src = '/footer/manol.gif';
-      });
-      wrapper.addEventListener('mouseleave', () => {
-        img.src = '/footer/manol.png';
-      });
-    } else {
-      img.src = '/footer/manol.gif';
-    }
-  }
-</script>
