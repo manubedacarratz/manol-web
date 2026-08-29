@@ -81,7 +81,7 @@ const suggestions = allProjects
       <>
         <!-- Hero 16:9 -->
         <div style="aspect-ratio: 16/9; overflow: hidden; background: var(--color-border);">
-          <video autoplay muted loop playsinline style="width: 100%; height: 100%; object-fit: cover; display: block;">
+          <video muted loop playsinline preload="none" style="width: 100%; height: 100%; object-fit: cover; display: block;">
             <source src="/work/paisanos/1-hero.mp4" type="video/mp4" />
           </video>
         </div>
@@ -106,12 +106,12 @@ const suggestions = allProjects
         <!-- Dos cuadrados 1:1 -->
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
           <div style="aspect-ratio: 1/1; overflow: hidden; background: #010E00;">
-            <video autoplay muted loop playsinline style="width: 100%; height: 100%; object-fit: cover; display: block; transform: scale(0.8);">
+            <video muted loop playsinline preload="none" style="width: 100%; height: 100%; object-fit: cover; display: block; transform: scale(0.8);">
               <source src="/work/paisanos/2.mp4" type="video/mp4" />
             </video>
           </div>
           <div style="aspect-ratio: 1/1; overflow: hidden; background: var(--color-border);">
-            <video autoplay muted loop playsinline style="width: 100%; height: 100%; object-fit: cover; display: block;">
+            <video muted loop playsinline preload="none" style="width: 100%; height: 100%; object-fit: cover; display: block;">
               <source src="/work/paisanos/3.mp4" type="video/mp4" />
             </video>
           </div>
@@ -119,7 +119,7 @@ const suggestions = allProjects
 
         <!-- Video 4: 16:9 full width -->
         <div style="aspect-ratio: 16/9; overflow: hidden; background: var(--color-border); margin-top: 8px;">
-          <video autoplay muted loop playsinline style="width: 100%; height: 100%; object-fit: cover; display: block;">
+          <video muted loop playsinline preload="none" style="width: 100%; height: 100%; object-fit: cover; display: block;">
             <source src="/work/paisanos/4.mp4" type="video/mp4" />
           </video>
         </div>
@@ -127,12 +127,12 @@ const suggestions = allProjects
         <!-- Videos 5 y 6: dos cuadrados 1:1 -->
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 8px;">
           <div style="aspect-ratio: 1/1; overflow: hidden; background: var(--color-border);">
-            <video autoplay muted loop playsinline style="width: 100%; height: 100%; object-fit: cover; display: block;">
+            <video muted loop playsinline preload="none" style="width: 100%; height: 100%; object-fit: cover; display: block;">
               <source src="/work/paisanos/5.mp4" type="video/mp4" />
             </video>
           </div>
           <div style="aspect-ratio: 1/1; overflow: hidden; background: var(--color-border);">
-            <video autoplay muted loop playsinline style="width: 100%; height: 100%; object-fit: cover; display: block;">
+            <video muted loop playsinline preload="none" style="width: 100%; height: 100%; object-fit: cover; display: block;">
               <source src="/work/paisanos/6.mp4" type="video/mp4" />
             </video>
           </div>
@@ -142,7 +142,7 @@ const suggestions = allProjects
       <>
         <!-- Hero landscape -->
         <div style="aspect-ratio: 1862/1005; overflow: hidden; background: var(--color-border);">
-          <img src="/work/reb/1.jpg" alt="REB 1" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
+          <img loading="lazy" src="/work/reb/1.jpg" alt="REB 1" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
         </div>
 
         <!-- Info -->
@@ -165,53 +165,53 @@ const suggestions = allProjects
         <!-- 2 + 3: dos columnas portrait -->
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
           <div style="aspect-ratio: 924/1174; overflow: hidden; background: var(--color-border);">
-            <img src="/work/reb/8.jpg" alt="REB 8" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
+            <img loading="lazy" src="/work/reb/8.jpg" alt="REB 8" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
           </div>
           <div style="aspect-ratio: 924/1174; overflow: hidden; background: var(--color-border);">
-            <img src="/work/reb/9.jpg" alt="REB 9" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
+            <img loading="lazy" src="/work/reb/9.jpg" alt="REB 9" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
           </div>
         </div>
 
         <!-- 4: landscape full width -->
         <div style="aspect-ratio: 1862/1006; overflow: hidden; background: var(--color-border); margin-top: 8px;">
-          <img src="/work/reb/4.jpg" alt="REB 4" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
+          <img loading="lazy" src="/work/reb/4.jpg" alt="REB 4" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
         </div>
 
         <!-- 5 + 6: dos columnas portrait -->
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 8px;">
           <div style="aspect-ratio: 924/1174; overflow: hidden; background: var(--color-border);">
-            <img src="/work/reb/5.jpg" alt="REB 5" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
+            <img loading="lazy" src="/work/reb/5.jpg" alt="REB 5" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
           </div>
           <div style="aspect-ratio: 924/1174; overflow: hidden; background: var(--color-border);">
-            <img src="/work/reb/6.jpg" alt="REB 6" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
+            <img loading="lazy" src="/work/reb/6.jpg" alt="REB 6" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
           </div>
         </div>
 
         <!-- 7: landscape full width -->
         <div style="aspect-ratio: 1862/1006; overflow: hidden; background: var(--color-border); margin-top: 8px;">
-          <img src="/work/reb/7.jpg" alt="REB 7" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
+          <img loading="lazy" src="/work/reb/7.jpg" alt="REB 7" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
         </div>
 
         <!-- 8 + 9: dos columnas portrait -->
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 8px;">
           <div style="aspect-ratio: 924/1174; overflow: hidden; background: var(--color-border);">
-            <img src="/work/reb/2.jpg" alt="REB 2" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
+            <img loading="lazy" src="/work/reb/2.jpg" alt="REB 2" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
           </div>
           <div style="aspect-ratio: 924/1174; overflow: hidden; background: var(--color-border);">
-            <img src="/work/reb/3.jpg" alt="REB 3" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
+            <img loading="lazy" src="/work/reb/3.jpg" alt="REB 3" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
           </div>
         </div>
 
         <!-- 10: landscape full width -->
         <div style="aspect-ratio: 1862/1006; overflow: hidden; background: var(--color-border); margin-top: 8px;">
-          <img src="/work/reb/10.jpg" alt="REB 10" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
+          <img loading="lazy" src="/work/reb/10.jpg" alt="REB 10" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
         </div>
       </>
     ) : slug === 'bernardo-parisi' ? (
       <>
         <!-- Hero video landscape -->
         <div style="aspect-ratio: 1862/1004; overflow: hidden; background: var(--color-border);">
-          <video autoplay muted loop playsinline style="width: 100%; height: 100%; object-fit: cover; display: block;">
+          <video muted loop playsinline preload="none" style="width: 100%; height: 100%; object-fit: cover; display: block;">
             <source src="/work/bernardo-parisi/1.mp4" type="video/mp4" />
           </video>
         </div>
@@ -236,48 +236,48 @@ const suggestions = allProjects
         <!-- 2 + 3: dos cuadrados -->
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
           <div style="aspect-ratio: 924/923; overflow: hidden; background: var(--color-border);">
-            <img src="/work/bernardo-parisi/2.jpg" alt="Bernardo Parisi 2" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
+            <img loading="lazy" src="/work/bernardo-parisi/2.jpg" alt="Bernardo Parisi 2" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
           </div>
           <div style="aspect-ratio: 924/923; overflow: hidden; background: var(--color-border);">
-            <img src="/work/bernardo-parisi/3.jpg" alt="Bernardo Parisi 3" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
+            <img loading="lazy" src="/work/bernardo-parisi/3.jpg" alt="Bernardo Parisi 3" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
           </div>
         </div>
 
         <!-- 4: landscape full width -->
         <div style="aspect-ratio: 1862/1006; overflow: hidden; background: var(--color-border); margin-top: 8px;">
-          <img src="/work/bernardo-parisi/4.jpg" alt="Bernardo Parisi 4" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
+          <img loading="lazy" src="/work/bernardo-parisi/4.jpg" alt="Bernardo Parisi 4" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
         </div>
 
         <!-- 5 + 6: dos near-square -->
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 8px;">
           <div style="aspect-ratio: 924/1005; overflow: hidden; background: var(--color-border);">
-            <img src="/work/bernardo-parisi/5.jpg" alt="Bernardo Parisi 5" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
+            <img loading="lazy" src="/work/bernardo-parisi/5.jpg" alt="Bernardo Parisi 5" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
           </div>
           <div style="aspect-ratio: 924/1005; overflow: hidden; background: var(--color-border);">
-            <img src="/work/bernardo-parisi/6.jpg" alt="Bernardo Parisi 6" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
+            <img loading="lazy" src="/work/bernardo-parisi/6.jpg" alt="Bernardo Parisi 6" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
           </div>
         </div>
 
         <!-- 7 + 8: dos near-square -->
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 8px;">
           <div style="aspect-ratio: 924/1005; overflow: hidden; background: var(--color-border);">
-            <img src="/work/bernardo-parisi/7.jpg" alt="Bernardo Parisi 7" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
+            <img loading="lazy" src="/work/bernardo-parisi/7.jpg" alt="Bernardo Parisi 7" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
           </div>
           <div style="aspect-ratio: 924/1005; overflow: hidden; background: var(--color-border);">
-            <img src="/work/bernardo-parisi/8.jpg" alt="Bernardo Parisi 8" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
+            <img loading="lazy" src="/work/bernardo-parisi/8.jpg" alt="Bernardo Parisi 8" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
           </div>
         </div>
 
         <!-- 9: landscape full width -->
         <div style="aspect-ratio: 1862/1006; overflow: hidden; background: var(--color-border); margin-top: 8px;">
-          <img src="/work/bernardo-parisi/9.jpg" alt="Bernardo Parisi 9" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
+          <img loading="lazy" src="/work/bernardo-parisi/9.jpg" alt="Bernardo Parisi 9" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
         </div>
       </>
     ) : slug === 'vilma-cafe' ? (
       <>
         <!-- Hero landscape -->
         <div style="aspect-ratio: 1862/1005; overflow: hidden; background: var(--color-border);">
-          <img src="/work/cafe-vilma/1.jpg" alt="Vilma Cafe 1" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
+          <img loading="lazy" src="/work/cafe-vilma/1.jpg" alt="Vilma Cafe 1" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
         </div>
 
         <!-- Info -->
@@ -300,53 +300,53 @@ const suggestions = allProjects
         <!-- 2 + 3: dos columnas portrait -->
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
           <div style="aspect-ratio: 924/1174; overflow: hidden; background: var(--color-border);">
-            <img src="/work/cafe-vilma/2.jpg" alt="Vilma Cafe 2" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
+            <img loading="lazy" src="/work/cafe-vilma/2.jpg" alt="Vilma Cafe 2" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
           </div>
           <div style="aspect-ratio: 924/1174; overflow: hidden; background: var(--color-border);">
-            <img src="/work/cafe-vilma/3.jpg" alt="Vilma Cafe 3" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
+            <img loading="lazy" src="/work/cafe-vilma/3.jpg" alt="Vilma Cafe 3" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
           </div>
         </div>
 
         <!-- 4: landscape full width -->
         <div style="aspect-ratio: 1862/1006; overflow: hidden; background: var(--color-border); margin-top: 8px;">
-          <img src="/work/cafe-vilma/4.jpg" alt="Vilma Cafe 4" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
+          <img loading="lazy" src="/work/cafe-vilma/4.jpg" alt="Vilma Cafe 4" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
         </div>
 
         <!-- 5 + 6: dos columnas ~1:1 -->
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 8px;">
           <div style="aspect-ratio: 924/1005; overflow: hidden; background: var(--color-border);">
-            <img src="/work/cafe-vilma/5.jpg" alt="Vilma Cafe 5" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
+            <img loading="lazy" src="/work/cafe-vilma/5.jpg" alt="Vilma Cafe 5" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
           </div>
           <div style="aspect-ratio: 924/1005; overflow: hidden; background: var(--color-border);">
-            <img src="/work/cafe-vilma/6.jpg" alt="Vilma Cafe 6" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
+            <img loading="lazy" src="/work/cafe-vilma/6.jpg" alt="Vilma Cafe 6" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
           </div>
         </div>
 
         <!-- 7: landscape full width -->
         <div style="aspect-ratio: 1862/1006; overflow: hidden; background: var(--color-border); margin-top: 8px;">
-          <img src="/work/cafe-vilma/7.jpg" alt="Vilma Cafe 7" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
+          <img loading="lazy" src="/work/cafe-vilma/7.jpg" alt="Vilma Cafe 7" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
         </div>
 
         <!-- 8 + 9: dos columnas ~1:1 -->
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 8px;">
           <div style="aspect-ratio: 924/1005; overflow: hidden; background: var(--color-border);">
-            <img src="/work/cafe-vilma/8.jpg" alt="Vilma Cafe 8" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
+            <img loading="lazy" src="/work/cafe-vilma/8.jpg" alt="Vilma Cafe 8" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
           </div>
           <div style="aspect-ratio: 924/1005; overflow: hidden; background: var(--color-border);">
-            <img src="/work/cafe-vilma/9.jpg" alt="Vilma Cafe 9" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
+            <img loading="lazy" src="/work/cafe-vilma/9.jpg" alt="Vilma Cafe 9" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
           </div>
         </div>
 
         <!-- 10: landscape full width -->
         <div style="aspect-ratio: 1862/1006; overflow: hidden; background: var(--color-border); margin-top: 8px;">
-          <img src="/work/cafe-vilma/10.jpg" alt="Vilma Cafe 10" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
+          <img loading="lazy" src="/work/cafe-vilma/10.jpg" alt="Vilma Cafe 10" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
         </div>
       </>
     ) : slug === 'legado' ? (
       <>
         <!-- Hero 1: landscape -->
         <div style="aspect-ratio: 1862/1005; overflow: hidden; background: var(--color-border);">
-          <img src="/work/legado/1.jpg" alt="Legado 1" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
+          <img loading="lazy" src="/work/legado/1.jpg" alt="Legado 1" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
         </div>
 
         <!-- Info -->
@@ -369,53 +369,53 @@ const suggestions = allProjects
         <!-- 2 + 3: dos columnas portrait -->
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
           <div style="aspect-ratio: 924/1174; overflow: hidden; background: var(--color-border);">
-            <img src="/work/legado/2.jpg" alt="Legado 2" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
+            <img loading="lazy" src="/work/legado/2.jpg" alt="Legado 2" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
           </div>
           <div style="aspect-ratio: 924/1174; overflow: hidden; background: var(--color-border);">
-            <img src="/work/legado/3.jpg" alt="Legado 3" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
+            <img loading="lazy" src="/work/legado/3.jpg" alt="Legado 3" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
           </div>
         </div>
 
         <!-- 4: landscape full width -->
         <div style="aspect-ratio: 1862/1006; overflow: hidden; background: var(--color-border); margin-top: 8px;">
-          <img src="/work/legado/4.jpg" alt="Legado 4" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
+          <img loading="lazy" src="/work/legado/4.jpg" alt="Legado 4" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
         </div>
 
         <!-- 5 + 6: dos columnas ~1:1 -->
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 8px;">
           <div style="aspect-ratio: 924/1005; overflow: hidden; background: var(--color-border);">
-            <img src="/work/legado/5.jpg" alt="Legado 5" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
+            <img loading="lazy" src="/work/legado/5.jpg" alt="Legado 5" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
           </div>
           <div style="aspect-ratio: 924/1005; overflow: hidden; background: var(--color-border);">
-            <img src="/work/legado/6.jpg" alt="Legado 6" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
+            <img loading="lazy" src="/work/legado/6.jpg" alt="Legado 6" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
           </div>
         </div>
 
         <!-- 7: landscape full width -->
         <div style="aspect-ratio: 1862/1006; overflow: hidden; background: var(--color-border); margin-top: 8px;">
-          <img src="/work/legado/7.jpg" alt="Legado 7" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
+          <img loading="lazy" src="/work/legado/7.jpg" alt="Legado 7" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
         </div>
 
         <!-- 8 + 9: dos columnas ~1:1 -->
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 8px;">
           <div style="aspect-ratio: 924/1005; overflow: hidden; background: var(--color-border);">
-            <img src="/work/legado/8.jpg" alt="Legado 8" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
+            <img loading="lazy" src="/work/legado/8.jpg" alt="Legado 8" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
           </div>
           <div style="aspect-ratio: 924/1005; overflow: hidden; background: var(--color-border);">
-            <img src="/work/legado/9.jpg" alt="Legado 9" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
+            <img loading="lazy" src="/work/legado/9.jpg" alt="Legado 9" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
           </div>
         </div>
 
         <!-- 10: landscape full width -->
         <div style="aspect-ratio: 1862/1006; overflow: hidden; background: var(--color-border); margin-top: 8px;">
-          <img src="/work/legado/10.jpg" alt="Legado 10" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
+          <img loading="lazy" src="/work/legado/10.jpg" alt="Legado 10" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
         </div>
       </>
     ) : slug === 'aerolab' ? (
       <>
         <!-- Hero video landscape -->
         <div style="aspect-ratio: 2500/1406; overflow: hidden; background: var(--color-border);">
-          <video autoplay muted loop playsinline style="width: 100%; height: 100%; object-fit: cover; display: block;">
+          <video muted loop playsinline preload="none" style="width: 100%; height: 100%; object-fit: cover; display: block;">
             <source src="/work/aerolab/1.mp4" type="video/mp4" />
           </video>
         </div>
@@ -440,12 +440,12 @@ const suggestions = allProjects
         <!-- 2 + 3: dos cuadrados -->
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
           <div style="aspect-ratio: 1/1; overflow: hidden; background: var(--color-border);">
-            <video autoplay muted loop playsinline style="width: 100%; height: 100%; object-fit: cover; display: block;">
+            <video muted loop playsinline preload="none" style="width: 100%; height: 100%; object-fit: cover; display: block;">
               <source src="/work/aerolab/2.mp4" type="video/mp4" />
             </video>
           </div>
           <div style="aspect-ratio: 1/1; overflow: hidden; background: var(--color-border);">
-            <video autoplay muted loop playsinline style="width: 100%; height: 100%; object-fit: cover; display: block;">
+            <video muted loop playsinline preload="none" style="width: 100%; height: 100%; object-fit: cover; display: block;">
               <source src="/work/aerolab/3.mp4" type="video/mp4" />
             </video>
           </div>
@@ -453,7 +453,7 @@ const suggestions = allProjects
 
         <!-- 4: landscape full width -->
         <div style="aspect-ratio: 2500/1406; overflow: hidden; background: var(--color-border); margin-top: 8px;">
-          <video autoplay muted loop playsinline style="width: 100%; height: 100%; object-fit: cover; display: block;">
+          <video muted loop playsinline preload="none" style="width: 100%; height: 100%; object-fit: cover; display: block;">
             <source src="/work/aerolab/4.mp4" type="video/mp4" />
           </video>
         </div>
@@ -461,12 +461,12 @@ const suggestions = allProjects
         <!-- 5 + 6: dos cuadrados -->
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 8px;">
           <div style="aspect-ratio: 1/1; overflow: hidden; background: var(--color-border);">
-            <video autoplay muted loop playsinline style="width: 100%; height: 100%; object-fit: cover; display: block;">
+            <video muted loop playsinline preload="none" style="width: 100%; height: 100%; object-fit: cover; display: block;">
               <source src="/work/aerolab/5.mp4" type="video/mp4" />
             </video>
           </div>
           <div style="aspect-ratio: 1/1; overflow: hidden; background: var(--color-border);">
-            <video autoplay muted loop playsinline style="width: 100%; height: 100%; object-fit: cover; display: block;">
+            <video muted loop playsinline preload="none" style="width: 100%; height: 100%; object-fit: cover; display: block;">
               <source src="/work/aerolab/6.mp4" type="video/mp4" />
             </video>
           </div>
@@ -474,7 +474,7 @@ const suggestions = allProjects
 
         <!-- 7: landscape full width -->
         <div style="aspect-ratio: 2500/1406; overflow: hidden; background: var(--color-border); margin-top: 8px;">
-          <video autoplay muted loop playsinline style="width: 100%; height: 100%; object-fit: cover; display: block;">
+          <video muted loop playsinline preload="none" style="width: 100%; height: 100%; object-fit: cover; display: block;">
             <source src="/work/aerolab/7.mp4" type="video/mp4" />
           </video>
         </div>
@@ -522,7 +522,7 @@ const suggestions = allProjects
             class="suggestion-card group relative overflow-hidden bg-[var(--color-border)] aspect-[4/5] cursor-none block"
             style="border-radius: 8px;"
           >
-            <img src={p.cover} alt={p.title} class="absolute inset-0 w-full h-full object-cover" />
+            <img loading="lazy" src={p.cover} alt={p.title} class="absolute inset-0 w-full h-full object-cover" />
             <div class="absolute inset-0 flex items-end p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300" style="background: linear-gradient(to top, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.4) 50%, transparent 100%);">
               <div>
                 <p class="text-xs font-medium tracking-wider uppercase text-white">{p.title}</p>
@@ -608,3 +608,22 @@ const suggestions = allProjects
     }
   }
 </style>
+
+<script>
+  // Videos con preload="none": recién cargan y arrancan cuando entran al viewport,
+  // y se pausan al salir. Evita bajar todos los .mp4 de la página de golpe.
+  const videos = document.querySelectorAll<HTMLVideoElement>('main video');
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      const video = entry.target as HTMLVideoElement;
+      if (entry.isIntersecting) {
+        video.play().catch(() => {});
+      } else {
+        video.pause();
+      }
+    });
+  }, { rootMargin: '300px 0px' });
+
+  videos.forEach(v => observer.observe(v));
+</script>
