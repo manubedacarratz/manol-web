@@ -26,7 +26,12 @@ export function getStaticPaths() {
       metaEs: 'Identidad de marca para REB, label de indumentaria urbana inspirada en la cultura del fútbol. Logo, sistema y desarrollo de las primeras prendas.',
       metaEn: 'Brand identity for REB, an urban clothing label inspired by football culture. Logo, system and development of the first garments.',
     },
-    { slug: 'cass-guille-saporta', title: 'CASS & GUILLE',    year: '2025',      tags: ['Film', 'Design'],                       descriptionEn: lorem, descriptionEs: lorem },
+    { slug: 'cass-guille-saporta', title: 'CASS & GUILLE',    year: '2025',      tags: ['Film', 'Design'],
+      descriptionEs: 'Sesión en vivo grabada para Cass & Guille Saporta, dúo uruguayo en su gira por Buenos Aires. Cámara, edición y diseño gráfico. Proyecto junto con: Mireya Ponce, Lucas Pajarola, Rocío Gómez, Fermín Trucco, Ignacio Pizzo y Mateo Rimoldi. La sesión está disponible <a href="https://www.youtube.com/watch?v=_MSb73Tg5Ns" target="_blank" rel="noopener" style="text-decoration: underline;">aquí</a>.',
+      descriptionEn: 'Live session filmed for Cass & Guille Saporta, a Uruguayan duo on tour in Buenos Aires. Camera, editing and graphic design. Project together with: Mireya Ponce, Lucas Pajarola, Rocío Gómez, Fermín Trucco, Ignacio Pizzo and Mateo Rimoldi. The session is available <a href="https://www.youtube.com/watch?v=_MSb73Tg5Ns" target="_blank" rel="noopener" style="text-decoration: underline;">here</a>.',
+      metaEs: 'Sesión en vivo para Cass & Guille Saporta, dúo uruguayo, durante su gira por Buenos Aires. Cámara, edición y diseño gráfico.',
+      metaEn: 'Live session for Cass & Guille Saporta, a Uruguayan duo, during their Buenos Aires tour. Camera, editing and graphic design.',
+    },
     { slug: 'bernardo-parisi',     title: 'BERNARDO PARISI',  year: '2025',      tags: ['Art Cover', 'Art Direction'],
       descriptionEs: 'Trabajamos en el lanzamiento de "La motito", el nuevo disco de Bernardo Parisi. El proyecto incluyó el arte de tapa y contratapa, además de las piezas de comunicación para el lanzamiento y la fecha de presentación. El disco está disponible en todas las plataformas.',
       descriptionEn: 'We worked on the launch of "La motito", Bernardo Parisi\'s new album. The project included the cover and back cover art, along with the communication pieces for the release and presentation date. The album is now available on all platforms.',
@@ -46,6 +51,12 @@ export function getStaticPaths() {
       metaEs: 'Identidad de marca para Vilma, un café en un antiguo puesto de diarios de Buenos Aires. Logo, tipografía, packaging y cartelería.',
       metaEn: 'Brand identity for Vilma, a café in a former newsstand in Buenos Aires. Logo, typography, packaging and signage.',
     },
+    { slug: 'druid-fluids',        title: 'DRUID FLUIDS',     year: '2026',      tags: ['Motion'],
+      descriptionEs: 'Videoclip para "Needles in Strawberries", de la banda australiana Druid Fluids, hecho junto con Sofía Grimoldi y Joe Andrew. El video está impreso en 3800 frames con risografía. Estas son algunas de las animaciones en las que trabajé para el proyecto.',
+      descriptionEn: 'Music video for "Needles in Strawberries", by Australian band Druid Fluids, made together with Sofía Grimoldi and Joe Andrew. The video was printed on 3800 frames using risography. These are some of the animations I worked on for the project.',
+      metaEs: 'Videoclip para "Needles in Strawberries" de Druid Fluids, impreso en 3800 frames con risografía.',
+      metaEn: 'Music video for "Needles in Strawberries" by Druid Fluids, printed on 3800 frames using risography.',
+    },
   ];
   return projects.map(p => ({ params: { slug: p.slug }, props: p }));
 }
@@ -63,9 +74,10 @@ const allProjects = [
   { slug: 'montanas',            title: 'MONTAÑAS',         year: '2023',      cover: '/work/montanas.jpg'            },
   { slug: 'legado',              title: 'LEGADO',           year: '2025–2026', cover: '/work/legado.jpg'              },
   { slug: 'vilma-cafe',          title: 'VILMA CAFE',       year: '2026',      cover: '/work/cafe-vilma.jpg'          },
+  { slug: 'druid-fluids',        title: 'DRUID FLUIDS',     year: '2026',      cover: '/work/druid-fluids.jpg'        },
 ];
 
-const soonSlugs = new Set(['from-room', 'cass-guille-saporta', 'isla', 'montanas']);
+const soonSlugs = new Set(['from-room', 'isla', 'montanas', 'vilma-cafe', 'reb']);
 
 const suggestions = allProjects
   .filter(p => p.slug !== slug && !soonSlugs.has(p.slug))
@@ -80,7 +92,7 @@ const suggestions = allProjects
     {slug === 'paisanos' ? (
       <>
         <!-- Hero 16:9 -->
-        <div style="aspect-ratio: 16/9; overflow: hidden; background: var(--color-border);">
+        <div class="project-hero" style="aspect-ratio: 16/9; overflow: hidden; background: var(--color-border);">
           <video muted loop playsinline preload="none" style="width: 100%; height: 100%; object-fit: cover; display: block;">
             <source src="/work/paisanos/1-hero.mp4" type="video/mp4" />
           </video>
@@ -90,7 +102,7 @@ const suggestions = allProjects
         <div class="project-info">
           <div class="project-info-left">
             <div class="project-info-header">
-              <h1 class="font-geist text-sm font-bold text-[var(--color-text)]">{title}</h1>
+              <h1 class="font-geist text-[28px] font-bold text-[var(--color-text)]">{title}</h1>
             </div>
             <div class="project-info-desc">
               <p class="lang-en text-xs text-[var(--color-muted)] leading-relaxed">{descriptionEn}</p>
@@ -141,7 +153,7 @@ const suggestions = allProjects
     ) : slug === 'reb' ? (
       <>
         <!-- Hero landscape -->
-        <div style="aspect-ratio: 1862/1005; overflow: hidden; background: var(--color-border);">
+        <div class="project-hero" style="aspect-ratio: 1862/1005; overflow: hidden; background: var(--color-border);">
           <img loading="lazy" src="/work/reb/1.jpg" alt="REB 1" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
         </div>
 
@@ -149,7 +161,7 @@ const suggestions = allProjects
         <div class="project-info">
           <div class="project-info-left">
             <div class="project-info-header">
-              <h1 class="font-geist text-sm font-bold text-[var(--color-text)]">{title}</h1>
+              <h1 class="font-geist text-[28px] font-bold text-[var(--color-text)]">{title}</h1>
             </div>
             <div class="project-info-desc">
               <p class="lang-en text-xs text-[var(--color-muted)] leading-relaxed">{descriptionEn}</p>
@@ -210,7 +222,7 @@ const suggestions = allProjects
     ) : slug === 'bernardo-parisi' ? (
       <>
         <!-- Hero video landscape -->
-        <div style="aspect-ratio: 1862/1004; overflow: hidden; background: var(--color-border);">
+        <div class="project-hero" style="aspect-ratio: 1862/1004; overflow: hidden; background: var(--color-border);">
           <video muted loop playsinline preload="none" style="width: 100%; height: 100%; object-fit: cover; display: block;">
             <source src="/work/bernardo-parisi/1.mp4" type="video/mp4" />
           </video>
@@ -220,7 +232,7 @@ const suggestions = allProjects
         <div class="project-info">
           <div class="project-info-left">
             <div class="project-info-header">
-              <h1 class="font-geist text-sm font-bold text-[var(--color-text)]">{title}</h1>
+              <h1 class="font-geist text-[28px] font-bold text-[var(--color-text)]">{title}</h1>
             </div>
             <div class="project-info-desc">
               <p class="lang-en text-xs text-[var(--color-muted)] leading-relaxed">{descriptionEn}</p>
@@ -276,7 +288,7 @@ const suggestions = allProjects
     ) : slug === 'vilma-cafe' ? (
       <>
         <!-- Hero landscape -->
-        <div style="aspect-ratio: 1862/1005; overflow: hidden; background: var(--color-border);">
+        <div class="project-hero" style="aspect-ratio: 1862/1005; overflow: hidden; background: var(--color-border);">
           <img loading="lazy" src="/work/cafe-vilma/1.jpg" alt="Vilma Cafe 1" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
         </div>
 
@@ -284,7 +296,7 @@ const suggestions = allProjects
         <div class="project-info">
           <div class="project-info-left">
             <div class="project-info-header">
-              <h1 class="font-geist text-sm font-bold text-[var(--color-text)]">{title}</h1>
+              <h1 class="font-geist text-[28px] font-bold text-[var(--color-text)]">{title}</h1>
             </div>
             <div class="project-info-desc">
               <p class="lang-en text-xs text-[var(--color-muted)] leading-relaxed">{descriptionEn}</p>
@@ -345,7 +357,7 @@ const suggestions = allProjects
     ) : slug === 'legado' ? (
       <>
         <!-- Hero 1: landscape -->
-        <div style="aspect-ratio: 1862/1005; overflow: hidden; background: var(--color-border);">
+        <div class="project-hero" style="aspect-ratio: 1862/1005; overflow: hidden; background: var(--color-border);">
           <img loading="lazy" src="/work/legado/1.jpg" alt="Legado 1" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
         </div>
 
@@ -353,7 +365,7 @@ const suggestions = allProjects
         <div class="project-info">
           <div class="project-info-left">
             <div class="project-info-header">
-              <h1 class="font-geist text-sm font-bold text-[var(--color-text)]">{title}</h1>
+              <h1 class="font-geist text-[28px] font-bold text-[var(--color-text)]">{title}</h1>
             </div>
             <div class="project-info-desc">
               <p class="lang-en text-xs text-[var(--color-muted)] leading-relaxed">{descriptionEn}</p>
@@ -414,7 +426,7 @@ const suggestions = allProjects
     ) : slug === 'aerolab' ? (
       <>
         <!-- Hero video landscape -->
-        <div style="aspect-ratio: 2500/1406; overflow: hidden; background: var(--color-border);">
+        <div class="project-hero" style="aspect-ratio: 2500/1406; overflow: hidden; background: var(--color-border);">
           <video muted loop playsinline preload="none" style="width: 100%; height: 100%; object-fit: cover; display: block;">
             <source src="/work/aerolab/1.mp4" type="video/mp4" />
           </video>
@@ -424,7 +436,7 @@ const suggestions = allProjects
         <div class="project-info">
           <div class="project-info-left">
             <div class="project-info-header">
-              <h1 class="font-geist text-sm font-bold text-[var(--color-text)]">{title}</h1>
+              <h1 class="font-geist text-[28px] font-bold text-[var(--color-text)]">{title}</h1>
             </div>
             <div class="project-info-desc">
               <p class="lang-en text-xs text-[var(--color-muted)] leading-relaxed">{descriptionEn}</p>
@@ -479,16 +491,138 @@ const suggestions = allProjects
           </video>
         </div>
       </>
-    ) : (
+    ) : slug === 'druid-fluids' ? (
       <>
-        <!-- Hero placeholder -->
-        <div class="bg-[var(--color-border)]" style="aspect-ratio: 16/9; width: 100%;"></div>
+        <!-- Hero video landscape -->
+        <div class="project-hero" style="aspect-ratio: 16/9; overflow: hidden; background: var(--color-border);">
+          <video muted loop playsinline preload="none" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+            <source src="/work/druid-fluids/0.mp4" type="video/mp4" />
+          </video>
+        </div>
 
         <!-- Info -->
         <div class="project-info">
           <div class="project-info-left">
             <div class="project-info-header">
-              <h1 class="font-geist text-sm font-bold text-[var(--color-text)]">{title}</h1>
+              <h1 class="font-geist text-[28px] font-bold text-[var(--color-text)]">{title}</h1>
+            </div>
+            <div class="project-info-desc">
+              <p class="lang-en text-xs text-[var(--color-muted)] leading-relaxed">{descriptionEn}</p>
+              <p class="lang-es text-xs text-[var(--color-muted)] leading-relaxed">{descriptionEs}</p>
+            </div>
+          </div>
+          <div class="project-info-meta flex flex-col items-end gap-2">
+            <p class="text-xs text-[var(--color-muted)]">{year}</p>
+            <p class="text-xs text-[var(--color-muted)]">{tags.join(', ')}</p>
+          </div>
+        </div>
+
+        <!-- 1: landscape full width -->
+        <div style="aspect-ratio: 16/9; overflow: hidden; background: var(--color-border);">
+          <video muted loop playsinline preload="none" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+            <source src="/work/druid-fluids/1.mp4" type="video/mp4" />
+          </video>
+        </div>
+
+        <!-- 2 + 3: dos cuadrados -->
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 8px;">
+          <div style="aspect-ratio: 1/1; overflow: hidden; background: var(--color-border);">
+            <video muted loop playsinline preload="none" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+              <source src="/work/druid-fluids/2.mp4" type="video/mp4" />
+            </video>
+          </div>
+          <div style="aspect-ratio: 1/1; overflow: hidden; background: var(--color-border);">
+            <video muted loop playsinline preload="none" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+              <source src="/work/druid-fluids/3.mp4" type="video/mp4" />
+            </video>
+          </div>
+        </div>
+
+        <!-- 4: landscape full width -->
+        <div style="aspect-ratio: 16/9; overflow: hidden; background: var(--color-border); margin-top: 8px;">
+          <video muted loop playsinline preload="none" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+            <source src="/work/druid-fluids/4.mp4" type="video/mp4" />
+          </video>
+        </div>
+
+        <!-- 5: landscape full width -->
+        <div style="aspect-ratio: 16/9; overflow: hidden; background: var(--color-border); margin-top: 8px;">
+          <video muted loop playsinline preload="none" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+            <source src="/work/druid-fluids/5.mp4" type="video/mp4" />
+          </video>
+        </div>
+      </>
+    ) : slug === 'cass-guille-saporta' ? (
+      <>
+        <!-- Hero video landscape -->
+        <div class="project-hero" style="aspect-ratio: 16/9; overflow: hidden; background: var(--color-border);">
+          <video muted loop autoplay playsinline preload="none" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+            <source src="/work/cass-guille-saporta/1.mp4" type="video/mp4" />
+          </video>
+        </div>
+
+        <!-- Info -->
+        <div class="project-info">
+          <div class="project-info-left">
+            <div class="project-info-header">
+              <h1 class="font-geist text-[28px] font-bold text-[var(--color-text)]">{title}</h1>
+            </div>
+            <div class="project-info-desc">
+              <p class="lang-en text-xs text-[var(--color-muted)] leading-relaxed" set:html={descriptionEn} />
+              <p class="lang-es text-xs text-[var(--color-muted)] leading-relaxed" set:html={descriptionEs} />
+            </div>
+          </div>
+          <div class="project-info-meta flex flex-col items-end gap-2">
+            <p class="text-xs text-[var(--color-muted)]">{year}</p>
+            <p class="text-xs text-[var(--color-muted)]">{tags.join(', ')}</p>
+          </div>
+        </div>
+
+        <!-- 2 + 3: dos columnas 4:5 -->
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+          <div style="aspect-ratio: 4/5; overflow: hidden; background: var(--color-border);">
+            <video muted loop autoplay playsinline preload="none" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+              <source src="/work/cass-guille-saporta/2.mp4" type="video/mp4" />
+            </video>
+          </div>
+          <div style="aspect-ratio: 4/5; overflow: hidden; background: var(--color-border);">
+            <video muted loop autoplay playsinline preload="none" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+              <source src="/work/cass-guille-saporta/3.mp4" type="video/mp4" />
+            </video>
+          </div>
+        </div>
+
+        <!-- 4: landscape full width -->
+        <div style="aspect-ratio: 16/9; overflow: hidden; background: var(--color-border); margin-top: 8px;">
+          <video muted loop autoplay playsinline preload="none" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+            <source src="/work/cass-guille-saporta/4.mp4" type="video/mp4" />
+          </video>
+        </div>
+
+        <!-- 5: landscape full width -->
+        <div style="aspect-ratio: 16/9; overflow: hidden; background: var(--color-border); margin-top: 8px;">
+          <video muted loop autoplay playsinline preload="none" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+            <source src="/work/cass-guille-saporta/5.mp4" type="video/mp4" />
+          </video>
+        </div>
+
+        <!-- 6: landscape full width -->
+        <div style="aspect-ratio: 16/9; overflow: hidden; background: var(--color-border); margin-top: 8px;">
+          <video muted loop autoplay playsinline preload="none" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+            <source src="/work/cass-guille-saporta/6.mp4" type="video/mp4" />
+          </video>
+        </div>
+      </>
+    ) : (
+      <>
+        <!-- Hero placeholder -->
+        <div class="project-hero bg-[var(--color-border)]" style="aspect-ratio: 16/9; width: 100%;"></div>
+
+        <!-- Info -->
+        <div class="project-info">
+          <div class="project-info-left">
+            <div class="project-info-header">
+              <h1 class="font-geist text-[28px] font-bold text-[var(--color-text)]">{title}</h1>
             </div>
             <div class="project-info-desc">
               <p class="lang-en text-xs text-[var(--color-muted)] leading-relaxed">{descriptionEn}</p>
@@ -512,8 +646,8 @@ const suggestions = allProjects
     <!-- Similar projects -->
     <section style="padding-top: 48px;">
       <div style="margin-bottom: 24px;">
-        <h2 class="lang-en text-sm font-bold tracking-widest uppercase text-[var(--color-text)]">Similar projects</h2>
-        <h2 class="lang-es text-sm font-bold tracking-widest uppercase text-[var(--color-text)]">Proyectos similares</h2>
+        <h2 class="lang-en font-geist text-[28px] font-bold text-[var(--color-text)]">Similar projects</h2>
+        <h2 class="lang-es font-geist text-[28px] font-bold text-[var(--color-text)]">Proyectos similares</h2>
       </div>
       <div class="grid grid-cols-2 md:grid-cols-4" style="gap: 8px;">
         {suggestions.map(p => (
@@ -594,6 +728,14 @@ const suggestions = allProjects
     /* 2-col grids → 1 col */
     [style*="grid-template-columns: 1fr 1fr"] {
       grid-template-columns: 1fr !important;
+    }
+
+    /* Hero de cada proyecto: full frame (pantalla completa) */
+    .project-hero {
+      aspect-ratio: unset !important;
+      width: 100vw !important;
+      height: 100vh !important;
+      height: 100dvh !important;
     }
 
     /* Similar projects section: devolver padding */

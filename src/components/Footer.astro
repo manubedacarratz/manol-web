@@ -8,24 +8,23 @@ import GifFooter from './GifFooter.astro';
   <div class="grid grid-cols-1 md:grid-cols-4 gap-8" style="padding: 88px 20px 8px; line-height: 0.65;">
 
     <div class="reveal" style="--i: 0;">
-      <h2 class="font-geist text-sm font-bold text-[var(--color-text)] mb-6">About</h2>
+      <h2 class="font-geist text-[28px] font-bold text-[var(--color-text)] mb-6">About</h2>
       <div class="space-y-3 max-w-sm">
         <div class="lang-en space-y-3">
           <p class="text-xs text-[var(--color-muted)]">My name is Manu Bedacarratz, you can also call me Manol.</p>
           <p class="text-xs text-[var(--color-muted)]">I work as a designer and animator from Buenos Aires for Argentina and the world. My work spans brand identities and motion systems to posters, album covers and music videos.</p>
-          <p class="text-xs text-[var(--color-muted)]">I'm especially drawn to design that leaves the screen. Projects that end up printed, pasted on a wall, pressed on vinyl. There's something about that physicality that feels important, especially now. What I enjoy most about this job is doing it with others: friends, colleagues, musicians, artists.</p>
+          <p class="text-xs text-[var(--color-muted)]">I'm especially drawn to design that leaves the screen, work that ends up out in the world. That feels important, especially now.</p>
         </div>
         <div class="lang-es space-y-3">
-          <p class="text-xs text-[var(--color-muted)]">Mi nombre es Manu Bedacarratz, también me dicen Manol.</p>
-          <p class="text-xs text-[var(--color-muted)]">Trabajo como diseñador y animador desde Buenos Aires para Argentina y el mundo. Mi trabajo abarca desde identidades de marca y sistemas animados hasta posters, tapas de discos y videoclips.</p>
-          <p class="text-xs text-[var(--color-muted)]">Me interesa especialmente el diseño que sale de la pantalla. Proyectos que terminan impresos, que se pegan en una pared, que se graban en vinilo. Hay algo en esa materialidad que me parece importante, especialmente hoy. Lo que más disfruto de mi oficio es hacerlo con otros: amigos, colegas, músicos, artistas.</p>
+          <p class="text-xs text-[var(--color-muted)]">Me llamo Manu Bedacarratz. Trabajo como diseñador y animador desde Buenos Aires para Argentina y el mundo. Mi laburo va desde identidades de marca y sistemas de motion hasta afiches, tapas de disco y videoclips.</p>
+          <p class="text-xs text-[var(--color-muted)]">Me atrae especialmente los proyectos que se materializan fuera de la pantalla. Eso me parece importante, sobre todo en este momento.</p>
         </div>
       </div>
     </div>
 
     <div class="reveal" style="--i: 1;">
       <div class="lang-en">
-        <h2 class="font-geist text-sm font-bold text-[var(--color-text)] mb-6">Services</h2>
+        <h2 class="font-geist text-[28px] font-bold text-[var(--color-text)] mb-6">Services</h2>
         <ul class="space-y-2">
           {['Brand identities', 'Motion & animated systems', 'Album covers and visual art', 'Posters and graphic pieces', 'Music videos and audiovisual work'].map(s => (
             <li class="text-xs text-[var(--color-muted)]">{s}</li>
@@ -33,7 +32,7 @@ import GifFooter from './GifFooter.astro';
         </ul>
       </div>
       <div class="lang-es">
-        <h2 class="font-geist text-sm font-bold text-[var(--color-text)] mb-6">Servicios</h2>
+        <h2 class="font-geist text-[28px] font-bold text-[var(--color-text)] mb-6">Servicios</h2>
         <ul class="space-y-2">
           {['Identidades de marca', 'Motion & sistemas animados', 'Tapas de discos y arte visual', 'Posters y piezas gráficas', 'Videoclips y piezas audiovisuales'].map(s => (
             <li class="text-xs text-[var(--color-muted)]">{s}</li>
@@ -43,7 +42,8 @@ import GifFooter from './GifFooter.astro';
     </div>
 
     <div class="reveal" style="--i: 2;">
-      <h2 class="font-geist text-sm font-bold text-[var(--color-text)] mb-6">Clients &amp; partners</h2>
+      <h2 class="lang-en font-geist text-[28px] font-bold text-[var(--color-text)] mb-6">Worked with</h2>
+      <h2 class="lang-es font-geist text-[28px] font-bold text-[var(--color-text)] mb-6">Con quién trabajé</h2>
       <ul class="space-y-2">
         {[
           { name: 'Paisanos',  url: 'https://www.paisanos.io/es' },
@@ -69,11 +69,11 @@ import GifFooter from './GifFooter.astro';
 
     <div class="reveal" style="--i: 3;">
       <div class="lang-en">
-        <h2 class="font-geist text-sm font-bold text-[var(--color-text)] mb-6">Contact</h2>
+        <h2 class="font-geist text-[28px] font-bold text-[var(--color-text)] mb-6">Contact</h2>
         <p class="text-xs text-[var(--color-muted)] mb-3">If you're working on something and think we could make something good together, reach out.</p>
       </div>
       <div class="lang-es">
-        <h2 class="font-geist text-sm font-bold text-[var(--color-text)] mb-6">Contacto</h2>
+        <h2 class="font-geist text-[28px] font-bold text-[var(--color-text)] mb-6">Contacto</h2>
         <p class="text-xs text-[var(--color-muted)] mb-3">Si estás trabajando en algo y creés que podemos hacer algo bueno juntos, escribime.</p>
       </div>
       <a

@@ -1,26 +1,28 @@
 ---
 const projects = [
-  { slug: 'vilma-cafe',          title: 'VILMA CAFE',          year: '2026',      tags: ['Branding', 'Motion'],                    cover: '/work/cafe-vilma.jpg'         },
-  { slug: 'bernardo-parisi',     title: 'BERNARDO PARISI',     year: '2025',      tags: ['Art Cover', 'Art Direction'],            cover: '/work/bernardo-parisi.jpg'    },
-  { slug: 'reb',                 title: 'REB',                 year: '2026',      tags: ['Branding'],                              cover: '/work/reb.jpg'                },
+  { slug: 'vilma-cafe',          title: 'VILMA CAFE',          year: '2026',      tags: ['Branding', 'Motion'],                    cover: '/work/cafe-vilma.jpg',         soon: true },
   { slug: 'legado',              title: 'LEGADO',              year: '2025–2026', tags: ['Branding'],                              cover: '/work/legado.jpg'             },
+  { slug: 'bernardo-parisi',     title: 'BERNARDO PARISI',     year: '2025',      tags: ['Art Cover', 'Art Direction'],            cover: '/work/bernardo-parisi.jpg'    },
+  { slug: 'reb',                 title: 'REB',                 year: '2026',      tags: ['Branding'],                              cover: '/work/reb.jpg',                soon: true },
+  { slug: 'druid-fluids',        title: 'DRUID FLUIDS',        year: '2026',      tags: ['Motion'],                                cover: '/work/druid-fluids.jpg'       },
   { slug: 'paisanos',            title: 'PAISANOS',            year: '2024',      tags: ['Motion'],                                cover: '/work/paisanos.jpg'           },
   { slug: 'aerolab',             title: 'AEROLAB',             year: '2024',      tags: ['Motion', 'Design'],                      cover: '/work/aerolab.jpg'            },
+  { slug: 'cass-guille-saporta', title: 'CASS & GUILLE',       year: '2025',      tags: ['Film', 'Design'],                        cover: '/work/cass-guille-saporta.jpg' },
   { slug: 'from-room',           title: 'FROM ROOM',           year: '2026',      tags: ['Motion', 'Design'],                      cover: '/work/from-room.jpg',          soon: true },
-  { slug: 'cass-guille-saporta', title: 'CASS & GUILLE',       year: '2025',      tags: ['Film', 'Design'],                        cover: '/work/cass-guille-saporta.jpg',soon: true },
   { slug: 'montanas',            title: 'MONTAÑAS',            year: '2023',      tags: ['Art Cover', 'Art Direction', 'Motion'],  cover: '/work/montanas.jpg',           soon: true },
 ];
 
-const allTags = [...new Set(projects.flatMap(p => p.tags))].sort();
-const shuffled = projects;
+const visibleProjects = projects.filter(p => !p.hidden);
+const allTags = [...new Set(visibleProjects.flatMap(p => p.tags))].sort();
+const shuffled = visibleProjects;
 ---
 
 <section id="work" style="padding: 48px 20px;">
 
   <div id="work-header" class="mb-10" style="display: flex; align-items: flex-end; justify-content: space-between; gap: 16px;">
     <div class="reveal" style="--i: 0;">
-      <h2 class="lang-en text-sm font-bold tracking-widest uppercase text-[var(--color-text)] mb-1">Projects</h2>
-      <h2 class="lang-es text-sm font-bold tracking-widest uppercase text-[var(--color-text)] mb-1">Proyectos</h2>
+      <h2 class="lang-en font-geist text-[28px] font-bold text-[var(--color-text)] mb-1">Projects</h2>
+      <h2 class="lang-es font-geist text-[28px] font-bold text-[var(--color-text)] mb-1">Proyectos</h2>
       <p class="lang-en text-xs text-[var(--color-muted)]">A selection of last projects I've been working on</p>
       <p class="lang-es text-xs text-[var(--color-muted)]">Una selección de mis últimos proyectos</p>
     </div>

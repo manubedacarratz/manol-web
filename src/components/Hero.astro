@@ -6,13 +6,15 @@
   <div id="hero-video-wrap" style="padding:56.24% 0 0 0;position:relative;border-radius:8px;overflow:hidden;">
     <video
       id="hero-video"
-      src="/reel-2026.mp4"
       autoplay
       loop
       muted
       playsinline
       style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;"
-    ></video>
+    >
+      <source src="/hero-2026-mobile.mp4" media="(max-width: 767px)" />
+      <source src="/hero-2026.mp4" />
+    </video>
 
     <button
       id="sound-toggle"
@@ -33,14 +35,42 @@
   </div>
 </section>
 
+<!-- Currently listening -->
+<button
+  id="music-link"
+  type="button"
+  aria-label="Play"
+  class="flex items-center gap-3 group cursor-none reveal"
+  style="position:fixed;bottom:20px;right:20px;z-index:100;background:none;border:none;padding:0;font:inherit;color:inherit;--i: 2;"
+>
+  <div class="text-right">
+    <p class="lang-en text-xs text-[var(--color-muted)] group-hover:text-[var(--color-text)] transition-colors">Currently listening</p>
+    <p class="lang-es text-xs text-[var(--color-muted)] group-hover:text-[var(--color-text)] transition-colors">Escuchando</p>
+    <p id="track-name" class="text-xs" style="color: var(--color-text); opacity: 0; transition: opacity 0.4s ease;">—</p>
+  </div>
+  <div class="flex-none" style="width:40px;height:40px;position:relative;">
+    <svg viewBox="0 0 40 40" width="40" height="40" class="vinyl-record">
+      <circle cx="20" cy="20" r="19" fill="#1c1c1a"/>
+      <circle cx="20" cy="20" r="17"   fill="none" stroke="#2c2c28" stroke-width="0.8"/>
+      <circle cx="20" cy="20" r="14.5" fill="none" stroke="#2c2c28" stroke-width="0.8"/>
+      <circle cx="20" cy="20" r="12"   fill="none" stroke="#2c2c28" stroke-width="0.8"/>
+      <circle cx="20" cy="20" r="9.5"  fill="none" stroke="#2c2c28" stroke-width="0.8"/>
+      <circle cx="20" cy="20" r="7" fill="#2e2820"/>
+      <circle cx="32" cy="8" r="1.5" fill="rgba(212,207,201,0.55)"/>
+      <circle cx="20" cy="20" r="1.5" fill="#141414"/>
+    </svg>
+    <svg id="icon-play" width="11" height="11" viewBox="0 0 24 24" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);fill:rgba(212,207,201,0.85);pointer-events:none;">
+      <path d="M8 5v14l11-7z"/>
+    </svg>
+    <svg id="icon-pause" width="11" height="11" viewBox="0 0 24 24" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);fill:rgba(212,207,201,0.85);pointer-events:none;display:none;">
+      <rect x="5" y="4" width="5" height="16"/>
+      <rect x="14" y="4" width="5" height="16"/>
+    </svg>
+  </div>
+</button>
+<div id="yt-audio-player" style="position:fixed;width:0;height:0;overflow:hidden;opacity:0;pointer-events:none;"></div>
+
 <style>
-  /* Currently listening: fijo en esquina inferior derecha en todos los viewports */
-  #music-link {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    z-index: 100;
-  }
   #music-link .text-right {
     text-align: right;
     white-space: nowrap;
@@ -54,30 +84,20 @@
   }
 
   @media (max-width: 767px) {
-    #hero-info-right {
-      align-items: flex-start !important;
-      justify-content: flex-start !important;
-      gap: 16px;
-    }
-    #hero-info-right > .text-right {
-      text-align: left !important;
-    }
     #hero-section {
       padding: 0 !important;
     }
     #hero-video-wrap {
       padding: 0 !important;
-      aspect-ratio: 4 / 5;
+      aspect-ratio: unset !important;
+      height: 100vh !important;
+      height: 100dvh !important;
       border-radius: 0 !important;
     }
     #hero-video-wrap video {
       position: relative !important;
       width: 100% !important;
       height: 100% !important;
-    }
-    #manol-img {
-      margin-top: -15px !important;
-      margin-bottom: -15px !important;
     }
   }
 
@@ -89,84 +109,7 @@
     animation: vinyl-spin 3s linear infinite;
     display: block;
   }
-
 </style>
-
-<!-- MANOL wordmark -->
-<div style="padding: 0;">
-  <div id="manol-wrap" style="overflow: hidden;">
-    <img
-      id="manol-img"
-      src="/footer/manol.png"
-      alt="MANOL"
-      class="reveal"
-      style="width: 100%; height: auto; display: block; margin-top: -50px; margin-bottom: -50px; --reveal-opacity: 0.2; --i: 0;"
-    />
-  </div>
-</div>
-
-<!-- Info row -->
-<div class="grid grid-cols-1 md:grid-cols-2 gap-8" style="padding: 12px 20px;">
-
-  <div class="max-w-sm reveal" style="--i: 0;">
-    <div class="lang-en">
-      <p class="text-xs text-[var(--color-muted)] leading-relaxed">
-        My name is Manu Bedacarratz, but you can call me Manol. Graphic and motion designer based in Buenos Aires. I work alongside studios and colleagues across all kinds of projects — from brand identities and motion systems to posters and music videos.
-      </p>
-    </div>
-    <div class="lang-es">
-      <p class="text-xs text-[var(--color-muted)] leading-relaxed">
-        Mi nombre es Manu Bedacarratz, también me dicen Manol. Diseñador gráfico y de motion basado en Buenos Aires. Trabajo junto con amigos y colegas en todo tipo de proyectos: desde identidades y sistemas de animación hasta posters o videoclips.
-      </p>
-    </div>
-  </div>
-
-  <div id="hero-info-right" class="flex flex-col items-end justify-between">
-    <div class="lang-en text-right space-y-1 reveal" style="--i: 1;">
-      <p class="text-xs text-[var(--color-muted)]">Based in Buenos Aires,</p>
-      <p class="text-xs text-[var(--color-muted)]">Working worldwide</p>
-    </div>
-    <div class="lang-es text-right space-y-1 reveal" style="--i: 1;">
-      <p class="text-xs text-[var(--color-muted)]">Buenos Aires,</p>
-      <p class="text-xs text-[var(--color-muted)]">Para el mundo</p>
-    </div>
-    <button
-      id="music-link"
-      type="button"
-      aria-label="Play"
-      class="flex items-center gap-3 group cursor-none reveal"
-      style="background:none;border:none;padding:0;font:inherit;color:inherit;--i: 2;"
-    >
-      <div class="text-right">
-        <p class="lang-en text-xs text-[var(--color-muted)] group-hover:text-[var(--color-text)] transition-colors">Currently listening</p>
-        <p class="lang-es text-xs text-[var(--color-muted)] group-hover:text-[var(--color-text)] transition-colors">Escuchando</p>
-        <p id="track-name" class="text-xs" style="color: var(--color-text); opacity: 0; transition: opacity 0.4s ease;">—</p>
-      </div>
-      <div class="flex-none" style="width:40px;height:40px;position:relative;">
-        <svg viewBox="0 0 40 40" width="40" height="40" class="vinyl-record">
-          <circle cx="20" cy="20" r="19" fill="#1c1c1a"/>
-          <circle cx="20" cy="20" r="17"   fill="none" stroke="#2c2c28" stroke-width="0.8"/>
-          <circle cx="20" cy="20" r="14.5" fill="none" stroke="#2c2c28" stroke-width="0.8"/>
-          <circle cx="20" cy="20" r="12"   fill="none" stroke="#2c2c28" stroke-width="0.8"/>
-          <circle cx="20" cy="20" r="9.5"  fill="none" stroke="#2c2c28" stroke-width="0.8"/>
-          <circle cx="20" cy="20" r="7" fill="#2e2820"/>
-          <circle cx="32" cy="8" r="1.5" fill="rgba(212,207,201,0.55)"/>
-          <circle cx="20" cy="20" r="1.5" fill="#141414"/>
-        </svg>
-        <svg id="icon-play" width="11" height="11" viewBox="0 0 24 24" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);fill:rgba(212,207,201,0.85);pointer-events:none;">
-          <path d="M8 5v14l11-7z"/>
-        </svg>
-        <svg id="icon-pause" width="11" height="11" viewBox="0 0 24 24" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);fill:rgba(212,207,201,0.85);pointer-events:none;display:none;">
-          <rect x="5" y="4" width="5" height="16"/>
-          <rect x="14" y="4" width="5" height="16"/>
-        </svg>
-      </div>
-    </button>
-    <div id="yt-audio-player" style="position:fixed;width:0;height:0;overflow:hidden;opacity:0;pointer-events:none;"></div>
-  </div>
-
-</div>
-
 
 <script>
   import { tracks } from '../data/music.js';
