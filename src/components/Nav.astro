@@ -138,9 +138,10 @@
   let frames: ReturnType<typeof decompressFrames> = [];
   let frameIndex = 0;
   let timer: ReturnType<typeof setTimeout> | null = null;
-  let loaded = false;
+  let loadPromise: Promise<void> | null = null;
+  let hovering = false;
 
-  async function loadGif() {
+  async function loadGif(): Promise<void> {
     const res    = await fetch('/footer/manol.gif');
     const buffer = await res.arrayBuffer();
     const gif    = parseGIF(buffer);
@@ -149,7 +150,6 @@
     // set canvas to natural GIF dimensions, CSS scales it to 12px height
     canvas.width  = frames[0].dims.width;
     canvas.height = frames[0].dims.height;
-    loaded = true;
   }
 
   function drawFrame(index: number) {
@@ -165,31 +165,45 @@
     }, delay);
   }
 
-  function startGif() {
-    if (!loaded) return;
+  async function startGif() {
+    hovering = true;
+    if (!loadPromise) loadPromise = loadGif();
+    try {
+      await loadPromise;
+    } catch {
+      loadPromise = null; // permite reintentar en el próximo hover
+      return;
+    }
+    // el usuario puede haberse ido del link mientras cargaba
+    if (!hovering) return;
+
+    text.style.display   = 'none';
+    canvas.style.display = 'block';
     frameIndex = 0;
+    if (timer) clearTimeout(timer);
     drawFrame(frameIndex);
   }
 
   function stopGif() {
+    hovering = false;
     if (timer) { clearTimeout(timer); timer = null; }
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-  }
-
-  link.addEventListener('mouseenter', () => {
-    text.style.display   = 'none';
-    canvas.style.display = 'block';
-    startGif();
-  });
-
-  link.addEventListener('mouseleave', () => {
-    stopGif();
     canvas.style.display = 'none';
     text.style.display   = '';
-  });
+  }
 
-  // preload en background para que el primer hover no tenga delay
-  loadGif();
+  // Sólo activar hover en dispositivos que realmente lo soportan (mouse).
+  // En touch, mouseenter/mouseleave es inconsistente (doble tap, ícono
+  // "trabado" en el gif) así que en mobile queda directamente el texto.
+  const isHoverDevice = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+
+  if (isHoverDevice) {
+    link.addEventListener('mouseenter', startGif);
+    link.addEventListener('mouseleave', stopGif);
+
+    // preload en background para que el primer hover no tenga delay
+    loadPromise = loadGif().catch(() => { loadPromise = null; });
+  }
 </script>
 
 <script>
