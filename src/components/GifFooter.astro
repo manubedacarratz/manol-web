@@ -6,7 +6,7 @@ interface Props {
 const { href, marginBottom = '-40px' } = Astro.props;
 ---
 
-<div id="gif-footer-wrapper" style={`margin: 0 50px ${marginBottom};`}>
+<div id="gif-footer-wrapper" style={`margin: 0 -50px ${marginBottom};`}>
   {href ? (
     <a href={href} style="display: block; cursor: none;">
       <img
@@ -14,7 +14,7 @@ const { href, marginBottom = '-40px' } = Astro.props;
         src="/footer/manol.gif"
         alt="MANOL"
         class="reveal"
-        style="width: 100%; height: auto; display: block; --reveal-opacity: 0.4; --i: 0;"
+        style="width: 98%; height: auto; display: block; margin: 0 auto; --reveal-opacity: 0.4; --i: 0;"
       />
     </a>
   ) : (
@@ -23,7 +23,7 @@ const { href, marginBottom = '-40px' } = Astro.props;
       src="/footer/manol.gif"
       alt="MANOL"
       class="reveal"
-      style="width: 100%; height: auto; display: block; cursor: none; --reveal-opacity: 0.4; --i: 0;"
+      style="width: 98%; height: auto; display: block; margin: 0 auto; cursor: none; --reveal-opacity: 0.4; --i: 0;"
     />
   )}
 </div>
