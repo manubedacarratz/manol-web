@@ -6,7 +6,7 @@ interface Props {
 const { href, marginBottom = '-40px' } = Astro.props;
 ---
 
-<div id="gif-footer-wrapper" style={`margin: 0 -50px ${marginBottom};`}>
+<div id="gif-footer-wrapper" style={`margin: 0 50px ${marginBottom};`}>
   {href ? (
     <a href={href} style="display: block; cursor: none;">
       <img
