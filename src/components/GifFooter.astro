@@ -6,7 +6,7 @@ interface Props {
 const { href, marginBottom = '-40px' } = Astro.props;
 ---
 
-<div id="gif-footer-wrapper" style={`margin: 0 -50px ${marginBottom};`}>
+<div id="gif-footer-wrapper" style={`margin-bottom: ${marginBottom};`}>
   {href ? (
     <a href={href} style="display: block; cursor: none;">
       <img
@@ -27,3 +27,17 @@ const { href, marginBottom = '-40px' } = Astro.props;
     />
   )}
 </div>
+
+<style>
+  #gif-footer-wrapper {
+    margin-left: -50px;
+    margin-right: -50px;
+  }
+
+  @media (max-width: 767px) {
+    #gif-footer-wrapper {
+      margin-left: -12px;
+      margin-right: -12px;
+    }
+  }
+</style>
