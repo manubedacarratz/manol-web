@@ -39,12 +39,12 @@
   type="button"
   aria-label="Play"
   class="flex items-center gap-3 group cursor-none reveal"
-  style="position:fixed;bottom:20px;right:20px;z-index:100;background:none;border:none;padding:0;font:inherit;color:inherit;--i: 2;"
+  style="position:fixed;bottom:20px;right:20px;z-index:100;background:none;border:none;padding:0;font:inherit;color:inherit;visibility:hidden;--i: 2;"
 >
   <div class="text-right">
     <p class="lang-en text-xs text-[var(--color-muted)] group-hover:text-[var(--color-text)] transition-colors">Currently listening</p>
     <p class="lang-es text-xs text-[var(--color-muted)] group-hover:text-[var(--color-text)] transition-colors">Escuchando</p>
-    <p id="track-name" class="text-xs" style="color: var(--color-text); opacity: 0; transition: opacity 0.4s ease;">—</p>
+    <p id="track-name" class="text-xs" style="color: var(--color-text); opacity: 0; transition: opacity 0.4s ease;"></p>
   </div>
   <div class="flex-none" style="width:40px;height:40px;position:relative;">
     <svg viewBox="0 0 40 40" width="40" height="40" class="vinyl-record">
@@ -139,6 +139,9 @@
 
   function pickTrack() {
     currentTrack = tracks[Math.floor(Math.random() * tracks.length)];
+    // Block stays hidden until there's a track to show
+    if (!currentTrack?.artist || !currentTrack?.title) return;
+    musicLink.style.visibility = '';
 
     trackName.style.opacity = '0';
     setTimeout(() => {

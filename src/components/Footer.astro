@@ -8,17 +8,11 @@ import GifFooter from './GifFooter.astro';
   <div class="grid grid-cols-1 md:grid-cols-4 gap-8" style="padding: 88px 20px 8px; line-height: 0.65;">
 
     <div class="reveal" style="--i: 0;">
-      <h2 class="font-geist text-[28px] font-bold text-[var(--color-text)] mb-6">About</h2>
-      <div class="space-y-3 max-w-sm">
-        <div class="lang-en space-y-3">
-          <p class="text-xs text-[var(--color-muted)]">My name is Manu Bedacarratz, you can also call me Manol.</p>
-          <p class="text-xs text-[var(--color-muted)]">I work as a designer and animator from Buenos Aires for Argentina and the world. My work spans brand identities and motion systems to posters, album covers and music videos.</p>
-          <p class="text-xs text-[var(--color-muted)]">I'm especially drawn to design that leaves the screen, work that ends up out in the world. That feels important, especially now.</p>
-        </div>
-        <div class="lang-es space-y-3">
-          <p class="text-xs text-[var(--color-muted)]">Me llamo Manu Bedacarratz. Trabajo como diseñador y animador desde Buenos Aires para Argentina y el mundo. Mi laburo va desde identidades de marca y sistemas de motion hasta afiches, tapas de disco y videoclips.</p>
-          <p class="text-xs text-[var(--color-muted)]">Me atrae especialmente los proyectos que se materializan fuera de la pantalla. Eso me parece importante, sobre todo en este momento.</p>
-        </div>
+      <h2 class="lang-en font-geist text-[28px] font-bold text-[var(--color-text)] mb-6">Studio</h2>
+      <h2 class="lang-es font-geist text-[28px] font-bold text-[var(--color-text)] mb-6">Estudio</h2>
+      <div class="max-w-sm">
+        <p class="lang-en text-xs text-[var(--color-muted)]">Manol is an independent design studio based in Buenos Aires, working worldwide. Its work spans brand identities, motion systems, posters, album covers and music videos, and leans toward design that leaves the screen: things that get printed, projected, played, held. Each project is built with the people it needs: illustrators, designers, animators, printers, musicians.</p>
+        <p class="lang-es text-xs text-[var(--color-muted)]">Manol es un estudio de diseño independiente de Buenos Aires que trabaja para cualquier parte del mundo. Su trabajo va de las identidades de marca y los sistemas de motion a los afiches, las tapas de disco y los videoclips, y le interesa sobre todo el diseño que sale de la pantalla: lo que se imprime, se proyecta, se escucha, se toca. Cada proyecto se arma con los perfiles que requiera: ilustradores, diseñadores, animadores, impresores, músicos.</p>
       </div>
     </div>
 
@@ -43,7 +37,7 @@ import GifFooter from './GifFooter.astro';
 
     <div class="reveal" style="--i: 2;">
       <h2 class="lang-en font-geist text-[28px] font-bold text-[var(--color-text)] mb-6">Worked with</h2>
-      <h2 class="lang-es font-geist text-[28px] font-bold text-[var(--color-text)] mb-6">Con quién trabajé</h2>
+      <h2 class="lang-es font-geist text-[28px] font-bold text-[var(--color-text)] mb-6">Trabajó con</h2>
       <ul class="space-y-2">
         {[
           { name: 'Paisanos',  url: 'https://www.paisanos.io/es' },
@@ -107,6 +101,11 @@ import GifFooter from './GifFooter.astro';
     </div>
 
   </div>
+
+  <!-- Credit line -->
+  <p class="text-xs text-[var(--color-muted)]" style="padding: 32px 20px 0;">
+    Manu Bedacarratz · <a href="mailto:hola@manol-studio.com" class="hover:text-[var(--color-text)] transition-colors">hola@manol-studio.com</a>
+  </p>
 
   <div style="margin-top: 20px;">
     <GifFooter marginBottom="-90px" />
